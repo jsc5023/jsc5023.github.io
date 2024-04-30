@@ -1,0 +1,22 @@
+# Bundler cache
+.bundle
+vendor
+Gemfile.lock
+
+# Jekyll cache
+.jekyll-cache
+.jekyll-metadata
+# _site ### 기존의 파일을 수정하기 위해 _site의 내용을 수정할 수 있도록 변경하였습니다.
+
+# RubyGems
+*.gem
+
+# NPM dependencies
+node_modules
+package-lock.json
+
+# IDE configurations
+.idea
+
+# Misc
+# assets/js/dist ###주석처리 (로컬에서는 assets/js/dist/*.min.js 파일이 존재하여 정상 동작했지만, 위 설정을 하지 않고 배포할 경우 Github에는 해당 파일이 push되지 않으므로 블로그 기능이 정상 동작하지 않습니다.)
