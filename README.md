@@ -21,8 +21,7 @@ bundle exec jekyll serve를 입력해 주면 됩니다.
 
 아래와 같은 화면이 나타나게 되면 성공입니다.
 
-![1722840840170](image/README/1722840840170.png)
-
+![image](https://github.com/user-attachments/assets/537716f4-de39-4b37-84f9-42ea12160d99)
 
 
 #### localhost:4000을 입력해서 로컬에서 테스트가 가능합니다.
@@ -31,4 +30,4 @@ bundle exec jekyll serve를 입력해 주면 됩니다.
 
 아래와 같은 창이 나타나게 됩니다.
 
-![1722841197894](image/README/1722841197894.png)
+![image](https://github.com/user-attachments/assets/6eeceda1-1b05-46ec-9f82-28be981ff491)
