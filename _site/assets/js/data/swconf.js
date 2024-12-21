@@ -1,27 +1,27 @@
 const swconf = {
   
-    cacheName: 'chirpy-1734797999',resources: [
-      '/jsc5023.github.io/assets/css/jekyll-theme-chirpy.css',
-      '/jsc5023.github.io/',
+    cacheName: 'chirpy-1734799643',resources: [
+      '/assets/css/jekyll-theme-chirpy.css',
+      '/',
       
-        '/jsc5023.github.io/categories/',
+        '/categories/',
       
-        '/jsc5023.github.io/tags/',
+        '/tags/',
       
-        '/jsc5023.github.io/archives/',
+        '/archives/',
       
-        '/jsc5023.github.io/about/',
+        '/about/',
       
 
       
       
-        '/jsc5023.github.io/assets/js/dist/categories.min.js',
-        '/jsc5023.github.io/assets/js/dist/commons.min.js',
-        '/jsc5023.github.io/assets/js/dist/home.min.js',
-        '/jsc5023.github.io/assets/js/dist/misc.min.js',
-        '/jsc5023.github.io/assets/js/dist/page.min.js',
-        '/jsc5023.github.io/assets/js/dist/post.min.js',
-        '/jsc5023.github.io/assets/js/dist/theme.min.js'
+        '/assets/js/dist/categories.min.js',
+        '/assets/js/dist/commons.min.js',
+        '/assets/js/dist/home.min.js',
+        '/assets/js/dist/misc.min.js',
+        '/assets/js/dist/page.min.js',
+        '/assets/js/dist/post.min.js',
+        '/assets/js/dist/theme.min.js'
     ],allowHosts: [
       
           'fonts.googleapis.com',
