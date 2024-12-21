@@ -1,16 +1,25 @@
-name: "CI"
+name: CI
+
 on:
   push:
     branches:
-      - "master"
+      - master
+      - "hotfix/*"
     paths-ignore:
       - ".github/**"
       - "!.github/workflows/ci.yml"
-      - ".gitignore"
+      - .gitignore
       - "docs/**"
-      - "README.md"
-      - "LICENSE"
+      - README.md
+      - LICENSE
   pull_request:
+    paths-ignore:
+      - ".github/**"
+      - "!.github/workflows/ci.yml"
+      - .gitignore
+      - "docs/**"
+      - README.md
+      - LICENSE
 
 jobs:
   build:
@@ -35,10 +44,10 @@ jobs:
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
-          node-version: latest
+          node-version: lts/*
 
       - name: Build Assets
         run: npm i && npm run build
 
       - name: Test Site
-        run: bash tools/test
+        run: bash tools/test.sh

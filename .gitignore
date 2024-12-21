@@ -6,7 +6,7 @@ Gemfile.lock
 # Jekyll cache
 .jekyll-cache
 .jekyll-metadata
-# _site ### 기존의 파일을 수정하기 위해 _site의 내용을 수정할 수 있도록 변경하였습니다.
+_site
 
 # RubyGems
 *.gem
@@ -17,6 +17,11 @@ package-lock.json
 
 # IDE configurations
 .idea
+.vscode/*
+!.vscode/settings.json
+!.vscode/extensions.json
+!.vscode/tasks.json
 
 # Misc
-# assets/js/dist ###주석처리 (로컬에서는 assets/js/dist/*.min.js 파일이 존재하여 정상 동작했지만, 위 설정을 하지 않고 배포할 경우 Github에는 해당 파일이 push되지 않으므로 블로그 기능이 정상 동작하지 않습니다.)
+# _sass/vendors
+# assets/js/dist
