@@ -3,7 +3,7 @@
 {
   "name": "jsc5023",
   "short_name": "jsc5023",
-  "description": "jsc5023의 블로그로, IT 개발자로서서 내용을 정리하는 글로 사용됩니다.",
+  "description": "jsc5023의 블로그로, 웹 관련 기술을 정리하는 글로 사용됩니다.",
   "icons": [
     {
       "src": "/assets/img/favicons/android-chrome-192x192.png",

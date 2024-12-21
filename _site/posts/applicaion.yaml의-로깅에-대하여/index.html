@@ -20,7 +20,6 @@
   <meta name="theme-color" media="(prefers-color-scheme: light)" content="#f7f7f7">
   <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#1b1b1e">
   <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta
     name="viewport"
@@ -237,12 +236,12 @@
 
 <aside aria-label="Sidebar" id="sidebar" class="d-flex flex-column align-items-end">
   <header class="profile-wrapper">
-    <a href="/" id="avatar" class="rounded-circle"><img src="/assets/images/avatar.png" width="112" height="112" alt="avatar" onerror="this.style.display='none'"></a>
+    <a href="/" id="avatar" class="rounded-circle"><img src="/commons/avatar.jpg" width="112" height="112" alt="avatar" onerror="this.style.display='none'"></a>
 
     <h1 class="site-title">
       <a href="/">jsc5023</a>
     </h1>
-    <p class="site-subtitle fst-italic mb-0">개발자 블로그.</p>
+    <p class="site-subtitle fst-italic mb-0">A text-focused Jekyll theme</p>
   </header>
   <!-- .profile-wrapper -->
 
@@ -332,6 +331,47 @@
           
         >
           <i class="fab fa-github"></i>
+        </a>
+      
+    
+      
+
+      
+        <a
+          href="https://twitter.com/"
+          aria-label="twitter"
+          
+
+          
+            target="_blank"
+            
+          
+
+          
+
+          
+            rel="noopener noreferrer"
+          
+        >
+          <i class="fa-brands fa-x-twitter"></i>
+        </a>
+      
+    
+      
+
+      
+        <a
+          href="javascript:location.href = 'mailto:' + ['kir5121','naver.com'].join('@')"
+          aria-label="email"
+          
+
+          
+
+          
+
+          
+        >
+          <i class="fas fa-envelope"></i>
         </a>
       
     
@@ -535,7 +575,7 @@
 
           <em>
             
-              <a href="https://github.com/jsc5023">jsc5023</a>
+              <a href="https://twitter.com/username">jsc5023</a>
             
           </em>
         </span>
@@ -658,46 +698,64 @@ logging.org.springframework.web.servlet: true</p>
         d-flex justify-content-between align-items-center mt-5 pb-2
       "
     >
-      <!--
-        <div class="license-wrapper">
+      <div class="license-wrapper">
+        
           
-            
 
-            This post is licensed under 
-            <a href="https://creativecommons.org/licenses/by/4.0/">
-              CC BY 4.0
-            </a>
-             by the author.
-          
-        </div>
+          This post is licensed under 
+        <a href="https://creativecommons.org/licenses/by/4.0/">
+          CC BY 4.0
+        </a>
+         by the author.
+        
+      </div>
 
-         <!-- Post sharing snippet -->
+      <!-- Post sharing snippet -->
 
-<!--
-  ><div class="share-wrapper d-flex align-items-center">
-    <span class="share-label text-muted">Share</span>
-    <span class="share-icons">
+<div class="share-wrapper d-flex align-items-center">
+  <span class="share-label text-muted">Share</span>
+  <span class="share-icons">
+    
+    
+    
+
+    
+
       
-      
-      
+
+      <a href="https://twitter.com/intent/tweet?text=Applicaion.yaml%EC%9D%98%20%EB%A1%9C%EA%B9%85%EC%97%90%20%EB%8C%80%ED%95%98%EC%97%AC%20-%20jsc5023&url=http%3A%2F%2Flocalhost%3A4000%2Fposts%2Fapplicaion.yaml%25EC%259D%2598-%25EB%25A1%259C%25EA%25B9%2585%25EC%2597%2590-%25EB%258C%2580%25ED%2595%2598%25EC%2597%25AC%2F" target="_blank" rel="noopener" data-bs-toggle="tooltip" data-bs-placement="top" title="Twitter" aria-label="Twitter">
+        <i class="fa-fw fa-brands fa-square-x-twitter"></i>
+      </a>
+    
 
       
 
-      <button
-        id="copy-link"
-        aria-label="Copy link"
-        class="btn small"
-        data-bs-toggle="tooltip"
-        data-bs-placement="top"
-        title="Copy link"
-        data-title-succeed="Link copied successfully!"
-      >
-        <i class="fa-fw fas fa-link pe-none fs-6"></i>
-      </button>
-    </span>
-  </div>
+      <a href="https://www.facebook.com/sharer/sharer.php?title=Applicaion.yaml%EC%9D%98%20%EB%A1%9C%EA%B9%85%EC%97%90%20%EB%8C%80%ED%95%98%EC%97%AC%20-%20jsc5023&u=http%3A%2F%2Flocalhost%3A4000%2Fposts%2Fapplicaion.yaml%25EC%259D%2598-%25EB%25A1%259C%25EA%25B9%2585%25EC%2597%2590-%25EB%258C%2580%25ED%2595%2598%25EC%2597%25AC%2F" target="_blank" rel="noopener" data-bs-toggle="tooltip" data-bs-placement="top" title="Facebook" aria-label="Facebook">
+        <i class="fa-fw fab fa-facebook-square"></i>
+      </a>
+    
 
-      -->
+      
+
+      <a href="https://t.me/share/url?url=http%3A%2F%2Flocalhost%3A4000%2Fposts%2Fapplicaion.yaml%25EC%259D%2598-%25EB%25A1%259C%25EA%25B9%2585%25EC%2597%2590-%25EB%258C%2580%25ED%2595%2598%25EC%2597%25AC%2F&text=Applicaion.yaml%EC%9D%98%20%EB%A1%9C%EA%B9%85%EC%97%90%20%EB%8C%80%ED%95%98%EC%97%AC%20-%20jsc5023" target="_blank" rel="noopener" data-bs-toggle="tooltip" data-bs-placement="top" title="Telegram" aria-label="Telegram">
+        <i class="fa-fw fab fa-telegram"></i>
+      </a>
+    
+
+    <button
+      id="copy-link"
+      aria-label="Copy link"
+      class="btn small"
+      data-bs-toggle="tooltip"
+      data-bs-placement="top"
+      title="Copy link"
+      data-title-succeed="Link copied successfully!"
+    >
+      <i class="fa-fw fas fa-link pe-none fs-6"></i>
+    </button>
+  </span>
+</div>
+
     </div>
     <!-- .post-tail-bottom -->
   </div>
@@ -890,7 +948,7 @@ logging.org.springframework.web.servlet: true</p>
     <time>2024</time>
 
     
-      <a href="https://github.com/jsc5023">jsc5023</a>.
+      <a href="https://twitter.com/username">jsc5023</a>.
     
 
     
