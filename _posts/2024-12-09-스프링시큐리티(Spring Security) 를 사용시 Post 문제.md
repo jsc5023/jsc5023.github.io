@@ -14,7 +14,7 @@
 public String signUp(HttpServletRequest request, Model model) {
     String userId = request.getParameter("userId");
     String password = request.getParameter("password");
-    // 회원가입 로직
+    // 회원가입 로직 (내용 생략)
     return "redirect:/security/login";
 }
 ```

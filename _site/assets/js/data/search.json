@@ -1,6 +1,108 @@
 [
   
   {
+    "title": "배달의민족으로 알아보는 msa 개념",
+    "url": "/posts/%EB%B0%B0%EB%8B%AC%EC%9D%98%EB%AF%BC%EC%A1%B1%EC%9C%BC%EB%A1%9C-%EC%95%8C%EC%95%84%EB%B3%B4%EB%8A%94-MSA-%EA%B0%9C%EB%85%90/",
+    "categories": "",
+    "tags": "",
+    "date": "2024-12-21 00:00:00 +0800",
+    
+
+
+
+
+
+    
+    "snippet": "배달의민족으로 알아보는 MSA 개념목차  배달의민족으로 알아보는 MSA 개념          목차      들어가며      MSA란 무엇인가?      MSA와 단일 책임 원칙(SRP)      실제 서비스로 이해하는 MSA                  기존 방식(모놀리식)의 문제점          MSA 방식의 장점                 ...",
+    "content": "배달의민족으로 알아보는 MSA 개념목차  배달의민족으로 알아보는 MSA 개념          목차      들어가며      MSA란 무엇인가?      MSA와 단일 책임 원칙(SRP)      실제 서비스로 이해하는 MSA                  기존 방식(모놀리식)의 문제점          MSA 방식의 장점                    MSA의 실제 효과      결론      들어가며MSA(Microservice Architecture)를 처음 접했을 때는 단순히 ‘서비스를 잘게 쪼개는 것’이라고만 생각했습니다. 하지만 실제로 공부해보니 그 이상의 깊이 있는 아키텍처 패턴이었습니다. 이 글에서는 제가 MSA를 공부하면서 깨달은 점들을 정리해보려 합니다.MSA란 무엇인가?MSA는 하나의 큰 애플리케이션을 여러 개의 작은 애플리케이션으로 쪼개어 변경과 조합이 가능하도록 만든 아키텍처입니다. 여기서 중요한 점은 단순히 ‘쪼개는 것’이 아니라, 각 서비스가 독립적으로 배포가능하고 확장가능하도록 만드는 것입니다.MSA와 단일 책임 원칙(SRP)MSA는 객체지향 프로그래밍의 단일 책임 원칙(Single Responsibility Principle)과 유사한 철학을 가지고 있습니다:  클래스가 하나의 책임만 가져야 하듯이, 각 마이크로서비스도 하나의 비즈니스 기능에 집중합니다  이는 코드의 응집도를 높이고 결합도를 낮추는 것과 같은 맥락입니다  서비스 간의 독립성을 보장함으로써 변경의 영향범위를 최소화할 수 있습니다실제 서비스로 이해하는 MSA배달의민족이나 쿠팡 같은 서비스를 예로 들어 MSA를 이해해보겠습니다.기존 방식(모놀리식)의 문제점  모든 기능(주문, 결제, 알림, 리뷰 등)이 하나의 큰 프로그램에 통합되어 있음  한 부분에 문제가 생기면 전체 서비스가 영향을 받을 수 있음  특정 기능만 확장하기 어려움MSA 방식의 장점각 기능을 독립적인 서비스로 분리하여 운영:  중요 서비스 (신뢰성 필수)          로그인/회원 시스템                  보안이 중요함          절대 장애가 나면 안 됨                    결제 시스템                  돈과 직결된 부분          100% 정확성 필요                    주문 시스템                  실시간 처리 중요          데이터 일관성 필수                      부가 서비스 (일시적 장애 허용)          리뷰 시스템                  잠시 멈춰도 주문은 가능          약간의 지연 허용됨                    알림 시스템                  푸시 알림이 늦게 가도 큰 문제 없음          재시도 메커니즘으로 해결 가능                    쿠폰/이벤트 시스템                  일시적 접속 장애 허용됨          나중에 다시 시도 가능                    MSA의 실제 효과  장애 격리          결제 시스템에 문제가 생겨도 리뷰 열람은 가능      리뷰 서버가 다운되어도 주문/결제는 정상 작동      알림이 지연되어도 주문 프로세스는 완료        리소스 최적화          주문이 몰리는 시간에는 주문 서비스만 확장      결제 시스템은 항상 안정적인 리소스 유지      리뷰 시스템은 상대적으로 적은 리소스로 운영        비용 효율성          중요 서비스에 더 많은 투자      부가 서비스는 비용 효율적으로 운영      필요한 부분만 선택적으로 확장 가능      결론MSA는 단순히 서비스를 잘게 쪼개는 것이 아닌, 비즈니스의 특성에 따라 서비스를 적절히 분리하고 각각에 맞는 리소스와 아키텍처를 적용하는 것입니다. 실제 서비스를 예로 들어보면, 모든 기능이 같은 수준의 안정성이나 신뢰성을 필요로 하지 않는다는 것을 알 수 있습니다.중요한 것은 모든 서비스를 무조건 마이크로서비스로 분리하는 것이 아니라, 비즈니스 요구사항과 각 서비스의 특성을 고려하여 적절한 수준의 분리를 결정하는 것입니다. 이러한 균형잡힌 접근이 성공적인 MSA 구현의 핵심이라고 할 수 있습니다."
+  },
+  
+  {
+    "title": "라이브러리를 사용하지 않고 리스트를 만드는 방법",
+    "url": "/posts/%EB%9D%BC%EC%9D%B4%EB%B8%8C%EB%9F%AC%EB%A6%AC%EB%A5%BC-%EC%82%AC%EC%9A%A9%ED%95%98%EC%A7%80-%EC%95%8A%EA%B3%A0-%EB%A6%AC%EC%8A%A4%ED%8A%B8%EB%A5%BC-%EB%A7%8C%EB%93%9C%EB%8A%94-%EB%B0%A9%EB%B2%95/",
+    "categories": "",
+    "tags": "",
+    "date": "2024-12-20 00:00:00 +0800",
+    
+
+
+
+
+
+    
+    "snippet": "라이브러리를 사용하지 않고 Java로 리스트 구현하기리스트는 Java에서 자주 사용되는 자료구조로, 보통 ArrayList나 LinkedList와 같은 라이브러리를 활용합니다. 하지만 이번에는 라이브러리를 사용하지 않고, 순수하게 Java로 리스트를 구현하는 방법을 알아보겠습니다.목차  라이브러리를 사용하지 않고 Java로 리스트 구현하기       ...",
+    "content": "라이브러리를 사용하지 않고 Java로 리스트 구현하기리스트는 Java에서 자주 사용되는 자료구조로, 보통 ArrayList나 LinkedList와 같은 라이브러리를 활용합니다. 하지만 이번에는 라이브러리를 사용하지 않고, 순수하게 Java로 리스트를 구현하는 방법을 알아보겠습니다.목차  라이브러리를 사용하지 않고 Java로 리스트 구현하기          목차      목표 기능      리스트와 배열의 차이      구현 과정                  1. 배열 초기화 및 추가 기능 구현          2. 조회(get) 및 초기화(clear) 기능          3. 삭제(delete) 및 삽입(insert) 기능          4. 크기 반환(size) 및 출력 기능                    완성된 클래스 코드      사용 예시      학습한 내용 정리      목표 기능구현할 리스트는 다음과 같은 기능을 갖추고 있습니다:  추가(add) - 리스트 끝에 데이터를 추가.  삭제(delete) - 특정 위치의 데이터를 삭제.  삽입(insert) - 특정 위치에 데이터를 삽입.  조회(get) - 특정 위치의 데이터를 반환.  크기(size) - 현재 리스트에 포함된 데이터의 개수를 반환.  초기화(clear) - 리스트를 초기 상태로 되돌림.추가적으로, 리스트와 배열의 차이점도 이해하며 구현 과정을 단계별로 살펴보겠습니다.리스트와 배열의 차이리스트와 배열의 가장 큰 차이는 크기의 유동성입니다.  배열 (Array):          크기가 고정되어 있으며, 생성 시 크기를 지정해야 합니다.      메모리 효율적이지만, 크기를 초과하거나 데이터 삽입/삭제 시 불편합니다.        리스트 (List):          크기가 동적이며, 데이터 추가/삭제 시 크기가 자동으로 조정됩니다.      내부적으로 배열을 활용하여 구현되지만, 배열 크기를 초과하면 더 큰 배열로 복사합니다.      구현 과정1. 배열 초기화 및 추가 기능 구현리스트를 구현하려면 먼저 배열의 크기를 고정적으로 정해야 합니다. 예를 들어, 초기 배열의 크기를 10으로 설정하고, 데이터가 추가될 때마다 크기를 확인하여 필요하면 배열을 확장합니다.public class CustomList {    private int[] data;    private int size;    public CustomList() {        data = new int[10];        size = 0;    }    public void add(int value) {        if(size == data.length) {            resize();        }        data[size++] = value;    }    public void resize() {        int newCapacity = data.length * 2;        int[] newData = new int[newCapacity];        System.arraycopy(data, 0, newData, 0, data.length);        data = newData;    }}2. 조회(get) 및 초기화(clear) 기능조회 기능은 배열의 특정 인덱스에 접근하여 데이터를 반환하는 단순한 작업입니다. 초기화 기능은 배열을 새로 생성하여 리스트를 초기 상태로 만듭니다.public int get(int index) {    if (index &lt; 0 || index &gt;= size) {        throw new IndexOutOfBoundsException(\"인덱스의 값이 잘못되었습니다.\");    }    return data[index];}public void clear() {    data = new int[10]; // 배열 재초기화    size = 0;}3. 삭제(delete) 및 삽입(insert) 기능삭제 기능은 특정 인덱스의 데이터를 제거하고, 뒤에 있는 데이터를 앞으로 이동시킵니다. 삽입 기능은 특정 인덱스에 데이터를 삽입하며, 뒤의 데이터를 한 칸씩 이동합니다.public void delete(int index) {    if (index &lt; 0 || index &gt;= size) {        throw new IndexOutOfBoundsException(\"인덱스의 값이 잘못되었습니다.\");    }    for (int i = index; i &lt; size - 1; i++) {        data[i] = data[i + 1]; // 뒤의 요소를 앞으로 이동    }    data[--size] = 0; // 크기 감소 후 마지막 요소 초기화}public void insert(int index, int value) {    if (index &lt; 0 || index &gt; size) {        throw new IndexOutOfBoundsException(\"인덱스의 값이 잘못되었습니다.\");    }    if (size == data.length) {        resize(); // 크기 초과 시 배열 확장    }    for (int i = size; i &gt; index; i--) {        data[i] = data[i - 1]; // 뒤로 밀기    }    data[index] = value; // 값 삽입    size++;}4. 크기 반환(size) 및 출력 기능리스트의 현재 크기를 반환하고, 리스트 내용을 문자열 형태로 출력하는 기능입니다.public int size() {    return size;}@Overridepublic String toString() {    StringBuilder sb = new StringBuilder(\"[\");    for (int i = 0; i &lt; size; i++) {        sb.append(data[i]);        if (i &lt; size - 1) sb.append(\", \");    }    sb.append(\"]\");    return sb.toString();}완성된 클래스 코드public class CustomList {    private int[] data;    private int size;    public CustomList() {        data = new int[10];        size = 0;    }    public void add(int value) {        if (size == data.length) {            resize();        }        data[size++] = value;    }    public int get(int index) {        if (index &lt; 0 || index &gt;= size) {            throw new IndexOutOfBoundsException(\"잘못된 인덱스 입니다.\");        }        return data[index];    }    public void delete(int index) {        if (index &lt; 0 || index &gt;= size) {            throw new IndexOutOfBoundsException(\"잘못된 인덱스 입니다.\");        }        for (int i = index; i &lt; size - 1; i++) {            data[i] = data[i + 1];        }        data[--size] = 0;    }    public void insert(int index, int value) {        if (index &lt; 0 || index &gt; size) {            throw new IndexOutOfBoundsException(\"잘못된 인덱스 입니다.\");        }        if (size == data.length) {            resize();        }        for (int i = size; i &gt; index; i--) {            data[i] = data[i - 1];        }        data[index] = value;        size++;    }    public void clear() {        data = new int[10];        size = 0;    }    public int size() {        return size;    }    private void resize() {        int newCapacity = data.length * 2;        int[] newData = new int[newCapacity];        System.arraycopy(data, 0, newData, 0, data.length);        data = newData;    }    @Override    public String toString() {        StringBuilder sb = new StringBuilder(\"[\");        for (int i = 0; i &lt; size; i++) {            sb.append(data[i]);            if (i &lt; size - 1) sb.append(\", \");        }        sb.append(\"]\");        return sb.toString();    }}사용 예시public class Main {    public static void main(String[] args) {        CustomList list = new CustomList();        list.add(10);        list.add(20);        list.add(30);        System.out.println(\"추가: \" + list); // [10, 20, 30]        list.insert(1, 15);        System.out.println(\"삽입: \" + list); // [10, 15, 20, 30]        list.delete(2);        System.out.println(\"삭제: \" + list); // [10, 15, 30]        System.out.println(\"조회: \" + list.get(1)); // 15        System.out.println(\"크기: \" + list.size()); // 3        list.clear();        System.out.println(\"초기화: \" + list); // []    }}학습한 내용 정리이번 구현 과정을 통해 배열과 리스트의 차이를 깊이 이해하고, Java에서 자료 구조를 직접 설계하는 경험을 쌓을 수 있었습니다. 특히, 동적 크기 조정을 위한 배열 확장과 데이터 삽입/삭제의 원리를 코드를 통해 체득하게 되었습니다. 이 과정을 기반으로 더 복잡한 자료 구조나 기능을 확장해 볼 수 있을 것 같습니다."
+  },
+  
+  {
+    "title": "스프링시큐리티(spring security) 를 사용시 post 문제",
+    "url": "/posts/%EC%8A%A4%ED%94%84%EB%A7%81%EC%8B%9C%ED%81%90%EB%A6%AC%ED%8B%B0(Spring-Security)-%EB%A5%BC-%EC%82%AC%EC%9A%A9%EC%8B%9C-Post-%EB%AC%B8%EC%A0%9C/",
+    "categories": "",
+    "tags": "",
+    "date": "2024-12-09 00:00:00 +0800",
+    
+
+
+
+
+
+    
+    "snippet": "Spring Security에서 POST 요청이 처리되지 않는 문제 해결: 회원가입 구현 중 배운 점회원가입 기능을 구현하던 중 예상치 못한 문제가 발생했습니다. 회원가입 버튼을 눌렀을 때 컨트롤러 메서드가 호출되지 않아 디버깅이 되지 않았습니다. 원인을 찾는 과정에서 Spring Security 설정에서 POST 요청 처리를 명시적으로 추가해야 한다...",
+    "content": "Spring Security에서 POST 요청이 처리되지 않는 문제 해결: 회원가입 구현 중 배운 점회원가입 기능을 구현하던 중 예상치 못한 문제가 발생했습니다. 회원가입 버튼을 눌렀을 때 컨트롤러 메서드가 호출되지 않아 디버깅이 되지 않았습니다. 원인을 찾는 과정에서 Spring Security 설정에서 POST 요청 처리를 명시적으로 추가해야 한다는 점을 깨달았고, 이를 해결하는 과정을 공유합니다.문제 상황회원가입을 구현하는 과정에서 @PostMapping(\"/security/sign-up\") 메서드가 호출되지 않았습니다. 브라우저 개발자 도구의 Network 탭을 확인해도 요청이 컨트롤러에 도달하지 않았습니다. 초기 코드 구성은 아래와 같았습니다:컨트롤러 코드@PostMapping(\"/security/sign-up\")public String signUp(HttpServletRequest request, Model model) {    String userId = request.getParameter(\"userId\");    String password = request.getParameter(\"password\");    // 회원가입 로직 (내용 생략)    return \"redirect:/security/login\";}Spring Security 설정@Beanpublic SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {    return http            .csrf(AbstractHttpConfigurer::disable)            .authorizeHttpRequests(auth -&gt; auth                .requestMatchers(HttpMethod.GET, \"/security/*\").permitAll()                .anyRequest().authenticated())            .build();}원인: Spring Security가 POST 요청을 기본적으로 보호하며, 명시적으로 허용하지 않은 POST 요청은 차단됩니다. 저는 GET 요청만 허용하도록 설정했기 때문에 POST 요청이 처리되지 않았던 것입니다.해결 과정문제를 해결하기 위해 아래와 같은 단계를 진행했습니다.1. POST 요청 허용 추가Spring Security 설정에서 POST 요청도 명시적으로 허용하도록 추가합니다.@Beanpublic SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {    return http            .csrf(AbstractHttpConfigurer::disable) // CSRF 비활성화            .authorizeHttpRequests(auth -&gt; auth                .requestMatchers(HttpMethod.GET, \"/security/login\", \"/security/sign-up\").permitAll() // GET 허용                .requestMatchers(HttpMethod.POST, \"/security/sign-up\").permitAll() // POST 허용                .anyRequest().authenticated()) // 나머지는 인증 필요            .build();}2. 설정 테스트  브라우저에서 회원가입 버튼을 클릭합니다.  POST 요청이 컨트롤러 메서드에 정상적으로 도달하는 것을 확인합니다.  Network 탭에서 200 응답 코드와 데이터 전송 결과를 확인합니다.3. 결과Spring Security 설정을 수정한 후, 회원가입 POST 요청이 정상적으로 처리되었습니다.배운 점이번 문제를 통해 다음과 같은 중요한 점을 배웠습니다:  Spring Security는 POST 요청과 GET 요청을 별도로 관리한다.          POST 요청은 명시적으로 허용하지 않으면 차단된다.        보안 설정은 기능 구현 초기부터 명확히 정의해야 한다.          예상치 못한 차단이 발생하지 않도록 보안 정책을 설계해야 한다.        문제를 해결하며 배운 점을 기록하고 공유하자.코드 요약최종 Spring Security 설정@Beanpublic SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {    return http            .csrf(AbstractHttpConfigurer::disable) // CSRF 비활성화            .authorizeHttpRequests(auth -&gt; auth                .requestMatchers(HttpMethod.GET, \"/security/login\", \"/security/sign-up\").permitAll()                .requestMatchers(HttpMethod.POST, \"/security/sign-up\").permitAll()                .anyRequest().authenticated())            .build();}회원가입 컨트롤러@PostMapping(\"/security/sign-up\")public String signUp(HttpServletRequest request, Model model) {    String userId = request.getParameter(\"userId\");    String password = request.getParameter(\"password\");    // 회원가입 로직 처리    return \"redirect:/security/login\";}마무리이번 경험을 통해 Spring Security 설정의 중요성을 다시 한번 깨달았습니다. 앞으로도 보안 설정에 대한 이해를 기반으로 더 안전한 애플리케이션을 개발할 수 있을 것 같습니다."
+  },
+  
+  {
+    "title": "Unsupported class file major version 66 에러 해결법",
+    "url": "/posts/Unsupported-class-file-major-version-66-%EC%97%90%EB%9F%AC-%ED%95%B4%EA%B2%B0%EB%B2%95/",
+    "categories": "",
+    "tags": "",
+    "date": "2024-08-16 00:00:00 +0800",
+    
+
+
+
+
+
+    
+    "snippet": "Unsupported class file major version X 의 해결방법노트북을 변경한 이후, Github에서 프로젝트를 새 컴퓨터로 옮겨서 작업하는 도중 한 오류가 나타났습니다.Unsupported class file major version 66이라는 오류가 나타났는데 해당오류는 JRE의 해당버전이 정상적으로 실행되지 않아서 발생한 오류입...",
+    "content": "Unsupported class file major version X 의 해결방법노트북을 변경한 이후, Github에서 프로젝트를 새 컴퓨터로 옮겨서 작업하는 도중 한 오류가 나타났습니다.Unsupported class file major version 66이라는 오류가 나타났는데 해당오류는 JRE의 해당버전이 정상적으로 실행되지 않아서 발생한 오류입니다.Unsupported class file major version X에서 X는 버전의 번호를 이야기합니다.JAVA SE 22 = 66, JAVA SE 21 = 65, JAVA SE 20 = 64 이런식과 동일합니다. (버전의 참조사항은 해당 페이지 아래의 해당 오류 해결 참조를 클릭해서 버전의 번호를 참조해주세요)Intellij 에서 해결하기 위해서는 File &gt; Project Settings에서 Project SDK를 프로젝트에 맞는 SDK로 변경합니다.또한, File &gt; Settings 에서 gradle에서도 SDK의 버전을 변경해야 합니다.해당 오류 해결 참조"
+  },
+  
+  {
+    "title": "Intellij의 환경변수 적용방법",
+    "url": "/posts/Intellij%EC%9D%98-%ED%99%98%EA%B2%BD%EB%B3%80%EC%88%98-%EC%A0%81%EC%9A%A9%EB%B0%A9%EB%B2%95/",
+    "categories": "",
+    "tags": "",
+    "date": "2024-08-06 00:00:00 +0800",
+    
+
+
+
+
+
+    
+    "snippet": "Spring DB 연동용 환경변수 적용하기환경변수란?환경변수란? 환경 변수는 프로세스가 컴퓨터에서 동작하는 방식에 영향을 미치는, 동적인 값들의 모임이다. 환경 변수는 실행 중인 프로세스가 컴퓨터에서 작동하는 방식에 영향을 줄 수 있는 사용자 정의 값이다. 환경 변수는 프로세스가 실행되는 환경의 일부입니다.이것은 환경이나 보안등의 이유를 위해, 동적 ...",
+    "content": "Spring DB 연동용 환경변수 적용하기환경변수란?환경변수란? 환경 변수는 프로세스가 컴퓨터에서 동작하는 방식에 영향을 미치는, 동적인 값들의 모임이다. 환경 변수는 실행 중인 프로세스가 컴퓨터에서 작동하는 방식에 영향을 줄 수 있는 사용자 정의 값이다. 환경 변수는 프로세스가 실행되는 환경의 일부입니다.이것은 환경이나 보안등의 이유를 위해, 동적 변수를 주어서 컴퓨터 내부적으로 관리하기위해 사용됩니다.Spring DB를 연동할때 환경변수를 적용하는 방법Spring에서 데이터 베이스를 연동할 경우, 코드상에서 보안을 위해 데이터 베이스 정보와 아이디, 비밀번호 관련을 코드상에서 말고 내부적으로 처리해야할 경우가 있습니다. 그를 위해 환경변수를 작성해야 합니다.application.yml 파일을 작성하면 되고, 아래와 같이 작성합니다.spring:  datasource:    url: ${LOCAL_DB_URL}    username: ${LOCAL_DB_USERNAME}    password: ${LOCAL_DB_PASSWORD}  thymeleaf3.decoupled-logic: true그럼 해당 ${LOCAL_DB_URL}, ${LOCAL_DB_USERNAME} , ${LOCAL_DB_PASSWORD}으로 환경변수를 선언하면, 어떻게 할수 있을까요?Intellij 기준으로 설명합니다.1. Run Configurations 열기 :  상단 메뉴에서 Run &gt; Run Configurations...를 선택합니다.2. 구성 설정 선택 :  좌측 패널에서 Java Application을 선택하고, Modify options를 클릭합니다.이후, Environement variables 를 클릭합니다.그럼 아래와 같은 화면이 나타납니다.3. 환경 변수 설정 :  Environment variables 의 우측  +(New) 버튼을 클릭하여 새로운 환경 변수를 추가합니다.          Name: LOCAL_DB_URL, LOCAL_DB_USERNAME, LOCAL_DB_PASSWORD와 같은 변수 이름을 입력합니다.      Value: 각 환경 변수의 값을 입력합니다.        입력이 완료되면 OK를 클릭하여 설정을 저장합니다.4. 설정 저장 및 실행 :  Run Configurations 창에서 Apply를 클릭한 후, Run 버튼을 클릭하여 애플리케이션을 실행합니다."
+  },
+  
+  {
+    "title": "Applicaion.yaml의 로깅에 대하여",
+    "url": "/posts/applicaion.yaml%EC%9D%98-%EB%A1%9C%EA%B9%85%EC%97%90-%EB%8C%80%ED%95%98%EC%97%AC/",
+    "categories": "",
+    "tags": "",
+    "date": "2024-07-30 00:00:00 +0800",
+    
+
+
+
+
+
+    
+    "snippet": "application.yaml의 로깅(logging)로그(log) : 정보를 제공하는 일련의 기록로깅(logging) : 로그(log)를 생성하도록 하는 시스템을 말한다.로깅를 사용하는 이유는 로그를 바탕으로 데이터를 분석하기 위해 사용합니다.Spring에서 application.yaml을 통해 logging을 하는 방법debug : true이렇게 d...",
+    "content": "application.yaml의 로깅(logging)로그(log) : 정보를 제공하는 일련의 기록로깅(logging) : 로그(log)를 생성하도록 하는 시스템을 말한다.로깅를 사용하는 이유는 로그를 바탕으로 데이터를 분석하기 위해 사용합니다.Spring에서 application.yaml을 통해 logging을 하는 방법debug : true이렇게 debug : false 가 되어있으면 진행하는 모든 데이터에서 로그를 뽑아냅니다.이러면 문제점이, 모든 데이터를 뽑음으로서 쓸모없는 로그를 계속해서 뽑아내어, 성능이 저하되는 문제가 됩니다.따라서 일반적으로는 특정부분을 한정하여 로그를 뽑아내어야 합니다.logging:  com.example.exam: true  org.springframework.web.servlet: true  org.hibernate.type.descriptor.sql.BasicBinder: tracelogging.com.example.exam : truelogging.org.springframework.web.servlet: true  해당 패키지에 작동되는 동작들의 로그를 저장 할 수 있습니다.logging.org.hibernate.type.descriptor.sql.BasicBinder: trace  쿼리문 로그에 출력되어 있는 파라미터에 바인딩 되는 값을 확인할 수 있습니다.  trace로 설정해야 바인딩 파라미터를 확인할 수 있습니다.logging:  file:    path: /Users/jsc/Logs/spring    max-size: 100MB    max-history: 10logging.file.path : 로그 파일의 경로를 설정합니다logging.file.max-size : 로그 파일의 최대 크기를 설정합니다logging.file.max-history : 몇일동안 로그를 저장할 것인지를 지정할 수 있습니다."
+  },
+  
+  {
     "title": "Md파일 테스트",
     "url": "/posts/Md%ED%8C%8C%EC%9D%BC-%ED%85%8C%EC%8A%A4%ED%8A%B8/",
     "categories": "",
@@ -13,13 +115,13 @@
 
 
     
-    "snippet": "Markdown의 참조 문서마크다운 markdown 작성법 : “Markdown Guide” 영어로 된 Markdown Guide 입니다.차차 수정예정",
-    "content": "Markdown의 참조 문서마크다운 markdown 작성법 : “Markdown Guide” 영어로 된 Markdown Guide 입니다.차차 수정예정"
+    "snippet": "Markdown의 참조 문서마크다운 markdown 작성법 : “Markdown Guide” 영어로 된 Markdown Guide 입니다.자주 사용되는 마크 다운 문법  헤더헤더 입니다.(This is a Big Header(H1))  HyperLink 작성하기[MarkDown Guide]  문단 적용하기",
+    "content": "Markdown의 참조 문서마크다운 markdown 작성법 : “Markdown Guide” 영어로 된 Markdown Guide 입니다.자주 사용되는 마크 다운 문법  헤더헤더 입니다.(This is a Big Header(H1))  HyperLink 작성하기[MarkDown Guide]  문단 적용하기"
   },
   
   {
-    "title": "Github Test",
-    "url": "/posts/Github-Test/",
+    "title": "로컬환경에서 github 블로그 테스트 하는법",
+    "url": "/posts/%EB%A1%9C%EC%BB%AC%ED%99%98%EA%B2%BD%EC%97%90%EC%84%9C-Github-%EB%B8%94%EB%A1%9C%EA%B7%B8-%ED%85%8C%EC%8A%A4%ED%8A%B8-%ED%95%98%EB%8A%94%EB%B2%95/",
     "categories": "",
     "tags": "",
     "date": "2024-04-26 00:00:00 +0800",
@@ -30,8 +132,8 @@
 
 
     
-    "snippet": "Test 페이지 입니다.(Github 확인용)",
-    "content": "Test 페이지 입니다.(Github 확인용)"
+    "snippet": "로컬에서 홈페이지 사용저 혼자 블로그를 수정하던 결과, 쓸때없는 commit이 너무 많아지는 결과가 나타났습니다.해당 문제를 해결하기 위해서, 로컬에서 직접 테스트 할 수 있는 방법을 찾았습니다.cmd 프로그램을 이용해서 localhost를 엽니다.Jeklly를 Local 웹사이트에서 실행하기 위해서는 github 블로그의 파일위치에서 Jekyll를 ...",
+    "content": "로컬에서 홈페이지 사용저 혼자 블로그를 수정하던 결과, 쓸때없는 commit이 너무 많아지는 결과가 나타났습니다.해당 문제를 해결하기 위해서, 로컬에서 직접 테스트 할 수 있는 방법을 찾았습니다.cmd 프로그램을 이용해서 localhost를 엽니다.Jeklly를 Local 웹사이트에서 실행하기 위해서는 github 블로그의 파일위치에서 Jekyll를 실행하면 됩니다.bundle exec jekyll serve를 입력해 주면 됩니다.아래와 같은 화면이 나타나게 되면 성공입니다.localhost:4000을 입력해서 로컬에서 테스트가 가능합니다.그리고 url입력 창에 localhost:4000을 입력한다면아래와 같은 창이 나타나게 됩니다.해당 방식은 저 스스로 블로그에 올릴때 사용하기 위한 방법으로 자주 사용 하는 방법을 공유하기 위해 블로그 글에도 올립니다."
   }
   
 ]

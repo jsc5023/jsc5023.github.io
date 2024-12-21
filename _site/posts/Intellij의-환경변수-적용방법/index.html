@@ -30,22 +30,23 @@
 
   <!-- Begin Jekyll SEO tag v2.8.0 -->
 <meta name="generator" content="Jekyll v4.3.4" />
-<meta property="og:title" content="jsc5023" />
+<meta property="og:title" content="Intellij의 환경변수 적용방법" />
 <meta property="og:locale" content="en" />
-<meta name="description" content="jsc5023의 블로그로, IT 개발자로서서 내용을 정리하는 글로 사용됩니다." />
-<meta property="og:description" content="jsc5023의 블로그로, IT 개발자로서서 내용을 정리하는 글로 사용됩니다." />
-<link rel="canonical" href="http://localhost:4000/" />
-<meta property="og:url" content="http://localhost:4000/" />
+<meta name="description" content="Spring DB 연동용 환경변수 적용하기" />
+<meta property="og:description" content="Spring DB 연동용 환경변수 적용하기" />
+<link rel="canonical" href="http://localhost:4000/posts/Intellij%EC%9D%98-%ED%99%98%EA%B2%BD%EB%B3%80%EC%88%98-%EC%A0%81%EC%9A%A9%EB%B0%A9%EB%B2%95/" />
+<meta property="og:url" content="http://localhost:4000/posts/Intellij%EC%9D%98-%ED%99%98%EA%B2%BD%EB%B3%80%EC%88%98-%EC%A0%81%EC%9A%A9%EB%B0%A9%EB%B2%95/" />
 <meta property="og:site_name" content="jsc5023" />
-<meta property="og:type" content="website" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2024-08-06T00:00:00+08:00" />
 <meta name="twitter:card" content="summary" />
-<meta property="twitter:title" content="jsc5023" />
+<meta property="twitter:title" content="Intellij의 환경변수 적용방법" />
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"WebSite","description":"jsc5023의 블로그로, IT 개발자로서서 내용을 정리하는 글로 사용됩니다.","headline":"jsc5023","name":"jsc5023","sameAs":["https://github.com/jsc5023"],"url":"http://localhost:4000/"}</script>
+{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2024-08-31T13:45:20+08:00","datePublished":"2024-08-06T00:00:00+08:00","description":"Spring DB 연동용 환경변수 적용하기","headline":"Intellij의 환경변수 적용방법","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/posts/Intellij%EC%9D%98-%ED%99%98%EA%B2%BD%EB%B3%80%EC%88%98-%EC%A0%81%EC%9A%A9%EB%B0%A9%EB%B2%95/"},"url":"http://localhost:4000/posts/Intellij%EC%9D%98-%ED%99%98%EA%B2%BD%EB%B3%80%EC%88%98-%EC%A0%81%EC%9A%A9%EB%B0%A9%EB%B2%95/"}</script>
 <!-- End Jekyll SEO tag -->
 
 
-  <title>jsc5023
+  <title>Intellij의 환경변수 적용방법 | jsc5023
   </title>
 
   <!--
@@ -102,11 +103,16 @@
   <link rel="stylesheet" href="/assets/css/jekyll-theme-chirpy.css">
 
   
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tocbot@4.25.0/dist/tocbot.min.css">
+  
 
   
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/loading-attribute-polyfill@2.1.1/dist/loading-attribute-polyfill.min.css">
   
 
+  
+    <!-- Image Popup -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/glightbox@3.3.0/dist/css/glightbox.min.css">
   
 
   <!-- JavaScript -->
@@ -242,7 +248,7 @@
   <nav class="flex-column flex-grow-1 w-100 ps-0">
     <ul class="nav">
       <!-- home -->
-      <li class="nav-item active">
+      <li class="nav-item">
         <a href="/" class="nav-link">
           <i class="fa-fw fas fa-home"></i>
           <span>HOME</span>
@@ -365,9 +371,23 @@
       
 
       
-        <!-- index page -->
-        <span>Home</span>
+        
+          
+            <span>
+              <a href="/">Home</a>
+            </span>
 
+          
+        
+          
+        
+          
+            
+              <span>Intellij의 환경변수 적용방법</span>
+            
+
+          
+        
       
     </nav>
     <!-- endof #breadcrumb -->
@@ -377,7 +397,7 @@
     </button>
 
     <div id="topbar-title">
-      jsc5023
+      Post
     </div>
 
     <button type="button" id="search-trigger" class="btn btn-link">
@@ -431,6 +451,331 @@
 
 
 
+  
+  
+
+  
+    
+      
+      
+    
+
+    
+    
+
+    
+
+    
+    
+
+    
+    
+    
+
+    
+      
+
+      
+      
+      
+
+      
+    
+      
+
+      
+      
+      
+
+      
+    
+
+    <!-- take out classes -->
+    
+
+    
+    
+
+    
+
+    
+      
+    
+
+    <!-- lazy-load images -->
+    
+
+    
+      <!-- make sure the `<img>` is wrapped by `<a>` -->
+      
+
+      
+        <!-- create the image wrapper -->
+        
+
+        
+        
+      
+    
+
+    <!-- combine -->
+    
+  
+    
+
+    
+    
+
+    
+
+    
+    
+
+    
+    
+    
+
+    
+      
+
+      
+      
+      
+
+      
+    
+      
+
+      
+      
+      
+
+      
+    
+
+    <!-- take out classes -->
+    
+
+    
+    
+
+    
+
+    
+      
+    
+
+    <!-- lazy-load images -->
+    
+
+    
+      <!-- make sure the `<img>` is wrapped by `<a>` -->
+      
+
+      
+        <!-- create the image wrapper -->
+        
+
+        
+        
+      
+    
+
+    <!-- combine -->
+    
+  
+    
+
+    
+    
+
+    
+
+    
+    
+
+    
+    
+    
+
+    
+      
+
+      
+      
+      
+
+      
+    
+      
+
+      
+      
+      
+
+      
+    
+
+    <!-- take out classes -->
+    
+
+    
+    
+
+    
+
+    
+      
+    
+
+    <!-- lazy-load images -->
+    
+
+    
+      <!-- make sure the `<img>` is wrapped by `<a>` -->
+      
+
+      
+        <!-- create the image wrapper -->
+        
+
+        
+        
+      
+    
+
+    <!-- combine -->
+    
+  
+    
+
+    
+    
+
+    
+
+    
+    
+
+    
+    
+    
+
+    
+      
+
+      
+      
+      
+
+      
+    
+      
+
+      
+      
+      
+
+      
+    
+
+    <!-- take out classes -->
+    
+
+    
+    
+
+    
+
+    
+      
+    
+
+    <!-- lazy-load images -->
+    
+
+    
+      <!-- make sure the `<img>` is wrapped by `<a>` -->
+      
+
+      
+        <!-- create the image wrapper -->
+        
+
+        
+        
+      
+    
+
+    <!-- combine -->
+    
+  
+    
+
+    
+    
+
+    
+
+    
+    
+
+    
+    
+    
+
+    
+      
+
+      
+      
+      
+
+      
+    
+      
+
+      
+      
+      
+
+      
+    
+
+    <!-- take out classes -->
+    
+
+    
+    
+
+    
+
+    
+      
+    
+
+    <!-- lazy-load images -->
+    
+
+    
+      <!-- make sure the `<img>` is wrapped by `<a>` -->
+      
+
+      
+        <!-- create the image wrapper -->
+        
+
+        
+        
+      
+    
+
+    <!-- combine -->
+    
+  
+
+  
+
 
 <!-- Add header for code snippets -->
 
@@ -456,6 +801,38 @@
   
 
   
+    
+    
+
+    
+      
+        
+        
+      
+
+      
+      
+
+      
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+      
+      
+
+      
+    
+
+    
+  
 
   
   
@@ -470,279 +847,16 @@
 
 
 
-
-
-
-
-
-<!-- Get pinned posts -->
-
-
-
-
-
-
-<!-- Get default posts -->
-
-
-
-
-
-
-
-
-
-
-<div id="post-list" class="flex-grow-1 px-xl-1">
-  
-    <article class="card-wrapper card">
-      <a href="/posts/%EB%B0%B0%EB%8B%AC%EC%9D%98%EB%AF%BC%EC%A1%B1%EC%9C%BC%EB%A1%9C-%EC%95%8C%EC%95%84%EB%B3%B4%EB%8A%94-MSA-%EA%B0%9C%EB%85%90/" class="post-preview row g-0 flex-md-row-reverse">
-        
-
-        
-
-        <div class="col-md-12">
-          <div class="card-body d-flex flex-column">
-            <h1 class="card-title my-2 mt-md-0">배달의민족으로 알아보는 msa 개념</h1>
-
-            <div class="card-text content mt-0 mb-3">
-              <p>배달의민족으로 알아보는 MSA 개념
-
-목차
-
-  배달의민족으로 알아보는 MSA 개념
+<article class="px-1">
+  <header>
+    <h1 data-toc-skip>Intellij의 환경변수 적용방법</h1>
     
-      목차
-      들어가며
-      MSA란 무엇인가?
-      MSA와 단일 책임 원칙(SRP)
-      실제 서비스로 이해하는 MSA
-        
-          기존 방식(모놀리식)의 문제점
-          MSA 방식의 장점
-   ...</p>
-            </div>
 
-            <div class="post-meta flex-grow-1 d-flex align-items-end">
-              <div class="me-auto">
-                <!-- posted date -->
-                <i class="far fa-calendar fa-fw me-1"></i>
-                <!--
-  Date format snippet
-  See: ${JS_ROOT}/utils/locale-dateime.js
--->
-
-
-
-
-<time
-  
-  data-ts="1734710400"
-  data-df="ll"
-  
->
-  Dec 21, 2024
-</time>
-
-
-                <!-- categories -->
-                
-              </div>
-
-              
-            </div>
-            <!-- .post-meta -->
-          </div>
-          <!-- .card-body -->
-        </div>
-      </a>
-    </article>
-  
-    <article class="card-wrapper card">
-      <a href="/posts/%EB%9D%BC%EC%9D%B4%EB%B8%8C%EB%9F%AC%EB%A6%AC%EB%A5%BC-%EC%82%AC%EC%9A%A9%ED%95%98%EC%A7%80-%EC%95%8A%EA%B3%A0-%EB%A6%AC%EC%8A%A4%ED%8A%B8%EB%A5%BC-%EB%A7%8C%EB%93%9C%EB%8A%94-%EB%B0%A9%EB%B2%95/" class="post-preview row g-0 flex-md-row-reverse">
-        
-
-        
-
-        <div class="col-md-12">
-          <div class="card-body d-flex flex-column">
-            <h1 class="card-title my-2 mt-md-0">라이브러리를 사용하지 않고 리스트를 만드는 방법</h1>
-
-            <div class="card-text content mt-0 mb-3">
-              <p>라이브러리를 사용하지 않고 Java로 리스트 구현하기
-
-리스트는 Java에서 자주 사용되는 자료구조로, 보통 ArrayList나 LinkedList와 같은 라이브러리를 활용합니다. 하지만 이번에는 라이브러리를 사용하지 않고, 순수하게 Java로 리스트를 구현하는 방법을 알아보겠습니다.
-
-목차
-
-  라이브러리를 사용하지 않고 Java로 리스트 구현하기
-...</p>
-            </div>
-
-            <div class="post-meta flex-grow-1 d-flex align-items-end">
-              <div class="me-auto">
-                <!-- posted date -->
-                <i class="far fa-calendar fa-fw me-1"></i>
-                <!--
-  Date format snippet
-  See: ${JS_ROOT}/utils/locale-dateime.js
--->
-
-
-
-
-<time
-  
-  data-ts="1734624000"
-  data-df="ll"
-  
->
-  Dec 20, 2024
-</time>
-
-
-                <!-- categories -->
-                
-              </div>
-
-              
-            </div>
-            <!-- .post-meta -->
-          </div>
-          <!-- .card-body -->
-        </div>
-      </a>
-    </article>
-  
-    <article class="card-wrapper card">
-      <a href="/posts/%EC%8A%A4%ED%94%84%EB%A7%81%EC%8B%9C%ED%81%90%EB%A6%AC%ED%8B%B0(Spring-Security)-%EB%A5%BC-%EC%82%AC%EC%9A%A9%EC%8B%9C-Post-%EB%AC%B8%EC%A0%9C/" class="post-preview row g-0 flex-md-row-reverse">
-        
-
-        
-
-        <div class="col-md-12">
-          <div class="card-body d-flex flex-column">
-            <h1 class="card-title my-2 mt-md-0">스프링시큐리티(spring security) 를 사용시 post 문제</h1>
-
-            <div class="card-text content mt-0 mb-3">
-              <p>Spring Security에서 POST 요청이 처리되지 않는 문제 해결: 회원가입 구현 중 배운 점
-
-회원가입 기능을 구현하던 중 예상치 못한 문제가 발생했습니다. 회원가입 버튼을 눌렀을 때 컨트롤러 메서드가 호출되지 않아 디버깅이 되지 않았습니다. 원인을 찾는 과정에서 Spring Security 설정에서 POST 요청 처리를 명시적으로 추가해야 ...</p>
-            </div>
-
-            <div class="post-meta flex-grow-1 d-flex align-items-end">
-              <div class="me-auto">
-                <!-- posted date -->
-                <i class="far fa-calendar fa-fw me-1"></i>
-                <!--
-  Date format snippet
-  See: ${JS_ROOT}/utils/locale-dateime.js
--->
-
-
-
-
-<time
-  
-  data-ts="1733673600"
-  data-df="ll"
-  
->
-  Dec  9, 2024
-</time>
-
-
-                <!-- categories -->
-                
-              </div>
-
-              
-            </div>
-            <!-- .post-meta -->
-          </div>
-          <!-- .card-body -->
-        </div>
-      </a>
-    </article>
-  
-    <article class="card-wrapper card">
-      <a href="/posts/Unsupported-class-file-major-version-66-%EC%97%90%EB%9F%AC-%ED%95%B4%EA%B2%B0%EB%B2%95/" class="post-preview row g-0 flex-md-row-reverse">
-        
-
-        
-
-        <div class="col-md-12">
-          <div class="card-body d-flex flex-column">
-            <h1 class="card-title my-2 mt-md-0">Unsupported class file major version 66 에러 해결법</h1>
-
-            <div class="card-text content mt-0 mb-3">
-              <p>Unsupported class file major version X 의 해결방법
-
-노트북을 변경한 이후, Github에서 프로젝트를 새 컴퓨터로 옮겨서 작업하는 도중 한 오류가 나타났습니다.
-
-Unsupported class file major version 66이라는 오류가 나타났는데 해당오류는 JRE의 해당버전이 정상적으로 실행되지 않아서 발생한...</p>
-            </div>
-
-            <div class="post-meta flex-grow-1 d-flex align-items-end">
-              <div class="me-auto">
-                <!-- posted date -->
-                <i class="far fa-calendar fa-fw me-1"></i>
-                <!--
-  Date format snippet
-  See: ${JS_ROOT}/utils/locale-dateime.js
--->
-
-
-
-
-<time
-  
-  data-ts="1723737600"
-  data-df="ll"
-  
->
-  Aug 16, 2024
-</time>
-
-
-                <!-- categories -->
-                
-              </div>
-
-              
-            </div>
-            <!-- .post-meta -->
-          </div>
-          <!-- .card-body -->
-        </div>
-      </a>
-    </article>
-  
-    <article class="card-wrapper card">
-      <a href="/posts/Intellij%EC%9D%98-%ED%99%98%EA%B2%BD%EB%B3%80%EC%88%98-%EC%A0%81%EC%9A%A9%EB%B0%A9%EB%B2%95/" class="post-preview row g-0 flex-md-row-reverse">
-        
-
-        
-
-        <div class="col-md-12">
-          <div class="card-body d-flex flex-column">
-            <h1 class="card-title my-2 mt-md-0">Intellij의 환경변수 적용방법</h1>
-
-            <div class="card-text content mt-0 mb-3">
-              <p>Spring DB 연동용 환경변수 적용하기
-
-환경변수란?
-
-환경변수란? 환경 변수는 프로세스가 컴퓨터에서 동작하는 방식에 영향을 미치는, 동적인 값들의 모임이다. 환경 변수는 실행 중인 프로세스가 컴퓨터에서 작동하는 방식에 영향을 줄 수 있는 사용자 정의 값이다. 환경 변수는 프로세스가 실행되는 환경의 일부입니다.
-
-이것은 환경이나 보안등의 이유를 위...</p>
-            </div>
-
-            <div class="post-meta flex-grow-1 d-flex align-items-end">
-              <div class="me-auto">
-                <!-- posted date -->
-                <i class="far fa-calendar fa-fw me-1"></i>
-                <!--
+    <div class="post-meta text-muted">
+      <!-- published date -->
+      <span>
+        Posted
+        <!--
   Date format snippet
   See: ${JS_ROOT}/utils/locale-dateime.js
 -->
@@ -755,53 +869,19 @@ Unsupported class file major version 66이라는 오류가 나타났는데 해�
   data-ts="1722873600"
   data-df="ll"
   
+    data-bs-toggle="tooltip" data-bs-placement="bottom"
+  
 >
   Aug  6, 2024
 </time>
 
+      </span>
 
-                <!-- categories -->
-                
-              </div>
-
-              
-            </div>
-            <!-- .post-meta -->
-          </div>
-          <!-- .card-body -->
-        </div>
-      </a>
-    </article>
-  
-    <article class="card-wrapper card">
-      <a href="/posts/applicaion.yaml%EC%9D%98-%EB%A1%9C%EA%B9%85%EC%97%90-%EB%8C%80%ED%95%98%EC%97%AC/" class="post-preview row g-0 flex-md-row-reverse">
-        
-
-        
-
-        <div class="col-md-12">
-          <div class="card-body d-flex flex-column">
-            <h1 class="card-title my-2 mt-md-0">Applicaion.yaml의 로깅에 대하여</h1>
-
-            <div class="card-text content mt-0 mb-3">
-              <p>application.yaml의 로깅(logging)
-
-로그(log) : 정보를 제공하는 일련의 기록
-
-로깅(logging) : 로그(log)를 생성하도록 하는 시스템을 말한다.
-
-로깅를 사용하는 이유는 로그를 바탕으로 데이터를 분석하기 위해 사용합니다.
-
-Spring에서 application.yaml을 통해 logging을 하는 방법
-
-debug :...</p>
-            </div>
-
-            <div class="post-meta flex-grow-1 d-flex align-items-end">
-              <div class="me-auto">
-                <!-- posted date -->
-                <i class="far fa-calendar fa-fw me-1"></i>
-                <!--
+      <!-- lastmod date -->
+      
+        <span>
+          Updated
+          <!--
   Date format snippet
   See: ${JS_ROOT}/utils/locale-dateime.js
 -->
@@ -811,151 +891,207 @@ debug :...</p>
 
 <time
   
-  data-ts="1722268800"
+  data-ts="1725083120"
   data-df="ll"
   
->
-  Jul 30, 2024
-</time>
-
-
-                <!-- categories -->
-                
-              </div>
-
-              
-            </div>
-            <!-- .post-meta -->
-          </div>
-          <!-- .card-body -->
-        </div>
-      </a>
-    </article>
-  
-    <article class="card-wrapper card">
-      <a href="/posts/Md%ED%8C%8C%EC%9D%BC-%ED%85%8C%EC%8A%A4%ED%8A%B8/" class="post-preview row g-0 flex-md-row-reverse">
-        
-
-        
-
-        <div class="col-md-12">
-          <div class="card-body d-flex flex-column">
-            <h1 class="card-title my-2 mt-md-0">Md파일 테스트</h1>
-
-            <div class="card-text content mt-0 mb-3">
-              <p>Markdown의 참조 문서
-
-마크다운 markdown 작성법 : “Markdown Guide” 영어로 된 Markdown Guide 입니다.
-
-
-자주 사용되는 마크 다운 문법
-
-
-  헤더
-헤더 입니다.(This is a Big Header(H1))
-  HyperLink 작성하기
-[MarkDown Guide]
-  문단 적용하기</p>
-            </div>
-
-            <div class="post-meta flex-grow-1 d-flex align-items-end">
-              <div class="me-auto">
-                <!-- posted date -->
-                <i class="far fa-calendar fa-fw me-1"></i>
-                <!--
-  Date format snippet
-  See: ${JS_ROOT}/utils/locale-dateime.js
--->
-
-
-
-
-<time
-  
-  data-ts="1714233600"
-  data-df="ll"
+    data-bs-toggle="tooltip" data-bs-placement="bottom"
   
 >
-  Apr 28, 2024
+  Aug 31, 2024
 </time>
 
+        </span>
+      
 
-                <!-- categories -->
-                
-              </div>
+      
 
-              
-            </div>
-            <!-- .post-meta -->
-          </div>
-          <!-- .card-body -->
-        </div>
-      </a>
-    </article>
-  
-    <article class="card-wrapper card">
-      <a href="/posts/%EB%A1%9C%EC%BB%AC%ED%99%98%EA%B2%BD%EC%97%90%EC%84%9C-Github-%EB%B8%94%EB%A1%9C%EA%B7%B8-%ED%85%8C%EC%8A%A4%ED%8A%B8-%ED%95%98%EB%8A%94%EB%B2%95/" class="post-preview row g-0 flex-md-row-reverse">
-        
+      <div class="d-flex justify-content-between">
+        <!-- author(s) -->
+        <span>
+          
 
-        
+          By
 
-        <div class="col-md-12">
-          <div class="card-body d-flex flex-column">
-            <h1 class="card-title my-2 mt-md-0">로컬환경에서 github 블로그 테스트 하는법</h1>
+          <em>
+            
+              <a href="https://github.com/jsc5023">jsc5023</a>
+            
+          </em>
+        </span>
 
-            <div class="card-text content mt-0 mb-3">
-              <p>로컬에서 홈페이지 사용
+        <div>
+          <!-- pageviews -->
+          
 
-저 혼자 블로그를 수정하던 결과, 쓸때없는 commit이 너무 많아지는 결과가 나타났습니다.
-
-해당 문제를 해결하기 위해서, 로컬에서 직접 테스트 할 수 있는 방법을 찾았습니다.
+          <!-- read time -->
+          <!-- Calculate the post's reading time, and display the word count in tooltip -->
 
 
 
-cmd 프로그램을 이용해서 localhost를 엽니다.
-
-Jeklly를 Local 웹사이트에서 실행하기 위해서는 github 블로그의 파일위치에...</p>
-            </div>
-
-            <div class="post-meta flex-grow-1 d-flex align-items-end">
-              <div class="me-auto">
-                <!-- posted date -->
-                <i class="far fa-calendar fa-fw me-1"></i>
-                <!--
-  Date format snippet
-  See: ${JS_ROOT}/utils/locale-dateime.js
--->
+<!-- words per minute -->
 
 
 
 
-<time
-  
-  data-ts="1714060800"
-  data-df="ll"
-  
+
+
+
+
+
+
+<!-- return element -->
+<span
+  class="readtime"
+  data-bs-toggle="tooltip"
+  data-bs-placement="bottom"
+  title="574 words"
 >
-  Apr 26, 2024
-</time>
+  <em>3 min</em> read</span>
 
-
-                <!-- categories -->
-                
-              </div>
-
-              
-            </div>
-            <!-- .post-meta -->
-          </div>
-          <!-- .card-body -->
         </div>
-      </a>
-    </article>
-  
-</div>
-<!-- #post-list -->
+      </div>
+    </div>
+  </header>
 
+  <div class="content">
+    <h1 id="spring-db-연동용-환경변수-적용하기">Spring DB 연동용 환경변수 적용하기</h1>
 
+<h4 id="환경변수란"><span class="me-2">환경변수란?</span><a href="#환경변수란" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h4>
+
+<p>환경변수란? 환경 변수는 프로세스가 컴퓨터에서 동작하는 방식에 영향을 미치는, 동적인 값들의 모임이다. 환경 변수는 실행 중인 프로세스가 컴퓨터에서 작동하는 방식에 영향을 줄 수 있는 사용자 정의 값이다. 환경 변수는 프로세스가 실행되는 환경의 일부입니다.</p>
+
+<p>이것은 환경이나 보안등의 이유를 위해, 동적 변수를 주어서 컴퓨터 내부적으로 관리하기위해 사용됩니다.</p>
+
+<h4 id="spring-db를-연동할때-환경변수를-적용하는-방법"><span class="me-2">Spring DB를 연동할때 환경변수를 적용하는 방법</span><a href="#spring-db를-연동할때-환경변수를-적용하는-방법" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h4>
+
+<p>Spring에서 데이터 베이스를 연동할 경우, 코드상에서 보안을 위해 데이터 베이스 정보와 아이디, 비밀번호 관련을 코드상에서 말고 내부적으로 처리해야할 경우가 있습니다. 그를 위해 환경변수를 작성해야 합니다.</p>
+
+<p>application.yml 파일을 작성하면 되고, 아래와 같이 작성합니다.</p>
+
+<div class="language-yaml highlighter-rouge"><div class="code-header">
+        <span data-label-text="YAML"><i class="fas fa-code fa-fw small"></i></span>
+      <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+</pre></td><td class="rouge-code"><pre><span class="na">spring</span><span class="pi">:</span>
+  <span class="na">datasource</span><span class="pi">:</span>
+    <span class="na">url</span><span class="pi">:</span> <span class="s">${LOCAL_DB_URL}</span>
+    <span class="na">username</span><span class="pi">:</span> <span class="s">${LOCAL_DB_USERNAME}</span>
+    <span class="na">password</span><span class="pi">:</span> <span class="s">${LOCAL_DB_PASSWORD}</span>
+  <span class="na">thymeleaf3.decoupled-logic</span><span class="pi">:</span> <span class="kc">true</span>
+</pre></td></tr></tbody></table></code></div></div>
+
+<p>그럼 해당 <code class="language-plaintext highlighter-rouge">${LOCAL_DB_URL}, ${LOCAL_DB_USERNAME} , ${LOCAL_DB_PASSWORD}</code>으로 환경변수를 선언하면, 어떻게 할수 있을까요?</p>
+
+<p>Intellij 기준으로 설명합니다.</p>
+
+<p><strong>1. Run Configurations 열기</strong> :</p>
+
+<ul>
+  <li>상단 메뉴에서 <code class="language-plaintext highlighter-rouge">Run</code> &gt; <code class="language-plaintext highlighter-rouge">Run Configurations...</code>를 선택합니다.</li>
+</ul>
+
+<p><a href="https://github.com/user-attachments/assets/710773e4-1255-4f27-807e-2c8583350831" class="popup img-link  shimmer"><img src="https://github.com/user-attachments/assets/710773e4-1255-4f27-807e-2c8583350831" alt="image" loading="lazy"></a></p>
+
+<p><strong>2. 구성 설정 선택</strong> :</p>
+
+<ul>
+  <li>좌측 패널에서 Java Application을 선택하고, Modify options를 클릭합니다.</li>
+</ul>
+
+<p><a href="https://github.com/user-attachments/assets/be6fbbe3-469b-459d-b6e0-040aa917a75e" class="popup img-link  shimmer"><img src="https://github.com/user-attachments/assets/be6fbbe3-469b-459d-b6e0-040aa917a75e" alt="image" loading="lazy"></a></p>
+
+<p>이후, Environement variables 를 클릭합니다.
+그럼 아래와 같은 화면이 나타납니다.</p>
+
+<p><a href="https://github.com/user-attachments/assets/ee853dae-7ef3-4f3a-a35d-aa7814fddd56" class="popup img-link  shimmer"><img src="https://github.com/user-attachments/assets/ee853dae-7ef3-4f3a-a35d-aa7814fddd56" alt="image" loading="lazy"></a></p>
+
+<p><strong>3. 환경 변수 설정</strong> :</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">Environment variables</code> 의 우측</li>
+  <li><code class="language-plaintext highlighter-rouge">+(New)</code> 버튼을 클릭하여 새로운 환경 변수를 추가합니다.
+    <ul>
+      <li><code class="language-plaintext highlighter-rouge">Name</code>: <code class="language-plaintext highlighter-rouge">LOCAL_DB_URL</code>, <code class="language-plaintext highlighter-rouge">LOCAL_DB_USERNAME</code>, <code class="language-plaintext highlighter-rouge">LOCAL_DB_PASSWORD</code>와 같은 변수 이름을 입력합니다.</li>
+      <li><code class="language-plaintext highlighter-rouge">Value</code>: 각 환경 변수의 값을 입력합니다.</li>
+    </ul>
+  </li>
+  <li>입력이 완료되면 <code class="language-plaintext highlighter-rouge">OK</code>를 클릭하여 설정을 저장합니다.</li>
+</ul>
+
+<p><a href="https://github.com/user-attachments/assets/85993a04-f5f7-4c1b-accc-b2ab05ad5463" class="popup img-link  shimmer"><img src="https://github.com/user-attachments/assets/85993a04-f5f7-4c1b-accc-b2ab05ad5463" alt="image" loading="lazy"></a></p>
+
+<p><strong>4. 설정 저장 및 실행</strong> :</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">Run Configurations</code> 창에서 <code class="language-plaintext highlighter-rouge">Apply</code>를 클릭한 후, <code class="language-plaintext highlighter-rouge">Run</code> 버튼을 클릭하여 애플리케이션을 실행합니다.</li>
+</ul>
+
+<p><a href="https://github.com/user-attachments/assets/6c43dcc9-d16d-46ef-91e6-2b84e8b8eb05" class="popup img-link  shimmer"><img src="https://github.com/user-attachments/assets/6c43dcc9-d16d-46ef-91e6-2b84e8b8eb05" alt="image" loading="lazy"></a></p>
+
+  </div>
+
+  <div class="post-tail-wrapper text-muted">
+    <!-- categories -->
+    
+
+    <!-- tags -->
+    
+
+    <div
+      class="
+        post-tail-bottom
+        d-flex justify-content-between align-items-center mt-5 pb-2
+      "
+    >
+      <!--
+        <div class="license-wrapper">
+          
+            
+
+            This post is licensed under 
+            <a href="https://creativecommons.org/licenses/by/4.0/">
+              CC BY 4.0
+            </a>
+             by the author.
+          
+        </div>
+
+         <!-- Post sharing snippet -->
+
+<!--
+  ><div class="share-wrapper d-flex align-items-center">
+    <span class="share-label text-muted">Share</span>
+    <span class="share-icons">
+      
+      
+      
+
+      
+
+      <button
+        id="copy-link"
+        aria-label="Copy link"
+        class="btn small"
+        data-bs-toggle="tooltip"
+        data-bs-placement="top"
+        title="Copy link"
+        data-title-succeed="Link copied successfully!"
+      >
+        <i class="fa-fw fas fa-link pe-none fs-6"></i>
+      </button>
+    </span>
+  </div>
+
+      -->
+    </div>
+    <!-- .post-tail-bottom -->
+  </div>
+  <!-- div.post-tail-wrapper -->
+</article>
 
 
             
@@ -1045,12 +1181,89 @@ Jeklly를 Local 웹사이트에서 실행하기 위해서는 github 블로그의
             </div>
 
             
+              
+              
+
+
+
+
+            
           </aside>
         </div>
 
         <div class="row">
           <!-- tail -->
           <div id="tail-wrapper" class="col-12 col-lg-11 col-xl-9 px-md-4">
+            
+              
+              <!-- Recommend the other 3 posts according to the tags and categories of the current post. -->
+
+<!-- The total size of related posts -->
+
+
+<!-- An random integer that bigger than 0 -->
+
+
+<!-- Equals to TAG_SCORE / {max_categories_hierarchy} -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            
+              
+              <!-- Navigation buttons at the bottom of the post. -->
+
+<nav class="post-navigation d-flex justify-content-between" aria-label="Post Navigation">
+  
+  
+
+  
+    <a
+      href="/posts/applicaion.yaml%EC%9D%98-%EB%A1%9C%EA%B9%85%EC%97%90-%EB%8C%80%ED%95%98%EC%97%AC/"
+      class="btn btn-outline-primary"
+      aria-label="Older"
+    >
+      <p>Applicaion.yaml의 로깅에 대하여</p>
+    </a>
+  
+
+  
+    <a
+      href="/posts/Unsupported-class-file-major-version-66-%EC%97%90%EB%9F%AC-%ED%95%B4%EA%B2%B0%EB%B2%95/"
+      class="btn btn-outline-primary"
+      aria-label="Newer"
+    >
+      <p>Unsupported class file major version 66 에러 해결법</p>
+    </a>
+  
+</nav>
+
+            
+              
+              <!-- The comments switcher -->
+
+
             
 
             <!-- The Footer -->
@@ -1172,6 +1385,9 @@ Jeklly를 Local 웹사이트에서 실행하기 위해서는 github 블로그의
   
 
   
+    <!-- image lazy-loading & popup & clipboard -->
+    
+  
 
 
 
@@ -1236,20 +1452,38 @@ Jeklly를 Local 웹사이트에서 실행하기 위해서는 github 블로그의
 
   
 
+  
+    
+
+    
+
+  
+
+  
+    
+
+    
+
+  
 
 
-  <script src="https://cdn.jsdelivr.net/combine/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js,npm/simple-jekyll-search@1.10.0/dest/simple-jekyll-search.min.js,npm/loading-attribute-polyfill@2.1.1/dist/loading-attribute-polyfill.umd.min.js,npm/dayjs@1.11.10/dayjs.min.js,npm/dayjs@1.11.10/locale/en.min.js,npm/dayjs@1.11.10/plugin/relativeTime.min.js,npm/dayjs@1.11.10/plugin/localizedFormat.min.js"></script>
+
+  <script src="https://cdn.jsdelivr.net/combine/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js,npm/simple-jekyll-search@1.10.0/dest/simple-jekyll-search.min.js,npm/loading-attribute-polyfill@2.1.1/dist/loading-attribute-polyfill.umd.min.js,npm/glightbox@3.3.0/dist/js/glightbox.min.js,npm/clipboard@2.0.11/dist/clipboard.min.js,npm/dayjs@1.11.10/dayjs.min.js,npm/dayjs@1.11.10/locale/en.min.js,npm/dayjs@1.11.10/plugin/relativeTime.min.js,npm/dayjs@1.11.10/plugin/localizedFormat.min.js"></script>
 
 
 
 
 
 
-<script defer src="/assets/js/dist/home.min.js"></script>
+<script defer src="/assets/js/dist/post.min.js"></script>
 
 
 
 <!-- Pageviews -->
+
+  
+
+  
 
 
 
