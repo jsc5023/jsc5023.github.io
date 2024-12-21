@@ -17,7 +17,7 @@ description: >- # used by seo meta and the atom feed
   jsc5023의 블로그로, IT 개발자로서서 내용을 정리하는 글로 사용됩니다.
 
 # Fill in the protocol & hostname for your site.
-url: "https://jsc5023.github.io/"
+url: ""
 
 github:
   username: jsc5023 # change to your github username
