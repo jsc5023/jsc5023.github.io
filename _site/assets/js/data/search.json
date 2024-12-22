@@ -103,23 +103,6 @@
   },
   
   {
-    "title": "Md파일 테스트",
-    "url": "/posts/Md%ED%8C%8C%EC%9D%BC-%ED%85%8C%EC%8A%A4%ED%8A%B8/",
-    "categories": "",
-    "tags": "",
-    "date": "2024-04-28 00:00:00 +0900",
-    
-
-
-
-
-
-    
-    "snippet": "Markdown의 참조 문서마크다운 markdown 작성법 : “Markdown Guide” 영어로 된 Markdown Guide 입니다.자주 사용되는 마크 다운 문법  헤더헤더 입니다.(This is a Big Header(H1))  HyperLink 작성하기[MarkDown Guide]  문단 적용하기",
-    "content": "Markdown의 참조 문서마크다운 markdown 작성법 : “Markdown Guide” 영어로 된 Markdown Guide 입니다.자주 사용되는 마크 다운 문법  헤더헤더 입니다.(This is a Big Header(H1))  HyperLink 작성하기[MarkDown Guide]  문단 적용하기"
-  },
-  
-  {
     "title": "로컬환경에서 github 블로그 테스트 하는법",
     "url": "/posts/%EB%A1%9C%EC%BB%AC%ED%99%98%EA%B2%BD%EC%97%90%EC%84%9C-Github-%EB%B8%94%EB%A1%9C%EA%B7%B8-%ED%85%8C%EC%8A%A4%ED%8A%B8-%ED%95%98%EB%8A%94%EB%B2%95/",
     "categories": "",

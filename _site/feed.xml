@@ -4,7 +4,7 @@
   <id>http://localhost:4000/</id>
   <title>jsc5023</title>
   <subtitle>jsc5023의 블로그로, IT 개발자로서서 배운 내용을 정리하는 글로 사용됩니다.</subtitle>
-  <updated>2024-12-22T09:06:51+09:00</updated>
+  <updated>2024-12-22T09:27:12+09:00</updated>
   <author>
     <name>jsc5023</name>
     <uri>http://localhost:4000/</uri>
@@ -24,7 +24,7 @@
     <link href="http://localhost:4000/posts/%EB%B0%B0%EB%8B%AC%EC%9D%98%EB%AF%BC%EC%A1%B1%EC%9C%BC%EB%A1%9C-%EC%95%8C%EC%95%84%EB%B3%B4%EB%8A%94-MSA-%EA%B0%9C%EB%85%90/" rel="alternate" type="text/html" title="배달의민족으로 알아보는 msa 개념" />
     <published>2024-12-21T00:00:00+09:00</published>
   
-    <updated>2024-12-22T03:44:18+09:00</updated>
+    <updated>2024-12-22T09:08:58+09:00</updated>
   
     <id>http://localhost:4000/posts/%EB%B0%B0%EB%8B%AC%EC%9D%98%EB%AF%BC%EC%A1%B1%EC%9C%BC%EB%A1%9C-%EC%95%8C%EC%95%84%EB%B3%B4%EB%8A%94-MSA-%EA%B0%9C%EB%85%90/</id>
     <content type="text/html" src="http://localhost:4000/posts/%EB%B0%B0%EB%8B%AC%EC%9D%98%EB%AF%BC%EC%A1%B1%EC%9C%BC%EB%A1%9C-%EC%95%8C%EC%95%84%EB%B3%B4%EB%8A%94-MSA-%EA%B0%9C%EB%85%90/" />
@@ -70,7 +70,7 @@ MSA(Microservice Architecture)를 처음 접했을 때는 단순히 ‘서비스
     <link href="http://localhost:4000/posts/%EB%9D%BC%EC%9D%B4%EB%B8%8C%EB%9F%AC%EB%A6%AC%EB%A5%BC-%EC%82%AC%EC%9A%A9%ED%95%98%EC%A7%80-%EC%95%8A%EA%B3%A0-%EB%A6%AC%EC%8A%A4%ED%8A%B8%EB%A5%BC-%EB%A7%8C%EB%93%9C%EB%8A%94-%EB%B0%A9%EB%B2%95/" rel="alternate" type="text/html" title="라이브러리를 사용하지 않고 리스트를 만드는 방법" />
     <published>2024-12-20T00:00:00+09:00</published>
   
-    <updated>2024-12-22T03:44:18+09:00</updated>
+    <updated>2024-12-22T09:08:58+09:00</updated>
   
     <id>http://localhost:4000/posts/%EB%9D%BC%EC%9D%B4%EB%B8%8C%EB%9F%AC%EB%A6%AC%EB%A5%BC-%EC%82%AC%EC%9A%A9%ED%95%98%EC%A7%80-%EC%95%8A%EA%B3%A0-%EB%A6%AC%EC%8A%A4%ED%8A%B8%EB%A5%BC-%EB%A7%8C%EB%93%9C%EB%8A%94-%EB%B0%A9%EB%B2%95/</id>
     <content type="text/html" src="http://localhost:4000/posts/%EB%9D%BC%EC%9D%B4%EB%B8%8C%EB%9F%AC%EB%A6%AC%EB%A5%BC-%EC%82%AC%EC%9A%A9%ED%95%98%EC%A7%80-%EC%95%8A%EA%B3%A0-%EB%A6%AC%EC%8A%A4%ED%8A%B8%EB%A5%BC-%EB%A7%8C%EB%93%9C%EB%8A%94-%EB%B0%A9%EB%B2%95/" />
@@ -108,7 +108,7 @@ MSA(Microservice Architecture)를 처음 접했을 때는 단순히 ‘서비스
     <link href="http://localhost:4000/posts/%EC%8A%A4%ED%94%84%EB%A7%81%EC%8B%9C%ED%81%90%EB%A6%AC%ED%8B%B0(Spring-Security)-%EB%A5%BC-%EC%82%AC%EC%9A%A9%EC%8B%9C-Post-%EB%AC%B8%EC%A0%9C/" rel="alternate" type="text/html" title="스프링시큐리티(spring security) 를 사용시 post 문제" />
     <published>2024-12-09T00:00:00+09:00</published>
   
-    <updated>2024-12-22T03:44:18+09:00</updated>
+    <updated>2024-12-22T09:08:58+09:00</updated>
   
     <id>http://localhost:4000/posts/%EC%8A%A4%ED%94%84%EB%A7%81%EC%8B%9C%ED%81%90%EB%A6%AC%ED%8B%B0(Spring-Security)-%EB%A5%BC-%EC%82%AC%EC%9A%A9%EC%8B%9C-Post-%EB%AC%B8%EC%A0%9C/</id>
     <content type="text/html" src="http://localhost:4000/posts/%EC%8A%A4%ED%94%84%EB%A7%81%EC%8B%9C%ED%81%90%EB%A6%AC%ED%8B%B0(Spring-Security)-%EB%A5%BC-%EC%82%AC%EC%9A%A9%EC%8B%9C-Post-%EB%AC%B8%EC%A0%9C/" />
@@ -141,7 +141,7 @@ MSA(Microservice Architecture)를 처음 접했을 때는 단순히 ‘서비스
     <link href="http://localhost:4000/posts/Unsupported-class-file-major-version-66-%EC%97%90%EB%9F%AC-%ED%95%B4%EA%B2%B0%EB%B2%95/" rel="alternate" type="text/html" title="Unsupported class file major version 66 에러 해결법" />
     <published>2024-08-16T00:00:00+09:00</published>
   
-    <updated>2024-12-22T03:44:18+09:00</updated>
+    <updated>2024-12-22T09:08:58+09:00</updated>
   
     <id>http://localhost:4000/posts/Unsupported-class-file-major-version-66-%EC%97%90%EB%9F%AC-%ED%95%B4%EA%B2%B0%EB%B2%95/</id>
     <content type="text/html" src="http://localhost:4000/posts/Unsupported-class-file-major-version-66-%EC%97%90%EB%9F%AC-%ED%95%B4%EA%B2%B0%EB%B2%95/" />
@@ -173,7 +173,7 @@ Intellij 에서...</summary>
     <link href="http://localhost:4000/posts/Intellij%EC%9D%98-%ED%99%98%EA%B2%BD%EB%B3%80%EC%88%98-%EC%A0%81%EC%9A%A9%EB%B0%A9%EB%B2%95/" rel="alternate" type="text/html" title="Intellij의 환경변수 적용방법" />
     <published>2024-08-06T00:00:00+09:00</published>
   
-    <updated>2024-12-22T03:44:18+09:00</updated>
+    <updated>2024-12-22T09:08:58+09:00</updated>
   
     <id>http://localhost:4000/posts/Intellij%EC%9D%98-%ED%99%98%EA%B2%BD%EB%B3%80%EC%88%98-%EC%A0%81%EC%9A%A9%EB%B0%A9%EB%B2%95/</id>
     <content type="text/html" src="http://localhost:4000/posts/Intellij%EC%9D%98-%ED%99%98%EA%B2%BD%EB%B3%80%EC%88%98-%EC%A0%81%EC%9A%A9%EB%B0%A9%EB%B2%95/" />
