@@ -2,9 +2,9 @@
 
 <feed xmlns="http://www.w3.org/2005/Atom">
   <id>http://localhost:4000/</id>
-  <title>Chirpy</title>
+  <title>jsc5023</title>
   <subtitle>jsc5023의 블로그로, IT 개발자로서서 배운 내용을 정리하는 글로 사용됩니다.</subtitle>
-  <updated>2024-12-22T07:46:20+08:00</updated>
+  <updated>2024-12-22T09:06:51+09:00</updated>
   <author>
     <name>jsc5023</name>
     <uri>http://localhost:4000/</uri>
@@ -20,113 +20,184 @@
 
   
   <entry>
-    <title>Customize the Favicon</title>
-    <link href="http://localhost:4000/posts/customize-the-favicon/" rel="alternate" type="text/html" title="Customize the Favicon" />
-    <published>2019-08-11T00:34:00+08:00</published>
+    <title>배달의민족으로 알아보는 msa 개념</title>
+    <link href="http://localhost:4000/posts/%EB%B0%B0%EB%8B%AC%EC%9D%98%EB%AF%BC%EC%A1%B1%EC%9C%BC%EB%A1%9C-%EC%95%8C%EC%95%84%EB%B3%B4%EB%8A%94-MSA-%EA%B0%9C%EB%85%90/" rel="alternate" type="text/html" title="배달의민족으로 알아보는 msa 개념" />
+    <published>2024-12-21T00:00:00+09:00</published>
   
-    <updated>2019-08-11T00:34:00+08:00</updated>
+    <updated>2024-12-22T03:44:18+09:00</updated>
   
-    <id>http://localhost:4000/posts/customize-the-favicon/</id>
-    <content type="text/html" src="http://localhost:4000/posts/customize-the-favicon/" />
+    <id>http://localhost:4000/posts/%EB%B0%B0%EB%8B%AC%EC%9D%98%EB%AF%BC%EC%A1%B1%EC%9C%BC%EB%A1%9C-%EC%95%8C%EC%95%84%EB%B3%B4%EB%8A%94-MSA-%EA%B0%9C%EB%85%90/</id>
+    <content type="text/html" src="http://localhost:4000/posts/%EB%B0%B0%EB%8B%AC%EC%9D%98%EB%AF%BC%EC%A1%B1%EC%9C%BC%EB%A1%9C-%EC%95%8C%EC%95%84%EB%B3%B4%EB%8A%94-MSA-%EA%B0%9C%EB%85%90/" />
     <author>
-      <name>cotes</name>
+      <name>jsc5023</name>
     </author>
 
   
     
-    <category term="Blogging" />
+  
+
+  <summary>배달의민족으로 알아보는 MSA 개념
+
+목차
+
+  배달의민족으로 알아보는 MSA 개념
     
-    <category term="Tutorial" />
+      목차
+      들어가며
+      MSA란 무엇인가?
+      MSA와 단일 책임 원칙(SRP)
+      실제 서비스로 이해하는 MSA
+        
+          기존 방식(모놀리식)의 문제점
+          MSA 방식의 장점
+        
+      
+      MSA의 실제 효과
+      결론
     
   
 
-  <summary>The favicons of Chirpy are placed in the directory assets/img/favicons/. You may want to replace them with your own. The following sections will guide you to create and replace the default favicons.
 
-Generate the favicon
+들어가며
 
-Prepare a square image (PNG, JPG, or SVG) with a size of 512x512 or more, and then go to the online tool Real Favicon Generator and click the button Select your Favicon image ...</summary>
+MSA(Microservice Architecture)를 처음 접했을 때는 단순히 ‘서비스를 잘게 쪼개는 것’이라고만 생각했습니다. 하지만 실제로 공부해보니 그 이상의 깊이 있는 아키텍처 패턴이었습니다. 이 글에서는 제가 MSA를 공부하면서 깨달은 점들을 정리...</summary>
 
   </entry>
 
   
   <entry>
-    <title>Getting Started</title>
-    <link href="http://localhost:4000/posts/getting-started/" rel="alternate" type="text/html" title="Getting Started" />
-    <published>2019-08-09T20:55:00+08:00</published>
+    <title>라이브러리를 사용하지 않고 리스트를 만드는 방법</title>
+    <link href="http://localhost:4000/posts/%EB%9D%BC%EC%9D%B4%EB%B8%8C%EB%9F%AC%EB%A6%AC%EB%A5%BC-%EC%82%AC%EC%9A%A9%ED%95%98%EC%A7%80-%EC%95%8A%EA%B3%A0-%EB%A6%AC%EC%8A%A4%ED%8A%B8%EB%A5%BC-%EB%A7%8C%EB%93%9C%EB%8A%94-%EB%B0%A9%EB%B2%95/" rel="alternate" type="text/html" title="라이브러리를 사용하지 않고 리스트를 만드는 방법" />
+    <published>2024-12-20T00:00:00+09:00</published>
   
-    <updated>2019-08-09T20:55:00+08:00</updated>
+    <updated>2024-12-22T03:44:18+09:00</updated>
   
-    <id>http://localhost:4000/posts/getting-started/</id>
-    <content type="text/html" src="http://localhost:4000/posts/getting-started/" />
+    <id>http://localhost:4000/posts/%EB%9D%BC%EC%9D%B4%EB%B8%8C%EB%9F%AC%EB%A6%AC%EB%A5%BC-%EC%82%AC%EC%9A%A9%ED%95%98%EC%A7%80-%EC%95%8A%EA%B3%A0-%EB%A6%AC%EC%8A%A4%ED%8A%B8%EB%A5%BC-%EB%A7%8C%EB%93%9C%EB%8A%94-%EB%B0%A9%EB%B2%95/</id>
+    <content type="text/html" src="http://localhost:4000/posts/%EB%9D%BC%EC%9D%B4%EB%B8%8C%EB%9F%AC%EB%A6%AC%EB%A5%BC-%EC%82%AC%EC%9A%A9%ED%95%98%EC%A7%80-%EC%95%8A%EA%B3%A0-%EB%A6%AC%EC%8A%A4%ED%8A%B8%EB%A5%BC-%EB%A7%8C%EB%93%9C%EB%8A%94-%EB%B0%A9%EB%B2%95/" />
     <author>
-      <name>cotes</name>
+      <name>jsc5023</name>
     </author>
 
   
     
-    <category term="Blogging" />
-    
-    <category term="Tutorial" />
-    
   
 
-  <summary>Get started with Chirpy basics in this comprehensive overview. You will learn how to install, configure, and use your first Chirpy-based website, as well as deploy it to a web server.</summary>
+  <summary>라이브러리를 사용하지 않고 Java로 리스트 구현하기
+
+리스트는 Java에서 자주 사용되는 자료구조로, 보통 ArrayList나 LinkedList와 같은 라이브러리를 활용합니다. 하지만 이번에는 라이브러리를 사용하지 않고, 순수하게 Java로 리스트를 구현하는 방법을 알아보겠습니다.
+
+목차
+
+  라이브러리를 사용하지 않고 Java로 리스트 구현하기
+    
+      목차
+      목표 기능
+      리스트와 배열의 차이
+      구현 과정
+        
+          1. 배열 초기화 및 추가 기능 구현
+          2. 조회(get) 및 초기화(clear) 기능
+          3. 삭제(delete) 및 삽입(insert) 기능
+          4. 크기 반환(size) 및 ...</summary>
 
   </entry>
 
   
   <entry>
-    <title>Writing a New Post</title>
-    <link href="http://localhost:4000/posts/write-a-new-post/" rel="alternate" type="text/html" title="Writing a New Post" />
-    <published>2019-08-08T14:10:00+08:00</published>
+    <title>스프링시큐리티(spring security) 를 사용시 post 문제</title>
+    <link href="http://localhost:4000/posts/%EC%8A%A4%ED%94%84%EB%A7%81%EC%8B%9C%ED%81%90%EB%A6%AC%ED%8B%B0(Spring-Security)-%EB%A5%BC-%EC%82%AC%EC%9A%A9%EC%8B%9C-Post-%EB%AC%B8%EC%A0%9C/" rel="alternate" type="text/html" title="스프링시큐리티(spring security) 를 사용시 post 문제" />
+    <published>2024-12-09T00:00:00+09:00</published>
   
-    <updated>2019-08-08T14:10:00+08:00</updated>
+    <updated>2024-12-22T03:44:18+09:00</updated>
   
-    <id>http://localhost:4000/posts/write-a-new-post/</id>
-    <content type="text/html" src="http://localhost:4000/posts/write-a-new-post/" />
+    <id>http://localhost:4000/posts/%EC%8A%A4%ED%94%84%EB%A7%81%EC%8B%9C%ED%81%90%EB%A6%AC%ED%8B%B0(Spring-Security)-%EB%A5%BC-%EC%82%AC%EC%9A%A9%EC%8B%9C-Post-%EB%AC%B8%EC%A0%9C/</id>
+    <content type="text/html" src="http://localhost:4000/posts/%EC%8A%A4%ED%94%84%EB%A7%81%EC%8B%9C%ED%81%90%EB%A6%AC%ED%8B%B0(Spring-Security)-%EB%A5%BC-%EC%82%AC%EC%9A%A9%EC%8B%9C-Post-%EB%AC%B8%EC%A0%9C/" />
     <author>
-      <name>cotes</name>
+      <name>jsc5023</name>
     </author>
 
   
     
-    <category term="Blogging" />
-    
-    <category term="Tutorial" />
-    
   
 
-  <summary>This tutorial will guide you how to write a post in the Chirpy template, and it’s worth reading even if you’ve used Jekyll before, as many features require specific variables to be set.
+  <summary>Spring Security에서 POST 요청이 처리되지 않는 문제 해결: 회원가입 구현 중 배운 점
 
-Naming and Path
+회원가입 기능을 구현하던 중 예상치 못한 문제가 발생했습니다. 회원가입 버튼을 눌렀을 때 컨트롤러 메서드가 호출되지 않아 디버깅이 되지 않았습니다. 원인을 찾는 과정에서 Spring Security 설정에서 POST 요청 처리를 명시적으로 추가해야 한다는 점을 깨달았고, 이를 해결하는 과정을 공유합니다.
 
-Create a new file named YYYY-MM-DD-TITLE.EXTENSION and put it in the _posts of the root directory. Please note that the EXTENSION must be one of md and markdown. If you want to save time of cre...</summary>
+
+
+문제 상황
+
+회원가입을 구현하는 과정에서 @PostMapping(&amp;quot;/security/sign-up&amp;quot;) 메서드가 호출되지 않았습니다. 브라우저 개발자 도구의 Network 탭을 확인해도 요청이 컨트롤러에 도달하지 않았습니다. 초기 코드 구성은 아래와 같았습니다:
+
+컨트롤러 코드
+@PostMappi...</summary>
 
   </entry>
 
   
   <entry>
-    <title>Text and Typography</title>
-    <link href="http://localhost:4000/posts/text-and-typography/" rel="alternate" type="text/html" title="Text and Typography" />
-    <published>2019-08-08T11:33:00+08:00</published>
+    <title>Unsupported class file major version 66 에러 해결법</title>
+    <link href="http://localhost:4000/posts/Unsupported-class-file-major-version-66-%EC%97%90%EB%9F%AC-%ED%95%B4%EA%B2%B0%EB%B2%95/" rel="alternate" type="text/html" title="Unsupported class file major version 66 에러 해결법" />
+    <published>2024-08-16T00:00:00+09:00</published>
   
-    <updated>2019-08-08T11:33:00+08:00</updated>
+    <updated>2024-12-22T03:44:18+09:00</updated>
   
-    <id>http://localhost:4000/posts/text-and-typography/</id>
-    <content type="text/html" src="http://localhost:4000/posts/text-and-typography/" />
+    <id>http://localhost:4000/posts/Unsupported-class-file-major-version-66-%EC%97%90%EB%9F%AC-%ED%95%B4%EA%B2%B0%EB%B2%95/</id>
+    <content type="text/html" src="http://localhost:4000/posts/Unsupported-class-file-major-version-66-%EC%97%90%EB%9F%AC-%ED%95%B4%EA%B2%B0%EB%B2%95/" />
     <author>
-      <name>cotes</name>
+      <name>jsc5023</name>
     </author>
 
   
     
-    <category term="Blogging" />
-    
-    <category term="Demo" />
+  
+
+  <summary>Unsupported class file major version X 의 해결방법
+
+노트북을 변경한 이후, Github에서 프로젝트를 새 컴퓨터로 옮겨서 작업하는 도중 한 오류가 나타났습니다.
+
+Unsupported class file major version 66이라는 오류가 나타났는데 해당오류는 JRE의 해당버전이 정상적으로 실행되지 않아서 발생한 오류입니다.
+
+Unsupported class file major version X에서 X는 버전의 번호를 이야기합니다.
+
+JAVA SE 22 = 66, JAVA SE 21 = 65, JAVA SE 20 = 64 이런식과 동일합니다. (버전의 참조사항은 해당 페이지 아래의 해당 오류 해결 참조를 클릭해서 버전의 번호를 참조해주세요)
+
+Intellij 에서...</summary>
+
+  </entry>
+
+  
+  <entry>
+    <title>Intellij의 환경변수 적용방법</title>
+    <link href="http://localhost:4000/posts/Intellij%EC%9D%98-%ED%99%98%EA%B2%BD%EB%B3%80%EC%88%98-%EC%A0%81%EC%9A%A9%EB%B0%A9%EB%B2%95/" rel="alternate" type="text/html" title="Intellij의 환경변수 적용방법" />
+    <published>2024-08-06T00:00:00+09:00</published>
+  
+    <updated>2024-12-22T03:44:18+09:00</updated>
+  
+    <id>http://localhost:4000/posts/Intellij%EC%9D%98-%ED%99%98%EA%B2%BD%EB%B3%80%EC%88%98-%EC%A0%81%EC%9A%A9%EB%B0%A9%EB%B2%95/</id>
+    <content type="text/html" src="http://localhost:4000/posts/Intellij%EC%9D%98-%ED%99%98%EA%B2%BD%EB%B3%80%EC%88%98-%EC%A0%81%EC%9A%A9%EB%B0%A9%EB%B2%95/" />
+    <author>
+      <name>jsc5023</name>
+    </author>
+
+  
     
   
 
-  <summary>Examples of text, typography, math equations, diagrams, flowcharts, pictures, videos, and more.</summary>
+  <summary>Spring DB 연동용 환경변수 적용하기
+
+환경변수란?
+
+환경변수란? 환경 변수는 프로세스가 컴퓨터에서 동작하는 방식에 영향을 미치는, 동적인 값들의 모임이다. 환경 변수는 실행 중인 프로세스가 컴퓨터에서 작동하는 방식에 영향을 줄 수 있는 사용자 정의 값이다. 환경 변수는 프로세스가 실행되는 환경의 일부입니다.
+
+이것은 환경이나 보안등의 이유를 위해, 동적 변수를 주어서 컴퓨터 내부적으로 관리하기위해 사용됩니다.
+
+Spring DB를 연동할때 환경변수를 적용하는 방법
+
+Spring에서 데이터 베이스를 연동할 경우, 코드상에서 보안을 위해 데이터 베이스 정보와 아이디, 비밀번호 관련을 코드상에서 말고 내부적으로 처리해야할 경우가 있습니다. 그를 위해 환경변수를 작성해야 합니다.
+
+application...</summary>
 
   </entry>
 
