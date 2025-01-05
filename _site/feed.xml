@@ -4,7 +4,7 @@
   <id>http://localhost:4000/</id>
   <title>jsc5023</title>
   <subtitle>jsc5023의 블로그로, IT 개발자로서서 배운 내용을 정리하는 글로 사용됩니다.</subtitle>
-  <updated>2024-12-22T09:27:12+09:00</updated>
+  <updated>2025-01-06T00:48:03+09:00</updated>
   <author>
     <name>jsc5023</name>
     <uri>http://localhost:4000/</uri>
@@ -13,21 +13,21 @@
   <link rel="alternate" type="text/html" hreflang="en"
     href="http://localhost:4000/"/>
   <generator uri="https://jekyllrb.com/" version="4.3.4">Jekyll</generator>
-  <rights> © 2024 jsc5023 </rights>
+  <rights> © 2025 jsc5023 </rights>
   <icon>/assets/img/favicons/favicon.ico</icon>
   <logo>/assets/img/favicons/favicon-96x96.png</logo>
 
 
   
   <entry>
-    <title>배달의민족으로 알아보는 msa 개념</title>
-    <link href="http://localhost:4000/posts/%EB%B0%B0%EB%8B%AC%EC%9D%98%EB%AF%BC%EC%A1%B1%EC%9C%BC%EB%A1%9C-%EC%95%8C%EC%95%84%EB%B3%B4%EB%8A%94-MSA-%EA%B0%9C%EB%85%90/" rel="alternate" type="text/html" title="배달의민족으로 알아보는 msa 개념" />
-    <published>2024-12-21T00:00:00+09:00</published>
+    <title>Jwt(json web token) 쉽게 이해하기</title>
+    <link href="http://localhost:4000/posts/JWT(JSON-Web-Token)-%EC%89%BD%EA%B2%8C-%EC%9D%B4%ED%95%B4%ED%95%98%EA%B8%B0/" rel="alternate" type="text/html" title="Jwt(json web token) 쉽게 이해하기" />
+    <published>2025-01-05T00:00:00+09:00</published>
   
-    <updated>2024-12-22T09:08:58+09:00</updated>
+    <updated>2025-01-05T00:00:00+09:00</updated>
   
-    <id>http://localhost:4000/posts/%EB%B0%B0%EB%8B%AC%EC%9D%98%EB%AF%BC%EC%A1%B1%EC%9C%BC%EB%A1%9C-%EC%95%8C%EC%95%84%EB%B3%B4%EB%8A%94-MSA-%EA%B0%9C%EB%85%90/</id>
-    <content type="text/html" src="http://localhost:4000/posts/%EB%B0%B0%EB%8B%AC%EC%9D%98%EB%AF%BC%EC%A1%B1%EC%9C%BC%EB%A1%9C-%EC%95%8C%EC%95%84%EB%B3%B4%EB%8A%94-MSA-%EA%B0%9C%EB%85%90/" />
+    <id>http://localhost:4000/posts/JWT(JSON-Web-Token)-%EC%89%BD%EA%B2%8C-%EC%9D%B4%ED%95%B4%ED%95%98%EA%B8%B0/</id>
+    <content type="text/html" src="http://localhost:4000/posts/JWT(JSON-Web-Token)-%EC%89%BD%EA%B2%8C-%EC%9D%B4%ED%95%B4%ED%95%98%EA%B8%B0/" />
     <author>
       <name>jsc5023</name>
     </author>
@@ -36,31 +36,111 @@
     
   
 
-  <summary>배달의민족으로 알아보는 MSA 개념
+  <summary>JWT(JSON Web Token) 쉽게 이해하기
 
-목차
+웹사이트를 개발하는 도중에, 회원가입과 로그인을 만드는 도중 보안 관련이 굉장히 중요하다고 생각되었는데, 보안을 위해 JWT를 적용해야 된다는 말을 들었습니다.
+제가 JWT를 알지 못했었는데, 배움을 정리하고, 제가 이해한 내용을 남들도 쉽게 이해하기 위해서 만들었습니다.
 
-  배달의민족으로 알아보는 MSA 개념
-    
-      목차
-      들어가며
-      MSA란 무엇인가?
-      MSA와 단일 책임 원칙(SRP)
-      실제 서비스로 이해하는 MSA
-        
-          기존 방식(모놀리식)의 문제점
-          MSA 방식의 장점
-        
-      
-      MSA의 실제 효과
-      결론
+1. JWT란 무엇인가?
+
+JWT는 JSON Web Token의 약자로, 당사자간 정보를 JSON 형태로 안전하게 전달하기 위한 토큰입니다. 
+쉽게 말해, 서버가 클라이언트에게 발급해주는 “디지털 통행증”이라고 생각하면 됩니다.
+
+실제 사용 예시
+
+  
+    # 실제 JWT 토큰 형태
+eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.
+eyJzdWIiOiIxMjM...</summary>
+
+  </entry>
+
+  
+  <entry>
+    <title>Tdd 가볍게 이해하기</title>
+    <link href="http://localhost:4000/posts/TDD-%EA%B0%80%EB%B3%8D%EA%B2%8C-%EC%9D%B4%ED%95%B4%ED%95%98%EA%B8%B0/" rel="alternate" type="text/html" title="Tdd 가볍게 이해하기" />
+    <published>2024-12-22T00:00:00+09:00</published>
+  
+    <updated>2024-12-22T00:00:00+09:00</updated>
+  
+    <id>http://localhost:4000/posts/TDD-%EA%B0%80%EB%B3%8D%EA%B2%8C-%EC%9D%B4%ED%95%B4%ED%95%98%EA%B8%B0/</id>
+    <content type="text/html" src="http://localhost:4000/posts/TDD-%EA%B0%80%EB%B3%8D%EA%B2%8C-%EC%9D%B4%ED%95%B4%ED%95%98%EA%B8%B0/" />
+    <author>
+      <name>jsc5023</name>
+    </author>
+
+  
     
   
 
+  <summary>TDD 가볍게 이해하기: 기본 개념과 간단한 예시
 
-들어가며
+Test-Driven Development(TDD)는 실제 코드를 작성하기 전에 테스트 코드를 먼저 작성하는 소프트웨어 개발 방법론입니다. 주요 특징은 다음과 같습니다:
 
-MSA(Microservice Architecture)를 처음 접했을 때는 단순히 ‘서비스를 잘게 쪼개는 것’이라고만 생각했습니다. 하지만 실제로 공부해보니 그 이상의 깊이 있는 아키텍처 패턴이었습니다. 이 글에서는 제가 MSA를 공부하면서 깨달은 점들을 정리...</summary>
+
+  레드-그린-리팩터(Red-Green-Refactor) 사이클
+  점진적인 개발 접근 방식
+  높은 코드 품질과 안정성 확보
+
+
+TDD 기본 프로세스
+
+1. 레드(Red) 단계
+
+  실패할 테스트 코드를 먼저 작성
+  원하는 기능의 동작을 정의
+  이 시점에서 테스트는 당연히 실패
+
+
+2. 그린(Green) 단계
+
+  테스트를 통과할 최소한의 구현 코드 작성
+  테스트가 성공할 정도로만 코드 작성
+
+
+3. 리팩터(Refactor) 단계
+
+  코드의 품질 개선
+  중복 제거
+  테...</summary>
+
+  </entry>
+
+  
+  <entry>
+    <title>예시를 통해 알아보는 msa 개념</title>
+    <link href="http://localhost:4000/posts/%EC%98%88%EC%8B%9C%EB%A5%BC-%ED%86%B5%ED%95%B4-%EC%95%8C%EC%95%84%EB%B3%B4%EB%8A%94-MSA-%EA%B0%9C%EB%85%90/" rel="alternate" type="text/html" title="예시를 통해 알아보는 msa 개념" />
+    <published>2024-12-21T00:00:00+09:00</published>
+  
+    <updated>2024-12-23T08:02:26+09:00</updated>
+  
+    <id>http://localhost:4000/posts/%EC%98%88%EC%8B%9C%EB%A5%BC-%ED%86%B5%ED%95%B4-%EC%95%8C%EC%95%84%EB%B3%B4%EB%8A%94-MSA-%EA%B0%9C%EB%85%90/</id>
+    <content type="text/html" src="http://localhost:4000/posts/%EC%98%88%EC%8B%9C%EB%A5%BC-%ED%86%B5%ED%95%B4-%EC%95%8C%EC%95%84%EB%B3%B4%EB%8A%94-MSA-%EA%B0%9C%EB%85%90/" />
+    <author>
+      <name>jsc5023</name>
+    </author>
+
+  
+    
+  
+
+  <summary>🌟 예시를 통해 알아보는 MSA 개념
+
+🌟 들어가며
+
+MSA(Microservice Architecture)를 처음 접했을 때는 단순히 ‘서비스를 잘게 쪼개는 것’이라고만 생각했습니다. 하지만 실제로 프로젝트에 직접 적용하기 위해 공부해보니 그 이상의 깊이 있는 아키텍처 패턴이었습니다. 이 글에서는 제가 MSA를 공부하면서 깨달은 점들을 정리해보려 합니다.
+
+
+
+🔍 MSA란 무엇인가?
+
+MSA는 하나의 큰 애플리케이션을 여러 개의 작은 애플리케이션으로 쪼개어 변경과 조합이 가능하도록 만든 아키텍처입니다. 여기서 중요한 점은 단순히 ‘쪼개는 것’이 아니라, 각 서비스가 독립적으로 배포 가능하고 확장 가능하도록 만드는 것입니다.
+
+
+
+📏 MSA와 단일 책임 원칙(SRP)
+
+MSA는 객체지향 프로그래밍의 단...</summary>
 
   </entry>
 
@@ -131,73 +211,9 @@ MSA(Microservice Architecture)를 처음 접했을 때는 단순히 ‘서비스
 회원가입을 구현하는 과정에서 @PostMapping(&amp;quot;/security/sign-up&amp;quot;) 메서드가 호출되지 않았습니다. 브라우저 개발자 도구의 Network 탭을 확인해도 요청이 컨트롤러에 도달하지 않았습니다. 초기 코드 구성은 아래와 같았습니다:
 
 컨트롤러 코드
-@PostMappi...</summary>
-
-  </entry>
 
   
-  <entry>
-    <title>Unsupported class file major version 66 에러 해결법</title>
-    <link href="http://localhost:4000/posts/Unsupported-class-file-major-version-66-%EC%97%90%EB%9F%AC-%ED%95%B4%EA%B2%B0%EB%B2%95/" rel="alternate" type="text/html" title="Unsupported class file major version 66 에러 해결법" />
-    <published>2024-08-16T00:00:00+09:00</published>
-  
-    <updated>2024-12-22T09:08:58+09:00</updated>
-  
-    <id>http://localhost:4000/posts/Unsupported-class-file-major-version-66-%EC%97%90%EB%9F%AC-%ED%95%B4%EA%B2%B0%EB%B2%95/</id>
-    <content type="text/html" src="http://localhost:4000/posts/Unsupported-class-file-major-version-66-%EC%97%90%EB%9F%AC-%ED%95%B4%EA%B2%B0%EB%B2%95/" />
-    <author>
-      <name>jsc5023</name>
-    </author>
-
-  
-    
-  
-
-  <summary>Unsupported class file major version X 의 해결방법
-
-노트북을 변경한 이후, Github에서 프로젝트를 새 컴퓨터로 옮겨서 작업하는 도중 한 오류가 나타났습니다.
-
-Unsupported class file major version 66이라는 오류가 나타났는데 해당오류는 JRE의 해당버전이 정상적으로 실행되지 않아서 발생한 오류입니다.
-
-Unsupported class file major version X에서 X는 버전의 번호를 이야기합니다.
-
-JAVA SE 22 = 66, JAVA SE 21 = 65, JAVA SE 20 = 64 이런식과 동일합니다. (버전의 참조사항은 해당 페이지 아래의 해당 오류 해결 참조를 클릭해서 버전의 번호를 참조해주세요)
-
-Intellij 에서...</summary>
-
-  </entry>
-
-  
-  <entry>
-    <title>Intellij의 환경변수 적용방법</title>
-    <link href="http://localhost:4000/posts/Intellij%EC%9D%98-%ED%99%98%EA%B2%BD%EB%B3%80%EC%88%98-%EC%A0%81%EC%9A%A9%EB%B0%A9%EB%B2%95/" rel="alternate" type="text/html" title="Intellij의 환경변수 적용방법" />
-    <published>2024-08-06T00:00:00+09:00</published>
-  
-    <updated>2024-12-22T09:08:58+09:00</updated>
-  
-    <id>http://localhost:4000/posts/Intellij%EC%9D%98-%ED%99%98%EA%B2%BD%EB%B3%80%EC%88%98-%EC%A0%81%EC%9A%A9%EB%B0%A9%EB%B2%95/</id>
-    <content type="text/html" src="http://localhost:4000/posts/Intellij%EC%9D%98-%ED%99%98%EA%B2%BD%EB%B3%80%EC%88%98-%EC%A0%81%EC%9A%A9%EB%B0%A9%EB%B2%95/" />
-    <author>
-      <name>jsc5023</name>
-    </author>
-
-  
-    
-  
-
-  <summary>Spring DB 연동용 환경변수 적용하기
-
-환경변수란?
-
-환경변수란? 환경 변수는 프로세스가 컴퓨터에서 동작하는 방식에 영향을 미치는, 동적인 값들의 모임이다. 환경 변수는 실행 중인 프로세스가 컴퓨터에서 작동하는 방식에 영향을 줄 수 있는 사용자 정의 값이다. 환경 변수는 프로세스가 실행되는 환경의 일부입니다.
-
-이것은 환경이나 보안등의 이유를 위해, 동적 변수를 주어서 컴퓨터 내부적으로 관리하기위해 사용됩니다.
-
-Spring DB를 연동할때 환경변수를 적용하는 방법
-
-Spring에서 데이터 베이스를 연동할 경우, 코드상에서 보안을 위해 데이터 베이스 정보와 아이디, 비밀번호 관련을 코드상에서 말고 내부적으로 처리해야할 경우가 있습니다. 그를 위해 환경변수를 작성해야 합니다.
-
-application...</summary>
+    @P...</summary>
 
   </entry>
 

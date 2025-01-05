@@ -212,6 +212,13 @@
 
   <!-- A placeholder to allow defining custom metadata -->
 
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mermaid/10.2.4/mermaid.min.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      mermaid.initialize({ startOnLoad: true });
+    });
+  </script>
 </head>
 
 
@@ -479,31 +486,133 @@
 <div id="post-list" class="flex-grow-1 px-xl-1">
   
     <article class="card-wrapper card">
-      <a href="/posts/%EB%B0%B0%EB%8B%AC%EC%9D%98%EB%AF%BC%EC%A1%B1%EC%9C%BC%EB%A1%9C-%EC%95%8C%EC%95%84%EB%B3%B4%EB%8A%94-MSA-%EA%B0%9C%EB%85%90/" class="post-preview row g-0 flex-md-row-reverse">
+      <a href="/posts/JWT(JSON-Web-Token)-%EC%89%BD%EA%B2%8C-%EC%9D%B4%ED%95%B4%ED%95%98%EA%B8%B0/" class="post-preview row g-0 flex-md-row-reverse">
         
 
         
 
         <div class="col-md-12">
           <div class="card-body d-flex flex-column">
-            <h1 class="card-title my-2 mt-md-0">배달의민족으로 알아보는 msa 개념</h1>
+            <h1 class="card-title my-2 mt-md-0">Jwt(json web token) 쉽게 이해하기</h1>
 
             <div class="card-text content mt-0 mb-3">
-              <p>배달의민족으로 알아보는 MSA 개념
+              <p>JWT(JSON Web Token) 쉽게 이해하기
 
-목차
+웹사이트를 개발하는 도중에, 회원가입과 로그인을 만드는 도중 보안 관련이 굉장히 중요하다고 생각되었는데, 보안을 위해 JWT를 적용해야 된다는 말을 들었습니다.
+제가 JWT를 알지 못했었는데, 배움을 정리하고, 제가 이해한 내용을 남들도 쉽게 이해하기 위해서 만들었습니다.
 
-  배달의민족으로 알아보는 MSA 개념
-    
-      목차
-      들어가며
-      MSA란 무엇인가?
-      MSA와 단일 책임 원칙(SRP)
-      실제 서비스로 이해하는 MSA
+1. JWT란 무엇인가?
+...</p>
+            </div>
+
+            <div class="post-meta flex-grow-1 d-flex align-items-end">
+              <div class="me-auto">
+                <!-- posted date -->
+                <i class="far fa-calendar fa-fw me-1"></i>
+                <!--
+  Date format snippet
+  See: ${JS_ROOT}/utils/locale-dateime.js
+-->
+
+
+
+
+<time
+  
+  data-ts="1736002800"
+  data-df="ll"
+  
+>
+  Jan  5, 2025
+</time>
+
+
+                <!-- categories -->
+                
+              </div>
+
+              
+            </div>
+            <!-- .post-meta -->
+          </div>
+          <!-- .card-body -->
+        </div>
+      </a>
+    </article>
+  
+    <article class="card-wrapper card">
+      <a href="/posts/TDD-%EA%B0%80%EB%B3%8D%EA%B2%8C-%EC%9D%B4%ED%95%B4%ED%95%98%EA%B8%B0/" class="post-preview row g-0 flex-md-row-reverse">
         
-          기존 방식(모놀리식)의 문제점
-          MSA 방식의 장점
-   ...</p>
+
+        
+
+        <div class="col-md-12">
+          <div class="card-body d-flex flex-column">
+            <h1 class="card-title my-2 mt-md-0">Tdd 가볍게 이해하기</h1>
+
+            <div class="card-text content mt-0 mb-3">
+              <p>TDD 가볍게 이해하기: 기본 개념과 간단한 예시
+
+Test-Driven Development(TDD)는 실제 코드를 작성하기 전에 테스트 코드를 먼저 작성하는 소프트웨어 개발 방법론입니다. 주요 특징은 다음과 같습니다:
+
+
+  레드-그린-리팩터(Red-Green-Refactor) 사이클
+  점진적인 개발 접근 방식
+  높은 코드 품질과 안정성 확보
+...</p>
+            </div>
+
+            <div class="post-meta flex-grow-1 d-flex align-items-end">
+              <div class="me-auto">
+                <!-- posted date -->
+                <i class="far fa-calendar fa-fw me-1"></i>
+                <!--
+  Date format snippet
+  See: ${JS_ROOT}/utils/locale-dateime.js
+-->
+
+
+
+
+<time
+  
+  data-ts="1734793200"
+  data-df="ll"
+  
+>
+  Dec 22, 2024
+</time>
+
+
+                <!-- categories -->
+                
+              </div>
+
+              
+            </div>
+            <!-- .post-meta -->
+          </div>
+          <!-- .card-body -->
+        </div>
+      </a>
+    </article>
+  
+    <article class="card-wrapper card">
+      <a href="/posts/%EC%98%88%EC%8B%9C%EB%A5%BC-%ED%86%B5%ED%95%B4-%EC%95%8C%EC%95%84%EB%B3%B4%EB%8A%94-MSA-%EA%B0%9C%EB%85%90/" class="post-preview row g-0 flex-md-row-reverse">
+        
+
+        
+
+        <div class="col-md-12">
+          <div class="card-body d-flex flex-column">
+            <h1 class="card-title my-2 mt-md-0">예시를 통해 알아보는 msa 개념</h1>
+
+            <div class="card-text content mt-0 mb-3">
+              <p>🌟 예시를 통해 알아보는 MSA 개념
+
+🌟 들어가며
+
+MSA(Microservice Architecture)를 처음 접했을 때는 단순히 ‘서비스를 잘게 쪼개는 것’이라고만 생각했습니다. 하지만 실제로 프로젝트에 직접 적용하기 위해 공부해보니 그 이상의 깊이 있는 아키텍처 패턴이었습니다. 이 글에서는 제가 MSA를 공부하면서 깨달은 점들을 정리해보려 합...</p>
             </div>
 
             <div class="post-meta flex-grow-1 d-flex align-items-end">
@@ -777,7 +886,9 @@ Unsupported class file major version 66이라는 오류가 나타났는데 해�
 
 Spring에서 application.yaml을 통해 logging을 하는 방법
 
-debug :...</p>
+
+  
+   ...</p>
             </div>
 
             <div class="post-meta flex-grow-1 d-flex align-items-end">
@@ -909,6 +1020,20 @@ Jeklly를 Local 웹사이트에서 실행하기 위해서는 github 블로그의
         
         
         <li class="text-truncate lh-lg">
+          <a href="/posts/JWT(JSON-Web-Token)-%EC%89%BD%EA%B2%8C-%EC%9D%B4%ED%95%B4%ED%95%98%EA%B8%B0/">Jwt(json web token) 쉽게 이해하기</a>
+        </li>
+      
+        
+        
+        
+        <li class="text-truncate lh-lg">
+          <a href="/posts/%EC%98%88%EC%8B%9C%EB%A5%BC-%ED%86%B5%ED%95%B4-%EC%95%8C%EC%95%84%EB%B3%B4%EB%8A%94-MSA-%EA%B0%9C%EB%85%90/">예시를 통해 알아보는 msa 개념</a>
+        </li>
+      
+        
+        
+        
+        <li class="text-truncate lh-lg">
           <a href="/posts/%EB%A1%9C%EC%BB%AC%ED%99%98%EA%B2%BD%EC%97%90%EC%84%9C-Github-%EB%B8%94%EB%A1%9C%EA%B7%B8-%ED%85%8C%EC%8A%A4%ED%8A%B8-%ED%95%98%EB%8A%94%EB%B2%95/">로컬환경에서 github 블로그 테스트 하는법</a>
         </li>
       
@@ -924,20 +1049,6 @@ Jeklly를 Local 웹사이트에서 실행하기 위해서는 github 블로그의
         
         <li class="text-truncate lh-lg">
           <a href="/posts/Intellij%EC%9D%98-%ED%99%98%EA%B2%BD%EB%B3%80%EC%88%98-%EC%A0%81%EC%9A%A9%EB%B0%A9%EB%B2%95/">Intellij의 환경변수 적용방법</a>
-        </li>
-      
-        
-        
-        
-        <li class="text-truncate lh-lg">
-          <a href="/posts/Unsupported-class-file-major-version-66-%EC%97%90%EB%9F%AC-%ED%95%B4%EA%B2%B0%EB%B2%95/">Unsupported class file major version 66 에러 해결법</a>
-        </li>
-      
-        
-        
-        
-        <li class="text-truncate lh-lg">
-          <a href="/posts/%EC%8A%A4%ED%94%84%EB%A7%81%EC%8B%9C%ED%81%90%EB%A6%AC%ED%8B%B0(Spring-Security)-%EB%A5%BC-%EC%82%AC%EC%9A%A9%EC%8B%9C-Post-%EB%AC%B8%EC%A0%9C/">스프링시큐리티(spring security) 를 사용시 post 문제</a>
         </li>
       
     </ul>
@@ -985,7 +1096,7 @@ Jeklly를 Local 웹사이트에서 실행하기 위해서는 github 블로그의
   "
 >
   <p>©
-    <time>2024</time>
+    <time>2025</time>
 
     
       <a href="https://github.com/jsc5023">jsc5023</a>.

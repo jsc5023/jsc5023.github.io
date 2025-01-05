@@ -58,6 +58,7 @@ $sidebar-display: 'sidebar-display'; /* the attribute for sidebar display */
     width: 6.5rem;
     height: 6.5rem;
     overflow: hidden;
+    margin: 0 auto; /* 사진을 중앙으로 정렬 */
     box-shadow: var(--avatar-border-color) 0 0 0 2px;
     transform: translateZ(0); /* fixed the zoom in Safari */
 
@@ -79,8 +80,6 @@ $sidebar-display: 'sidebar-display'; /* the attribute for sidebar display */
     @include mx.mt-mb(2.5rem);
     @extend %clickable-transition;
 
-    padding-left: 2.5rem;
-    padding-right: 1.25rem;
     width: 100%;
 
     @include bp.lg {
@@ -103,8 +102,8 @@ $sidebar-display: 'sidebar-display'; /* the attribute for sidebar display */
     font-size: 1.75rem;
     line-height: 1.2;
     letter-spacing: 0.25px;
-    margin-top: 1.25rem;
-    margin-bottom: 0.5rem;
+    margin: 1.25rem auto 0.5rem; /* 상단/하단 간격 및 중앙 정렬 */
+    text-align: center; /* 텍스트 중앙 정렬 */
     width: fit-content;
     color: var(--site-title-color);
   }
@@ -112,7 +111,8 @@ $sidebar-display: 'sidebar-display'; /* the attribute for sidebar display */
   .site-subtitle {
     font-size: 95%;
     color: var(--site-subtitle-color);
-    margin-top: 0.25rem;
+    margin: 0.25rem auto; /* 상단/하단 간격 및 중앙 정렬 */
+    text-align: center; /* 텍스트 중앙 정렬 */
     word-spacing: 1px;
     -webkit-user-select: none;
     -moz-user-select: none;
@@ -175,9 +175,12 @@ $sidebar-display: 'sidebar-display'; /* the attribute for sidebar display */
   }
 
   .sidebar-bottom {
-    padding-left: 2rem;
-    padding-right: 1rem;
-    margin-bottom: 1.5rem;
+    display: flex; /* 플렉스박스 사용 */
+    justify-content: center; /* 수평 중앙 정렬 */
+    align-items: center; /* 수직 중앙 정렬 */
+    padding-left: 0; /* 좌측 여백 제거 */
+    padding-right: 0; /* 우측 여백 제거 */
+    margin-bottom: 1.5rem; /* 필요시 간격 유지 */
 
     @include bp.xxxl {
       padding-left: 2.75rem;
