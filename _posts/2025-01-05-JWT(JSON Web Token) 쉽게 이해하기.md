@@ -17,7 +17,7 @@ SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c
 ```
 (위는 그냥 예시일 뿐입니다.)
 
-![JWT 실제적용 예제](image-1.png)
+![JWT 실제적용 예제](/assets/img/jwt-image1.png)
 
 [jwt 참조사이트](https://jwt.io/) 
 
