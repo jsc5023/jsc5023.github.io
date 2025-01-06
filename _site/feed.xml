@@ -4,7 +4,7 @@
   <id>http://localhost:4000/</id>
   <title>jsc5023</title>
   <subtitle>jsc5023의 블로그로, IT 개발자로서서 배운 내용을 정리하는 글로 사용됩니다.</subtitle>
-  <updated>2025-01-06T00:57:55+09:00</updated>
+  <updated>2025-01-06T17:06:23+09:00</updated>
   <author>
     <name>jsc5023</name>
     <uri>http://localhost:4000/</uri>
@@ -20,11 +20,52 @@
 
   
   <entry>
+    <title>Java의 정적 유틸리티 클래스 (Static Utility Class) 이해하기</title>
+    <link href="http://localhost:4000/posts/Java%EC%9D%98-%EC%A0%95%EC%A0%81-%EC%9C%A0%ED%8B%B8%EB%A6%AC%ED%8B%B0-%ED%81%B4%EB%9E%98%EC%8A%A4-(Static-Utility-Class)-%EC%9D%B4%ED%95%B4%ED%95%98%EA%B8%B0/" rel="alternate" type="text/html" title="Java의 정적 유틸리티 클래스 (Static Utility Class) 이해하기" />
+    <published>2025-01-06T00:00:00+09:00</published>
+  
+    <updated>2025-01-06T00:00:00+09:00</updated>
+  
+    <id>http://localhost:4000/posts/Java%EC%9D%98-%EC%A0%95%EC%A0%81-%EC%9C%A0%ED%8B%B8%EB%A6%AC%ED%8B%B0-%ED%81%B4%EB%9E%98%EC%8A%A4-(Static-Utility-Class)-%EC%9D%B4%ED%95%B4%ED%95%98%EA%B8%B0/</id>
+    <content type="text/html" src="http://localhost:4000/posts/Java%EC%9D%98-%EC%A0%95%EC%A0%81-%EC%9C%A0%ED%8B%B8%EB%A6%AC%ED%8B%B0-%ED%81%B4%EB%9E%98%EC%8A%A4-(Static-Utility-Class)-%EC%9D%B4%ED%95%B4%ED%95%98%EA%B8%B0/" />
+    <author>
+      <name>jsc5023</name>
+    </author>
+
+  
+    
+    <category term="Java" />
+    
+    <category term="Programming" />
+    
+  
+
+  <summary>들어가며
+오늘 File 입출력 관련 강의를 듣다가 흥미로운 점을 발견했습니다. 강사님이 파일 처리를 위한 유틸리티 클래스를 만들 때 static 키워드를 사용하셨는데요. 처음에는 ‘왜 굳이 static으로 만들까?’라는 의문이 들었습니다. 이 글에서는 제가 이해한 정적 유틸리티 클래스의 개념과 사용 이유에 대해 설명하고자 합니다.
+
+
+
+정적 유틸리티 클래스란?
+정적 유틸리티 클래스는 인스턴스 변수 없이 정적 메서드만을 포함하는 클래스입니다. 주로 특정 작업을 수행하는 관련 메서드들을 묶어서 제공할 때 사용됩니다.
+
+
+
+특징
+
+  모든 메서드가 static으로 선언됨
+  인스턴스 변수가 없음
+  생성자가 private으로 선언됨 (인스턴스화 방지)
+  상태를 유지할 필요가 없는 순수 기능성 메서드들의 모...</summary>
+
+  </entry>
+
+  
+  <entry>
     <title>Jwt(json web token) 쉽게 이해하기</title>
     <link href="http://localhost:4000/posts/JWT(JSON-Web-Token)-%EC%89%BD%EA%B2%8C-%EC%9D%B4%ED%95%B4%ED%95%98%EA%B8%B0/" rel="alternate" type="text/html" title="Jwt(json web token) 쉽게 이해하기" />
     <published>2025-01-05T00:00:00+09:00</published>
   
-    <updated>2025-01-05T00:00:00+09:00</updated>
+    <updated>2025-01-06T00:58:22+09:00</updated>
   
     <id>http://localhost:4000/posts/JWT(JSON-Web-Token)-%EC%89%BD%EA%B2%8C-%EC%9D%B4%ED%95%B4%ED%95%98%EA%B8%B0/</id>
     <content type="text/html" src="http://localhost:4000/posts/JWT(JSON-Web-Token)-%EC%89%BD%EA%B2%8C-%EC%9D%B4%ED%95%B4%ED%95%98%EA%B8%B0/" />
@@ -36,9 +77,7 @@
     
   
 
-  <summary>JWT(JSON Web Token) 쉽게 이해하기
-
-웹사이트를 개발하는 도중에, 회원가입과 로그인을 만드는 도중 보안 관련이 굉장히 중요하다고 생각되었는데, 보안을 위해 JWT를 적용해야 된다는 말을 들었습니다.
+  <summary>웹사이트를 개발하는 도중에, 회원가입과 로그인을 만드는 도중 보안 관련이 굉장히 중요하다고 생각되었는데, 보안을 위해 JWT를 적용해야 된다는 말을 들었습니다.
 제가 JWT를 알지 못했었는데, 배움을 정리하고, 제가 이해한 내용을 남들도 쉽게 이해하기 위해서 만들었습니다.
 
 1. JWT란 무엇인가?
@@ -51,7 +90,7 @@ JWT는 JSON Web Token의 약자로, 당사자간 정보를 JSON 형태로 안전
   
     # 실제 JWT 토큰 형태
 eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.
-eyJzdWIiOiIxMjM...</summary>
+eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4g...</summary>
 
   </entry>
 
@@ -179,41 +218,6 @@ MSA는 객체지향 프로그래밍의 단...</summary>
           2. 조회(get) 및 초기화(clear) 기능
           3. 삭제(delete) 및 삽입(insert) 기능
           4. 크기 반환(size) 및 ...</summary>
-
-  </entry>
-
-  
-  <entry>
-    <title>스프링시큐리티(spring security) 를 사용시 post 문제</title>
-    <link href="http://localhost:4000/posts/%EC%8A%A4%ED%94%84%EB%A7%81%EC%8B%9C%ED%81%90%EB%A6%AC%ED%8B%B0(Spring-Security)-%EB%A5%BC-%EC%82%AC%EC%9A%A9%EC%8B%9C-Post-%EB%AC%B8%EC%A0%9C/" rel="alternate" type="text/html" title="스프링시큐리티(spring security) 를 사용시 post 문제" />
-    <published>2024-12-09T00:00:00+09:00</published>
-  
-    <updated>2024-12-22T09:08:58+09:00</updated>
-  
-    <id>http://localhost:4000/posts/%EC%8A%A4%ED%94%84%EB%A7%81%EC%8B%9C%ED%81%90%EB%A6%AC%ED%8B%B0(Spring-Security)-%EB%A5%BC-%EC%82%AC%EC%9A%A9%EC%8B%9C-Post-%EB%AC%B8%EC%A0%9C/</id>
-    <content type="text/html" src="http://localhost:4000/posts/%EC%8A%A4%ED%94%84%EB%A7%81%EC%8B%9C%ED%81%90%EB%A6%AC%ED%8B%B0(Spring-Security)-%EB%A5%BC-%EC%82%AC%EC%9A%A9%EC%8B%9C-Post-%EB%AC%B8%EC%A0%9C/" />
-    <author>
-      <name>jsc5023</name>
-    </author>
-
-  
-    
-  
-
-  <summary>Spring Security에서 POST 요청이 처리되지 않는 문제 해결: 회원가입 구현 중 배운 점
-
-회원가입 기능을 구현하던 중 예상치 못한 문제가 발생했습니다. 회원가입 버튼을 눌렀을 때 컨트롤러 메서드가 호출되지 않아 디버깅이 되지 않았습니다. 원인을 찾는 과정에서 Spring Security 설정에서 POST 요청 처리를 명시적으로 추가해야 한다는 점을 깨달았고, 이를 해결하는 과정을 공유합니다.
-
-
-
-문제 상황
-
-회원가입을 구현하는 과정에서 @PostMapping(&amp;quot;/security/sign-up&amp;quot;) 메서드가 호출되지 않았습니다. 브라우저 개발자 도구의 Network 탭을 확인해도 요청이 컨트롤러에 도달하지 않았습니다. 초기 코드 구성은 아래와 같았습니다:
-
-컨트롤러 코드
-
-  
-    @P...</summary>
 
   </entry>
 
