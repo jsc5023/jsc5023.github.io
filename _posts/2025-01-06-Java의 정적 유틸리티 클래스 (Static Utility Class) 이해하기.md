@@ -2,8 +2,8 @@
 layout: post
 title: "Java의 정적 유틸리티 클래스 (Static Utility Class) 이해하기"
 date: 2025-01-06
-categories: [Java, Programming]
-tags: [Java, Static, Utility, File IO]
+categories: [Java]
+tags: [Programming, Java, Static, Utility, File IO]
 ---
 
 ## 들어가며
