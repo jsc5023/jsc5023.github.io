@@ -1,4 +1,10 @@
-# application.yaml의 로깅(logging)
+---
+layout: post
+title: "applicaion.yaml의 로깅에 대하여"
+date: 2024-07-30
+categories: [Spring]
+tags: [Spring, Logging, YAML, Configuration]
+---
 
 로그(log) : **정보를 제공**하는 일련의 **기록**
 
