@@ -1,4 +1,10 @@
-## Unsupported class file major version X 의 해결방법
+---
+layout: post
+title: "Unsupported class file major version X 의 해결방법"
+date: 2024-08-16
+categories: [Java]
+tags: [Java, JDK, Version, Troubleshooting]
+---
 
 노트북을 변경한 이후, Github에서 프로젝트를 새 컴퓨터로 옮겨서 작업하는 도중 한 오류가 나타났습니다.
 
