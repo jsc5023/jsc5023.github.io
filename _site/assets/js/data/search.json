@@ -1,10 +1,95 @@
 [
   
   {
+    "title": "Spring JPA에서 순환 참조 문제 해결하기: DTO 패턴의 중요성",
+    "url": "/posts/%EC%88%9C%ED%99%98-%EC%B0%B8%EC%A1%B0-%EB%AC%B8%EC%A0%9C-%ED%95%B4%EA%B2%B0/",
+    "categories": "문제 해결",
+    "tags": "Java, JPA, SpringFramework",
+    "date": "2025-02-23 00:00:00 +0900",
+    
+
+
+
+
+
+    
+    "snippet": "순환 참조(Circular Reference) 문제는 Spring과 JPA를 사용하는 많은 개발자들이 마주치는 흔한 문제입니다. 저도 커피 주문 시스템을 개발하면서 이 문제를 경험했고, 해결 과정에서 DTO 패턴의 중요성을 깨달았습니다.문제 상황: 엔티티 간의 순환 참조초기에 저는 빠른 개발을 위해 요청(Request)은 DTO로 처리했지만, 비즈니스...",
+    "content": "순환 참조(Circular Reference) 문제는 Spring과 JPA를 사용하는 많은 개발자들이 마주치는 흔한 문제입니다. 저도 커피 주문 시스템을 개발하면서 이 문제를 경험했고, 해결 과정에서 DTO 패턴의 중요성을 깨달았습니다.문제 상황: 엔티티 간의 순환 참조초기에 저는 빠른 개발을 위해 요청(Request)은 DTO로 처리했지만, 비즈니스 로직 처리 후 Model 객체에 Entity를 직접 담아 View로 전달하는 방식을 선택했습니다. 특히 Order와 OrderItem 사이의 양방향 관계를 가진 Entity를 Thymeleaf와 같은 템플릿 엔진으로 렌더링할 때 문제가 발생했습니다.@Entitypublic class Order {    @Id    @GeneratedValue(strategy = GenerationType.IDENTITY)    private Long id;        @OneToMany(mappedBy = \"order\",                cascade = {CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REMOVE},                orphanRemoval = true)    private List&lt;OrderItem&gt; orderItems = new ArrayList&lt;&gt;();        // 기타 필드 및 메서드 생략}@Entitypublic class OrderItem {    @Id    @GeneratedValue(strategy = GenerationType.IDENTITY)    private Long id;        @ManyToOne(fetch = FetchType.LAZY)    @JoinColumn(name = \"order_id\")    @Setter    private Order order;        // 기타 필드 및 메서드 생략}순환 참조 발생 원인Thymeleaf가 객체를 처리하는 방식에서 문제 발생:Thymeleaf는 Model에서 전달된 객체를 템플릿에 바인딩하기 위해 객체 그래프를 탐색Order 객체의 orderItems 리스트 처리 시도각 OrderItem 객체의 속성 처리 과정에서 order 필드 접근해당 order 필드가 다시 원래 Order 객체를 참조Order 객체에서 다시 orderItems 처리 시도이 과정이 무한히 반복되어 StackOverflowError 발생양방향 연관관계에서 Thymeleaf는 객체 그래프의 순환 구조를 감지하지 못하고 계속해서 객체 탐색을 시도하기 때문에 문제 발생해결 방법: DTO 패턴 적용하기이 문제의 근본적인 해결책은 DTO(Data Transfer Object) 패턴을 사용하는 것입니다. 저는 다음과 같이 OrderDto와 OrderItemDto를 만들어 해결했습니다:public class OrderDto {    private Long id;    private String customerName;    private List&lt;OrderItemDto&gt; orderItems;        // 생성자, 게터, 세터 생략        // Entity를 DTO로 변환하는 정적 메서드    public static OrderDto from(Order order) {        OrderDto dto = new OrderDto();        dto.setId(order.getId());        dto.setCustomerName(order.getCustomerName());                // OrderItem -&gt; OrderItemDto 변환        List&lt;OrderItemDto&gt; itemDtos = order.getOrderItems().stream()            .map(OrderItemDto::fromWithoutOrder)  // 중요: Order 참조 없이 변환            .collect(Collectors.toList());                dto.setOrderItems(itemDtos);        return dto;    }}public class OrderItemDto {    private Long id;    private String productName;    private Integer quantity;    // Order 참조를 포함하지 않음        // 생성자, 게터, 세터 생략        // 일반적인 변환 메서드    public static OrderItemDto from(OrderItem item) {        OrderItemDto dto = new OrderItemDto();        dto.setId(item.getId());        dto.setProductName(item.getProductName());        dto.setQuantity(item.getQuantity());        return dto;    }        // Order 참조 없이 변환하는 메서드    public static OrderItemDto fromWithoutOrder(OrderItem item) {        return from(item);  // 현재는 동일하지만 확장성을 위해 별도 메서드로 분리    }}Controller에서의 적용@Controller@RequestMapping(\"/orders\")public class OrderController {    @Autowired    private OrderService orderService;        @GetMapping(\"/{id}\")    public String getOrder(@PathVariable Long id, Model model) {        Order order = orderService.findById(id);        model.addAttribute(\"order\", OrderDto.from(order));  // Entity를 DTO로 변환해서 모델에 추가        return \"order/detail\";  // Thymeleaf 템플릿 경로    }}배운 점      Entity를 직접 반환하지 말 것: Entity는 데이터베이스 모델링을 위한 것이며, API 응답으로 사용하면 여러 문제가 발생할 수 있습니다.        DTO의 역할 이해: DTO는 단순히 요청을 받기 위한 것이 아니라, 계층 간 데이터 전송의 일관성을 위해 중요합니다.        계층 분리의 중요성: 프레젠테이션 계층(Controller)과 데이터 접근 계층(Repository)은 DTO를 통해 분리되어야 합니다.        성능과 보안 이점: DTO를 사용하면 필요한 데이터만 전송할 수 있어 성능이 향상되고, 민감한 정보를 노출하지 않을 수 있습니다.  결론처음에는 빠른 개발을 위해 DTO 패턴의 사용을 최소화했지만, 순환 참조 문제를 해결하는 과정에서 DTO 패턴의 중요성을 깨달았습니다. 특히 양방향 관계가 있는 엔티티를 다룰 때는 반드시 DTO를 사용하여 데이터를 전송해야 합니다."
+  },
+  
+  {
+    "title": "Spring JPA에서 순환 참조 문제 해결하기: DTO 패턴의 중요성",
+    "url": "/posts/N-+-1-%EB%AC%B8%EC%A0%9C-%ED%95%B4%EA%B2%B0/",
+    "categories": "문제 해결",
+    "tags": "Java, Hibernate, JPA",
+    "date": "2025-01-20 00:00:00 +0900",
+    
+
+
+
+
+
+    
+    "snippet": "",
+    "content": ""
+  },
+  
+  {
+    "title": "build.gradle 사용시 키워드 정리하기",
+    "url": "/posts/build-gradle-%EC%82%AC%EC%9A%A9%EC%8B%9C-%ED%82%A4%EC%9B%8C%EB%93%9C-%EC%A0%95%EB%A6%AC%ED%95%98%EA%B8%B0/",
+    "categories": "문제 해결",
+    "tags": "Java, Hibernate, JPA",
+    "date": "2025-01-20 00:00:00 +0900",
+    
+
+
+
+
+
+    
+    "snippet": "Hibernate를 사용하면서 ddl-auto 설정 때문에 겪었던 문제와 그 해결 방법을 공유합니다. 이 글에서는 문제 상황, 해결 과정, 그리고 배운 점을 간단히 정리해 보았습니다.문제 상황JPA와 Hibernate를 사용하는 도중, 다음과 같이 ddl-auto: update 설정을 사용하고 있었습니다:jpa:  hibernate:    ddl-au...",
+    "content": "Hibernate를 사용하면서 ddl-auto 설정 때문에 겪었던 문제와 그 해결 방법을 공유합니다. 이 글에서는 문제 상황, 해결 과정, 그리고 배운 점을 간단히 정리해 보았습니다.문제 상황JPA와 Hibernate를 사용하는 도중, 다음과 같이 ddl-auto: update 설정을 사용하고 있었습니다:jpa:  hibernate:    ddl-auto: update이 설정은 테이블을 유지하면서 변경 사항을 반영하도록 도와줍니다. 하지만, 컬럼 이름을 변경하거나 데이터 타입을 수정하는 경우에는 문제가 발생할 수 있습니다.오류 발생 예시  기존 테이블의 컬럼 이름을 변경한 뒤 애플리케이션을 실행했을 때, 테이블이 제대로 업데이트되지 않았습니다.  로그에는 관련 오류 메시지가 출력되었고, 애플리케이션이 정상적으로 실행되지 않았습니다.해결 방법이 문제를 해결하기 위해 다음 단계를 진행했습니다:  ddl-auto 설정 변경컬럼 변경 사항을 반영하기 위해 ddl-auto를 create로 설정했습니다:    jpa:  hibernate:    ddl-auto: create        이 설정은 기존 테이블을 삭제하고, 새로운 테이블을 생성합니다.        애플리케이션 실행변경된 컬럼 이름과 데이터 타입이 반영된 새 테이블이 생성되었습니다.    ddl-auto 설정 복구이후, create 설정을 다시 update로 변경하여 테이블을 유지하면서 추가적인 변경 작업을 진행할 수 있었습니다:    jpa:  hibernate:    ddl-auto: update      배운 점  ddl-auto 설정 옵션 이해          create: 기존 테이블을 삭제하고 새로 생성.      update: 기존 테이블을 유지하며 변경 사항을 반영. 하지만 컬럼 이름 변경 등 일부 작업은 반영되지 않을 수 있음.      validate: 테이블과 매핑 정보의 일치 여부를 검증. 변경 작업은 하지 않음.      none: 아무 작업도 하지 않음.        컬럼 변경 시 update의 한계          update는 새로운 컬럼 추가나 기본적인 변경에는 적합하지만, 컬럼 이름 변경이나 데이터 타입 변경은 반영되지 않음.        개발 환경과 프로덕션 환경의 차이          개발 환경에서는 create나 update를 자유롭게 사용할 수 있지만, 프로덕션 환경에서는 데이터 손실 방지를 위해 마이그레이션 도구(Flyway, Liquibase 등)를 사용하는 것이 권장됩니다.      결론Hibernate의 ddl-auto 설정은 편리하지만, 컬럼 변경 작업에서 예상치 못한 문제가 발생할 수 있습니다.이를 해결하기 위해 적절한 설정 변경과 마이그레이션 도구 활용이 필요합니다.이번 경험은 Hibernate와 JPA를 사용하는 데 있어 중요한 교훈을 주었습니다.비슷한 문제를 겪는 분들께 도움이 되길 바랍니다!"
+  },
+  
+  {
+    "title": "Hibernate 오류 해결: ddl-auto 설정 주의사항",
+    "url": "/posts/Hibernate-%EC%98%A4%EB%A5%98-%ED%95%B4%EA%B2%B0-ddl-auto-%EC%84%A4%EC%A0%95-%EC%A3%BC%EC%9D%98%EC%82%AC%ED%95%AD/",
+    "categories": "문제 해결",
+    "tags": "Java, Hibernate, JPA",
+    "date": "2025-01-20 00:00:00 +0900",
+    
+
+
+
+
+
+    
+    "snippet": "Hibernate를 사용하면서 ddl-auto 설정 때문에 겪었던 문제와 그 해결 방법을 공유합니다. 이 글에서는 문제 상황, 해결 과정, 그리고 배운 점을 간단히 정리해 보았습니다.문제 상황JPA와 Hibernate를 사용하는 도중, 다음과 같이 ddl-auto: update 설정을 사용하고 있었습니다:jpa:  hibernate:    ddl-au...",
+    "content": "Hibernate를 사용하면서 ddl-auto 설정 때문에 겪었던 문제와 그 해결 방법을 공유합니다. 이 글에서는 문제 상황, 해결 과정, 그리고 배운 점을 간단히 정리해 보았습니다.문제 상황JPA와 Hibernate를 사용하는 도중, 다음과 같이 ddl-auto: update 설정을 사용하고 있었습니다:jpa:  hibernate:    ddl-auto: update이 설정은 테이블을 유지하면서 변경 사항을 반영하도록 도와줍니다. 하지만, 컬럼 이름을 변경하거나 데이터 타입을 수정하는 경우에는 문제가 발생할 수 있습니다.오류 발생 예시  기존 테이블의 컬럼 이름을 변경한 뒤 애플리케이션을 실행했을 때, 테이블이 제대로 업데이트되지 않았습니다.  로그에는 관련 오류 메시지가 출력되었고, 애플리케이션이 정상적으로 실행되지 않았습니다.해결 방법이 문제를 해결하기 위해 다음 단계를 진행했습니다:  ddl-auto 설정 변경컬럼 변경 사항을 반영하기 위해 ddl-auto를 create로 설정했습니다:    jpa:  hibernate:    ddl-auto: create        이 설정은 기존 테이블을 삭제하고, 새로운 테이블을 생성합니다.        애플리케이션 실행변경된 컬럼 이름과 데이터 타입이 반영된 새 테이블이 생성되었습니다.    ddl-auto 설정 복구이후, create 설정을 다시 update로 변경하여 테이블을 유지하면서 추가적인 변경 작업을 진행할 수 있었습니다:    jpa:  hibernate:    ddl-auto: update      배운 점  ddl-auto 설정 옵션 이해          create: 기존 테이블을 삭제하고 새로 생성.      update: 기존 테이블을 유지하며 변경 사항을 반영. 하지만 컬럼 이름 변경 등 일부 작업은 반영되지 않을 수 있음.      validate: 테이블과 매핑 정보의 일치 여부를 검증. 변경 작업은 하지 않음.      none: 아무 작업도 하지 않음.        컬럼 변경 시 update의 한계          update는 새로운 컬럼 추가나 기본적인 변경에는 적합하지만, 컬럼 이름 변경이나 데이터 타입 변경은 반영되지 않음.        개발 환경과 프로덕션 환경의 차이          개발 환경에서는 create나 update를 자유롭게 사용할 수 있지만, 프로덕션 환경에서는 데이터 손실 방지를 위해 마이그레이션 도구(Flyway, Liquibase 등)를 사용하는 것이 권장됩니다.      결론Hibernate의 ddl-auto 설정은 편리하지만, 컬럼 변경 작업에서 예상치 못한 문제가 발생할 수 있습니다.이를 해결하기 위해 적절한 설정 변경과 마이그레이션 도구 활용이 필요합니다.이번 경험은 Hibernate와 JPA를 사용하는 데 있어 중요한 교훈을 주었습니다.비슷한 문제를 겪는 분들께 도움이 되길 바랍니다!"
+  },
+  
+  {
+    "title": "Index에 대해서 알아보기",
+    "url": "/posts/Index%EC%97%90-%EB%8C%80%ED%95%B4%EC%84%9C-%EC%95%8C%EC%95%84%EB%B3%B4%EA%B8%B0/",
+    "categories": "SQL",
+    "tags": "Index, SQL, MYSQL",
+    "date": "2025-01-06 00:00:00 +0900",
+    
+
+
+
+
+
+    
+    "snippet": "1. 인덱스란?Index 기능은 데이터의 조회를 빠르게 할 수 있는 기능으로서 사용됩니다.비유하자면 고속검색을 위한 일종의 지도 데이터로, 특정 위치(필드)의 데이터를 찾아갈 때 전체 데이터를 살펴보지 않고도 지도(인덱스)를 통해 빠르게 원하는 데이터의 위치를 찾아갈 수 있게 해줍니다.인덱스 생성-- CREATE INDEX 인덱스명 ON 테이블명 (필...",
+    "content": "1. 인덱스란?Index 기능은 데이터의 조회를 빠르게 할 수 있는 기능으로서 사용됩니다.비유하자면 고속검색을 위한 일종의 지도 데이터로, 특정 위치(필드)의 데이터를 찾아갈 때 전체 데이터를 살펴보지 않고도 지도(인덱스)를 통해 빠르게 원하는 데이터의 위치를 찾아갈 수 있게 해줍니다.인덱스 생성-- CREATE INDEX 인덱스명 ON 테이블명 (필드명);CREATE INDEX `loginId` ON `member` (loginId);인덱스 삭제 시 주의사항인덱스 삭제시 MYSQL 자료를 찾는중  DELETE : 데이터만 삭제  TRUNCATE : 데이터와 인덱스 데이터도 삭제이 내용과 혼동이 있었던 적이 있었는데, 인덱스 삭제는 ALTER TABLE 테이블명 DROP INDEX 인덱스명을 사용해야 하며, TRUNCATE는 단순히 테이블의 데이터를 비우고 AUTO_INCREMENT를 초기화하는 것입니다.인덱스의 종류구조적분류Clustered Index vs Non-Clustered Index([10분 테코톡] 안돌의 Index - 클러스터드 인덱스)  Clustered Index(클러스터드 인덱스)          Clustered - 군집을 의미함, 여기서 군집은 인덱스와 데이터      PK와 유사함      범위 검색에 강력함      테이블에 여러개               Non-Clustered Index(논 클러스터드 인덱스)          순서 상관없음      한 테이블에 여러개             기능적 분류PRIMARY KEY : 주키 인덱스, UNIQUE KEY : 유니크 인덱, NORMAL KEY : 일반(유니크가 없는 인덱스), FULL TEXT(풀 텍스트 인덱스)  UNIQUE KEY : 유니크 인덱스          유니크, 즉 중복된 값을 가지지 않기 때문에 검색 속도가 일반 인덱스보다 빠름      발견 즉시 탐색을 중지하기 때문        PRIMARY KEY : 주키 인덱스          유니크 + 클러스터 인덱스      유니크의 특징인 일반 인덱스보다 빠른것, 클러스터드 인덱스의 속도가 빠른것이 합쳐서 가장 속도가 빠흠        NORMAL KEY : 일반 인덱스          유니크 없는 일반 인덱스      가장 속도가 느립니다.        FULL TEXT : 풀텍스트 인덱스          본문검색에 사용할 수 있는 인덱스      단, 한글 검색에는 제한이 있습니다      CREATE TABLE `member` (  id INT PRIMARY KEY, -- 클러스터형 인덱스이며, Primary Key 즉 주키 인덱스  regDate DATETIME NOT NULL,  loginId VARCHAR(30) NOT NULL,  loginPw VARCHAR(100) NOT NULL,  `name` CHAR(30));CREATE UNIQUE INDEX loginId ON employees(loginId);    -- UNIQUE 인덱스CREATE INDEX name_index ON employees(`name`);  -- 논 클러스터형 인덱스 이며 일반 인덱스CREATE FULLTEXT INDEX idx_search ON articles(title, content); -- FULL TEXT 인덱스, 논클러스터형 인덱스참고자료[10분 테코톡] 👨‍🏫안돌의 INDEXmysql 인덱스 생성방법(공식문서)"
+  },
+  
+  {
     "title": "Java의 정적 유틸리티 클래스 (Static Utility Class) 이해하기",
     "url": "/posts/Java%EC%9D%98-%EC%A0%95%EC%A0%81-%EC%9C%A0%ED%8B%B8%EB%A6%AC%ED%8B%B0-%ED%81%B4%EB%9E%98%EC%8A%A4-(Static-Utility-Class)-%EC%9D%B4%ED%95%B4%ED%95%98%EA%B8%B0/",
-    "categories": "Java, Programming",
-    "tags": "Java, Static, Utility, File IO",
+    "categories": "Java",
+    "tags": "Programming, Java, Static, Utility, File IO",
     "date": "2025-01-06 00:00:00 +0900",
     
 
@@ -18,10 +103,27 @@
   },
   
   {
-    "title": "Jwt(json web token) 쉽게 이해하기",
+    "title": "Intellij의 환경변수 적용방법",
+    "url": "/posts/Intellij%EC%9D%98-%ED%99%98%EA%B2%BD%EB%B3%80%EC%88%98-%EC%A0%81%EC%9A%A9%EB%B0%A9%EB%B2%95/",
+    "categories": "Intellij",
+    "tags": "Intellij, Spring, Programming",
+    "date": "2025-01-06 00:00:00 +0900",
+    
+
+
+
+
+
+    
+    "snippet": "환경변수란?환경변수란? 환경 변수는 프로세스가 컴퓨터에서 동작하는 방식에 영향을 미치는, 동적인 값들의 모임이다. 환경 변수는 실행 중인 프로세스가 컴퓨터에서 작동하는 방식에 영향을 줄 수 있는 사용자 정의 값이다. 환경 변수는 프로세스가 실행되는 환경의 일부입니다.이것은 환경이나 보안등의 이유를 위해, 동적 변수를 주어서 컴퓨터 내부적으로 관리하기위...",
+    "content": "환경변수란?환경변수란? 환경 변수는 프로세스가 컴퓨터에서 동작하는 방식에 영향을 미치는, 동적인 값들의 모임이다. 환경 변수는 실행 중인 프로세스가 컴퓨터에서 작동하는 방식에 영향을 줄 수 있는 사용자 정의 값이다. 환경 변수는 프로세스가 실행되는 환경의 일부입니다.이것은 환경이나 보안등의 이유를 위해, 동적 변수를 주어서 컴퓨터 내부적으로 관리하기위해 사용됩니다.Spring DB를 연동할때 환경변수를 적용하는 방법Spring에서 데이터 베이스를 연동할 경우, 코드상에서 보안을 위해 데이터 베이스 정보와 아이디, 비밀번호 관련을 코드상에서 말고 내부적으로 처리해야할 경우가 있습니다. 그를 위해 환경변수를 작성해야 합니다.application.yml 파일을 작성하면 되고, 아래와 같이 작성합니다.spring:  datasource:    url: ${LOCAL_DB_URL}    username: ${LOCAL_DB_USERNAME}    password: ${LOCAL_DB_PASSWORD}  thymeleaf3.decoupled-logic: true그럼 해당 ${LOCAL_DB_URL}, ${LOCAL_DB_USERNAME} , ${LOCAL_DB_PASSWORD}으로 환경변수를 선언하면, 어떻게 할수 있을까요?Intellij 기준으로 설명합니다.1. Run Configurations 열기 :  상단 메뉴에서 Run &gt; Run Configurations...를 선택합니다.2. 구성 설정 선택 :  좌측 패널에서 Java Application을 선택하고, Modify options를 클릭합니다.이후, Environement variables 를 클릭합니다.그럼 아래와 같은 화면이 나타납니다.3. 환경 변수 설정 :  Environment variables 의 우측  +(New) 버튼을 클릭하여 새로운 환경 변수를 추가합니다.          Name: LOCAL_DB_URL, LOCAL_DB_USERNAME, LOCAL_DB_PASSWORD와 같은 변수 이름을 입력합니다.      Value: 각 환경 변수의 값을 입력합니다.        입력이 완료되면 OK를 클릭하여 설정을 저장합니다.4. 설정 저장 및 실행 :  Run Configurations 창에서 Apply를 클릭한 후, Run 버튼을 클릭하여 애플리케이션을 실행합니다."
+  },
+  
+  {
+    "title": "JWT(JSON Web Token) 쉽게 이해하기",
     "url": "/posts/JWT(JSON-Web-Token)-%EC%89%BD%EA%B2%8C-%EC%9D%B4%ED%95%B4%ED%95%98%EA%B8%B0/",
-    "categories": "",
-    "tags": "",
+    "categories": "Json",
+    "tags": "Json, Java, JWT",
     "date": "2025-01-05 00:00:00 +0900",
     
 
@@ -35,10 +137,10 @@
   },
   
   {
-    "title": "Tdd 가볍게 이해하기",
+    "title": "TDD 가볍게 이해하기: 기본 개념과 간단한 예시",
     "url": "/posts/TDD-%EA%B0%80%EB%B3%8D%EA%B2%8C-%EC%9D%B4%ED%95%B4%ED%95%98%EA%B8%B0/",
-    "categories": "",
-    "tags": "",
+    "categories": "Json",
+    "tags": "Json, Java, JWT",
     "date": "2024-12-22 00:00:00 +0900",
     
 
@@ -47,15 +149,15 @@
 
 
     
-    "snippet": "TDD 가볍게 이해하기: 기본 개념과 간단한 예시Test-Driven Development(TDD)는 실제 코드를 작성하기 전에 테스트 코드를 먼저 작성하는 소프트웨어 개발 방법론입니다. 주요 특징은 다음과 같습니다:  레드-그린-리팩터(Red-Green-Refactor) 사이클  점진적인 개발 접근 방식  높은 코드 품질과 안정성 확보TDD 기본 프...",
-    "content": "TDD 가볍게 이해하기: 기본 개념과 간단한 예시Test-Driven Development(TDD)는 실제 코드를 작성하기 전에 테스트 코드를 먼저 작성하는 소프트웨어 개발 방법론입니다. 주요 특징은 다음과 같습니다:  레드-그린-리팩터(Red-Green-Refactor) 사이클  점진적인 개발 접근 방식  높은 코드 품질과 안정성 확보TDD 기본 프로세스1. 레드(Red) 단계  실패할 테스트 코드를 먼저 작성  원하는 기능의 동작을 정의  이 시점에서 테스트는 당연히 실패2. 그린(Green) 단계  테스트를 통과할 최소한의 구현 코드 작성  테스트가 성공할 정도로만 코드 작성3. 리팩터(Refactor) 단계  코드의 품질 개선  중복 제거  테스트는 계속 통과해야 함TDD로 접근 예시컨트롤러(Controller) 테스트  HTTP 요청/응답 검증  기본적인 엔드포인트(/sign, /login) 동작 확인  상태 코드, 응답 구조 테스트예시 코드:class AuthControllerTest {    @Test    void 회원가입_성공_테스트() {        // given        SignUpRequest request = new SignUpRequest(            \"testuser\",             \"password123!\",             \"test@example.com\",             \"Test User\"        );        // when        SignUpResponse response = authService.signup(request);        // then        assertThat(response.getUsername()).isEqualTo(\"testuser\");        assertThat(response.getEmail()).isEqualTo(\"test@example.com\");    }}서비스(Service) 테스트  비즈니스 로직 검증  복잡한 로직의 단위 테스트  트랜잭션 및 도메인 로직 테스트예시 코드:class AuthServiceTest {    @Test    void 회원가입_성공_테스트() {        // given        SignUpRequest request = new SignUpRequest(            \"testuser\",             \"validPassword123!\",             \"test@example.com\",             \"Test User\"        );        // when        User savedUser = authService.signup(request);        // then        assertThat(savedUser.getUsername()).isEqualTo(\"testuser\");        assertThat(savedUser.getEmail()).isEqualTo(\"test@example.com\");        assertThat(savedUser.getPassword()).isNotNull();    }    @Test    void 중복_이메일_가입_실패_테스트() {        // given        SignUpRequest firstRequest = new SignUpRequest(            \"user1\",             \"password123!\",             \"test@example.com\",             \"First User\"        );        authService.signup(firstRequest);        SignUpRequest duplicateRequest = new SignUpRequest(            \"user2\",             \"anotherPassword123!\",             \"test@example.com\",             \"Second User\"        );        // when &amp; then        assertThatThrownBy(() -&gt; authService.signup(duplicateRequest))            .isInstanceOf(DuplicateEmailException.class);    }}리포지토리(Repository) 테스트  데이터베이스 로직 검증  복잡한 쿼리 테스트  데이터 저장 및 조회 로직 확인예시 코드:@DataJpaTestclass UserRepositoryTest {    @Test    void 존재하지_않는_사용자_조회_테스트() {        // when        Optional&lt;User&gt; foundUser = userRepository.findByUsername(\"nonexistentuser\");        // then        assertThat(foundUser).isEmpty();    }}TDD 적용 시 주의사항  점진적 접근: 모든 것을 한 번에 완벽하게 테스트하려 하지 마세요.  의미 있는 테스트: 형식적인 테스트보다 실제 비즈니스 로직을 검증하는 테스트에 집중하세요.  리팩토링 중요성: 지속적인 코드 개선을 잊지 마세요.레이어 접근 방식: 컨트롤러 &gt; 서비스 &gt; 리포지토리대부분의 스프링 부트 프로젝트에서 일반적으로 따르는 레이어 개발 순서는 다음과 같습니다:  컨트롤러(Controller): HTTP 요청 처리와 기본적인 라우팅  서비스(Service): 비즈니스 로직 구현  리포지토리(Repository): 데이터 지속성 및 데이터베이스 접근점진적 테스트 접근 방법TDD를 처음 적용할 때의 핵심 전략은 통합 테스트부터 시작해 점진적으로 단위 테스트를 세분화하는 것입니다:  초기 단계: 전체 시스템 흐름을 검증하는 통합 테스트 작성  중간 단계: 주요 비즈니스 로직의 단위 테스트 추가  후속 단계: 세부적인 경계 조건과 예외 상황에 대한 상세 테스트 구현나의 TDD 학습 여정초기 접근 방식  처음에는 당연히 오류가 발생할 것을 인지  주석으로 기능의 틀을 먼저 잡기  점진적으로 기능을 구현하며 테스트 코드 발전주요 깨달음  TDD는 단순한 테스트 방법이 아닌 개발 철학  코드의 품질과 안정성을 높이는 효과적인 접근 방법  개발 초기에는 완벽함보다 점진적 개선에 집중MSA와 TDD의 유사성TDD의 접근 방식은 MSA(Microservice Architecture)의 설계 원칙과 많은 유사점을 공유합니다:  모듈성: 각 레이어(컨트롤러, 서비스, 리포지토리)가 독립적으로 개발되고 테스트될 수 있음  느슨한 결합: 각 컴포넌트가 서로 최소한의 의존성을 가짐  독립적인 테스트 가능성: 각 모듈은 개별적으로 검증 가능  점진적 개발: 전체 시스템을 작은 부분으로 나누어 점진적으로 개발이러한 유사성 때문에 TDD를 학습하면서 MSA의 설계 철학도 자연스럽게 이해할 수 있었습니다."
+    "snippet": "Test-Driven Development(TDD)는 실제 코드를 작성하기 전에 테스트 코드를 먼저 작성하는 소프트웨어 개발 방법론입니다. 주요 특징은 다음과 같습니다:  레드-그린-리팩터(Red-Green-Refactor) 사이클  점진적인 개발 접근 방식  높은 코드 품질과 안정성 확보TDD 기본 프로세스1. 레드(Red) 단계  실패할 테스트 코...",
+    "content": "Test-Driven Development(TDD)는 실제 코드를 작성하기 전에 테스트 코드를 먼저 작성하는 소프트웨어 개발 방법론입니다. 주요 특징은 다음과 같습니다:  레드-그린-리팩터(Red-Green-Refactor) 사이클  점진적인 개발 접근 방식  높은 코드 품질과 안정성 확보TDD 기본 프로세스1. 레드(Red) 단계  실패할 테스트 코드를 먼저 작성  원하는 기능의 동작을 정의  이 시점에서 테스트는 당연히 실패2. 그린(Green) 단계  테스트를 통과할 최소한의 구현 코드 작성  테스트가 성공할 정도로만 코드 작성3. 리팩터(Refactor) 단계  코드의 품질 개선  중복 제거  테스트는 계속 통과해야 함TDD로 접근 예시컨트롤러(Controller) 테스트  HTTP 요청/응답 검증  기본적인 엔드포인트(/sign, /login) 동작 확인  상태 코드, 응답 구조 테스트예시 코드:class AuthControllerTest {    @Test    void 회원가입_성공_테스트() {        // given        SignUpRequest request = new SignUpRequest(            \"testuser\",             \"password123!\",             \"test@example.com\",             \"Test User\"        );        // when        SignUpResponse response = authService.signup(request);        // then        assertThat(response.getUsername()).isEqualTo(\"testuser\");        assertThat(response.getEmail()).isEqualTo(\"test@example.com\");    }}서비스(Service) 테스트  비즈니스 로직 검증  복잡한 로직의 단위 테스트  트랜잭션 및 도메인 로직 테스트예시 코드:class AuthServiceTest {    @Test    void 회원가입_성공_테스트() {        // given        SignUpRequest request = new SignUpRequest(            \"testuser\",             \"validPassword123!\",             \"test@example.com\",             \"Test User\"        );        // when        User savedUser = authService.signup(request);        // then        assertThat(savedUser.getUsername()).isEqualTo(\"testuser\");        assertThat(savedUser.getEmail()).isEqualTo(\"test@example.com\");        assertThat(savedUser.getPassword()).isNotNull();    }    @Test    void 중복_이메일_가입_실패_테스트() {        // given        SignUpRequest firstRequest = new SignUpRequest(            \"user1\",             \"password123!\",             \"test@example.com\",             \"First User\"        );        authService.signup(firstRequest);        SignUpRequest duplicateRequest = new SignUpRequest(            \"user2\",             \"anotherPassword123!\",             \"test@example.com\",             \"Second User\"        );        // when &amp; then        assertThatThrownBy(() -&gt; authService.signup(duplicateRequest))            .isInstanceOf(DuplicateEmailException.class);    }}리포지토리(Repository) 테스트  데이터베이스 로직 검증  복잡한 쿼리 테스트  데이터 저장 및 조회 로직 확인예시 코드:@DataJpaTestclass UserRepositoryTest {    @Test    void 존재하지_않는_사용자_조회_테스트() {        // when        Optional&lt;User&gt; foundUser = userRepository.findByUsername(\"nonexistentuser\");        // then        assertThat(foundUser).isEmpty();    }}TDD 적용 시 주의사항  점진적 접근: 모든 것을 한 번에 완벽하게 테스트하려 하지 마세요.  의미 있는 테스트: 형식적인 테스트보다 실제 비즈니스 로직을 검증하는 테스트에 집중하세요.  리팩토링 중요성: 지속적인 코드 개선을 잊지 마세요.레이어 접근 방식: 컨트롤러 &gt; 서비스 &gt; 리포지토리대부분의 스프링 부트 프로젝트에서 일반적으로 따르는 레이어 개발 순서는 다음과 같습니다:  컨트롤러(Controller): HTTP 요청 처리와 기본적인 라우팅  서비스(Service): 비즈니스 로직 구현  리포지토리(Repository): 데이터 지속성 및 데이터베이스 접근점진적 테스트 접근 방법TDD를 처음 적용할 때의 핵심 전략은 통합 테스트부터 시작해 점진적으로 단위 테스트를 세분화하는 것입니다:  초기 단계: 전체 시스템 흐름을 검증하는 통합 테스트 작성  중간 단계: 주요 비즈니스 로직의 단위 테스트 추가  후속 단계: 세부적인 경계 조건과 예외 상황에 대한 상세 테스트 구현나의 TDD 학습 여정초기 접근 방식  처음에는 당연히 오류가 발생할 것을 인지  주석으로 기능의 틀을 먼저 잡기  점진적으로 기능을 구현하며 테스트 코드 발전주요 깨달음  TDD는 단순한 테스트 방법이 아닌 개발 철학  코드의 품질과 안정성을 높이는 효과적인 접근 방법  개발 초기에는 완벽함보다 점진적 개선에 집중MSA와 TDD의 유사성TDD의 접근 방식은 MSA(Microservice Architecture)의 설계 원칙과 많은 유사점을 공유합니다:  모듈성: 각 레이어(컨트롤러, 서비스, 리포지토리)가 독립적으로 개발되고 테스트될 수 있음  느슨한 결합: 각 컴포넌트가 서로 최소한의 의존성을 가짐  독립적인 테스트 가능성: 각 모듈은 개별적으로 검증 가능  점진적 개발: 전체 시스템을 작은 부분으로 나누어 점진적으로 개발이러한 유사성 때문에 TDD를 학습하면서 MSA의 설계 철학도 자연스럽게 이해할 수 있었습니다."
   },
   
   {
-    "title": "예시를 통해 알아보는 msa 개념",
+    "title": "예시를 통해 알아보는 MSA 개념",
     "url": "/posts/%EC%98%88%EC%8B%9C%EB%A5%BC-%ED%86%B5%ED%95%B4-%EC%95%8C%EC%95%84%EB%B3%B4%EB%8A%94-MSA-%EA%B0%9C%EB%85%90/",
-    "categories": "",
-    "tags": "",
+    "categories": "MSA",
+    "tags": "MSA",
     "date": "2024-12-21 00:00:00 +0900",
     
 
@@ -64,15 +166,15 @@
 
 
     
-    "snippet": "🌟 예시를 통해 알아보는 MSA 개념🌟 들어가며MSA(Microservice Architecture)를 처음 접했을 때는 단순히 ‘서비스를 잘게 쪼개는 것’이라고만 생각했습니다. 하지만 실제로 프로젝트에 직접 적용하기 위해 공부해보니 그 이상의 깊이 있는 아키텍처 패턴이었습니다. 이 글에서는 제가 MSA를 공부하면서 깨달은 점들을 정리해보려 합니다.🔍...",
-    "content": "🌟 예시를 통해 알아보는 MSA 개념🌟 들어가며MSA(Microservice Architecture)를 처음 접했을 때는 단순히 ‘서비스를 잘게 쪼개는 것’이라고만 생각했습니다. 하지만 실제로 프로젝트에 직접 적용하기 위해 공부해보니 그 이상의 깊이 있는 아키텍처 패턴이었습니다. 이 글에서는 제가 MSA를 공부하면서 깨달은 점들을 정리해보려 합니다.🔍 MSA란 무엇인가?MSA는 하나의 큰 애플리케이션을 여러 개의 작은 애플리케이션으로 쪼개어 변경과 조합이 가능하도록 만든 아키텍처입니다. 여기서 중요한 점은 단순히 ‘쪼개는 것’이 아니라, 각 서비스가 독립적으로 배포 가능하고 확장 가능하도록 만드는 것입니다.📏 MSA와 단일 책임 원칙(SRP)MSA는 객체지향 프로그래밍의 단일 책임 원칙(Single Responsibility Principle)과 유사한 철학을 가지고 있습니다:  클래스가 하나의 책임만 가져야 하듯이, 각 마이크로서비스도 하나의 비즈니스 기능에 집중합니다.  이는 코드의 응집도를 높이고 결합도를 낮추는 것과 같은 맥락입니다.  서비스 간의 독립성을 보장함으로써 변경의 영향 범위를 최소화할 수 있습니다.💡 실제 서비스로 이해하는 MSA제가 한때 .NET을 이용해 공장 데이터를 계산하는 프로그램을 만든 적이 있었습니다. 그런데 누군가 테스트를 위해 잘못된 데이터를 입력한 적이 있었습니다(예: 50이어야 할 값에 20000 입력). 이로 인해 연계 프로그램(이상 값 알림 등)에서도 문제가 발생하며 많은 전화가 왔던 경험이 있습니다. 이것이 바로 모놀리식 아키텍처의 치명적인 약점이었습니다.기존 방식(모놀리식)의 문제점  모든 기능(주문, 결제, 알림, 리뷰 등)이 하나의 큰 프로그램에 통합되어 있음.  한 부분에 문제가 생기면 전체 서비스가 영향을 받을 수 있음.  특정 기능만 확장하기 어려움.MSA 방식의 장점각 기능을 독립적인 서비스로 분리하여 운영:  중요 서비스 (신뢰성 필수)          로그인/회원 시스템                  보안이 중요.          절대 장애가 나면 안 됨.                    결제 시스템                  돈과 직결된 부분.          100% 정확성 필요.                    주문 시스템                  실시간 처리 중요.          데이터 일관성 필수.                      부가 서비스 (일시적 장애 허용)          리뷰 시스템                  잠시 멈춰도 주문은 가능.          약간의 지연 허용됨.                    알림 시스템                  푸시 알림이 늦게 가도 큰 문제 없음.          재시도 메커니즘으로 해결 가능.                    쿠폰/이벤트 시스템                  일시적 접속 장애 허용됨.          나중에 다시 시도 가능.                    🎯 MSA의 실제 효과  장애 격리          결제 시스템에 문제가 생겨도 리뷰 열람은 가능.      리뷰 서버가 다운되어도 주문/결제는 정상 작동.      알림이 지연되어도 주문 프로세스는 완료.        리소스 최적화          주문이 몰리는 시간에는 주문 서비스만 확장.      결제 시스템은 항상 안정적인 리소스 유지.      리뷰 시스템은 상대적으로 적은 리소스로 운영.        비용 효율성          중요 서비스에 더 많은 투자.      부가 서비스는 비용 효율적으로 운영.      필요한 부분만 선택적으로 확장 가능.      🔚 결론MSA는 단순히 서비스를 잘게 쪼개는 것이 아닌, 비즈니스의 특성에 따라 서비스를 적절히 분리하고 각각에 맞는 리소스와 아키텍처를 적용하는 것입니다. 실제 서비스를 예로 들어보면, 모든 기능이 같은 수준의 안정성이나 신뢰성을 필요로 하지 않는다는 것을 알 수 있습니다.중요한 것은 모든 서비스를 무조건 마이크로서비스로 분리하는 것이 아니라, 비즈니스 요구사항과 각 서비스의 특성을 고려하여 적절한 수준의 분리를 결정하는 것입니다. 이러한 균형 잡힌 접근이 성공적인 MSA 구현의 핵심이라고 할 수 있습니다."
+    "snippet": "🌟 들어가며MSA(Microservice Architecture)를 처음 접했을 때는 단순히 ‘서비스를 잘게 쪼개는 것’이라고만 생각했습니다. 하지만 실제로 프로젝트에 직접 적용하기 위해 공부해보니 그 이상의 깊이 있는 아키텍처 패턴이었습니다. 이 글에서는 제가 MSA를 공부하면서 깨달은 점들을 정리해보려 합니다.🔍 MSA란 무엇인가?MSA는 하나의 ...",
+    "content": "🌟 들어가며MSA(Microservice Architecture)를 처음 접했을 때는 단순히 ‘서비스를 잘게 쪼개는 것’이라고만 생각했습니다. 하지만 실제로 프로젝트에 직접 적용하기 위해 공부해보니 그 이상의 깊이 있는 아키텍처 패턴이었습니다. 이 글에서는 제가 MSA를 공부하면서 깨달은 점들을 정리해보려 합니다.🔍 MSA란 무엇인가?MSA는 하나의 큰 애플리케이션을 여러 개의 작은 애플리케이션으로 쪼개어 변경과 조합이 가능하도록 만든 아키텍처입니다. 여기서 중요한 점은 단순히 ‘쪼개는 것’이 아니라, 각 서비스가 독립적으로 배포 가능하고 확장 가능하도록 만드는 것입니다.📏 MSA와 단일 책임 원칙(SRP)MSA는 객체지향 프로그래밍의 단일 책임 원칙(Single Responsibility Principle)과 유사한 철학을 가지고 있습니다:  클래스가 하나의 책임만 가져야 하듯이, 각 마이크로서비스도 하나의 비즈니스 기능에 집중합니다.  이는 코드의 응집도를 높이고 결합도를 낮추는 것과 같은 맥락입니다.  서비스 간의 독립성을 보장함으로써 변경의 영향 범위를 최소화할 수 있습니다.💡 실제 서비스로 이해하는 MSA제가 한때 .NET을 이용해 공장 데이터를 계산하는 프로그램을 만든 적이 있었습니다. 그런데 누군가 테스트를 위해 잘못된 데이터를 입력한 적이 있었습니다(예: 50이어야 할 값에 20000 입력). 이로 인해 연계 프로그램(이상 값 알림 등)에서도 문제가 발생하며 많은 전화가 왔던 경험이 있습니다. 이것이 바로 모놀리식 아키텍처의 치명적인 약점이었습니다.기존 방식(모놀리식)의 문제점  모든 기능(주문, 결제, 알림, 리뷰 등)이 하나의 큰 프로그램에 통합되어 있음.  한 부분에 문제가 생기면 전체 서비스가 영향을 받을 수 있음.  특정 기능만 확장하기 어려움.MSA 방식의 장점각 기능을 독립적인 서비스로 분리하여 운영:  중요 서비스 (신뢰성 필수)          로그인/회원 시스템                  보안이 중요.          절대 장애가 나면 안 됨.                    결제 시스템                  돈과 직결된 부분.          100% 정확성 필요.                    주문 시스템                  실시간 처리 중요.          데이터 일관성 필수.                      부가 서비스 (일시적 장애 허용)          리뷰 시스템                  잠시 멈춰도 주문은 가능.          약간의 지연 허용됨.                    알림 시스템                  푸시 알림이 늦게 가도 큰 문제 없음.          재시도 메커니즘으로 해결 가능.                    쿠폰/이벤트 시스템                  일시적 접속 장애 허용됨.          나중에 다시 시도 가능.                    🎯 MSA의 실제 효과  장애 격리          결제 시스템에 문제가 생겨도 리뷰 열람은 가능.      리뷰 서버가 다운되어도 주문/결제는 정상 작동.      알림이 지연되어도 주문 프로세스는 완료.        리소스 최적화          주문이 몰리는 시간에는 주문 서비스만 확장.      결제 시스템은 항상 안정적인 리소스 유지.      리뷰 시스템은 상대적으로 적은 리소스로 운영.        비용 효율성          중요 서비스에 더 많은 투자.      부가 서비스는 비용 효율적으로 운영.      필요한 부분만 선택적으로 확장 가능.      🔚 결론MSA는 단순히 서비스를 잘게 쪼개는 것이 아닌, 비즈니스의 특성에 따라 서비스를 적절히 분리하고 각각에 맞는 리소스와 아키텍처를 적용하는 것입니다. 실제 서비스를 예로 들어보면, 모든 기능이 같은 수준의 안정성이나 신뢰성을 필요로 하지 않는다는 것을 알 수 있습니다.중요한 것은 모든 서비스를 무조건 마이크로서비스로 분리하는 것이 아니라, 비즈니스 요구사항과 각 서비스의 특성을 고려하여 적절한 수준의 분리를 결정하는 것입니다. 이러한 균형 잡힌 접근이 성공적인 MSA 구현의 핵심이라고 할 수 있습니다."
   },
   
   {
-    "title": "라이브러리를 사용하지 않고 리스트를 만드는 방법",
+    "title": "라이브러리를 사용하지 않고 Java로 리스트 구현하기",
     "url": "/posts/%EB%9D%BC%EC%9D%B4%EB%B8%8C%EB%9F%AC%EB%A6%AC%EB%A5%BC-%EC%82%AC%EC%9A%A9%ED%95%98%EC%A7%80-%EC%95%8A%EA%B3%A0-%EB%A6%AC%EC%8A%A4%ED%8A%B8%EB%A5%BC-%EB%A7%8C%EB%93%9C%EB%8A%94-%EB%B0%A9%EB%B2%95/",
-    "categories": "",
-    "tags": "",
+    "categories": "Java",
+    "tags": "List",
     "date": "2024-12-20 00:00:00 +0900",
     
 
@@ -81,8 +183,8 @@
 
 
     
-    "snippet": "라이브러리를 사용하지 않고 Java로 리스트 구현하기리스트는 Java에서 자주 사용되는 자료구조로, 보통 ArrayList나 LinkedList와 같은 라이브러리를 활용합니다. 하지만 이번에는 라이브러리를 사용하지 않고, 순수하게 Java로 리스트를 구현하는 방법을 알아보겠습니다.목차  라이브러리를 사용하지 않고 Java로 리스트 구현하기       ...",
-    "content": "라이브러리를 사용하지 않고 Java로 리스트 구현하기리스트는 Java에서 자주 사용되는 자료구조로, 보통 ArrayList나 LinkedList와 같은 라이브러리를 활용합니다. 하지만 이번에는 라이브러리를 사용하지 않고, 순수하게 Java로 리스트를 구현하는 방법을 알아보겠습니다.목차  라이브러리를 사용하지 않고 Java로 리스트 구현하기          목차      목표 기능      리스트와 배열의 차이      구현 과정                  1. 배열 초기화 및 추가 기능 구현          2. 조회(get) 및 초기화(clear) 기능          3. 삭제(delete) 및 삽입(insert) 기능          4. 크기 반환(size) 및 출력 기능                    완성된 클래스 코드      사용 예시      학습한 내용 정리      목표 기능구현할 리스트는 다음과 같은 기능을 갖추고 있습니다:  추가(add) - 리스트 끝에 데이터를 추가.  삭제(delete) - 특정 위치의 데이터를 삭제.  삽입(insert) - 특정 위치에 데이터를 삽입.  조회(get) - 특정 위치의 데이터를 반환.  크기(size) - 현재 리스트에 포함된 데이터의 개수를 반환.  초기화(clear) - 리스트를 초기 상태로 되돌림.추가적으로, 리스트와 배열의 차이점도 이해하며 구현 과정을 단계별로 살펴보겠습니다.리스트와 배열의 차이리스트와 배열의 가장 큰 차이는 크기의 유동성입니다.  배열 (Array):          크기가 고정되어 있으며, 생성 시 크기를 지정해야 합니다.      메모리 효율적이지만, 크기를 초과하거나 데이터 삽입/삭제 시 불편합니다.        리스트 (List):          크기가 동적이며, 데이터 추가/삭제 시 크기가 자동으로 조정됩니다.      내부적으로 배열을 활용하여 구현되지만, 배열 크기를 초과하면 더 큰 배열로 복사합니다.      구현 과정1. 배열 초기화 및 추가 기능 구현리스트를 구현하려면 먼저 배열의 크기를 고정적으로 정해야 합니다. 예를 들어, 초기 배열의 크기를 10으로 설정하고, 데이터가 추가될 때마다 크기를 확인하여 필요하면 배열을 확장합니다.public class CustomList {    private int[] data;    private int size;    public CustomList() {        data = new int[10];        size = 0;    }    public void add(int value) {        if(size == data.length) {            resize();        }        data[size++] = value;    }    public void resize() {        int newCapacity = data.length * 2;        int[] newData = new int[newCapacity];        System.arraycopy(data, 0, newData, 0, data.length);        data = newData;    }}2. 조회(get) 및 초기화(clear) 기능조회 기능은 배열의 특정 인덱스에 접근하여 데이터를 반환하는 단순한 작업입니다. 초기화 기능은 배열을 새로 생성하여 리스트를 초기 상태로 만듭니다.public int get(int index) {    if (index &lt; 0 || index &gt;= size) {        throw new IndexOutOfBoundsException(\"인덱스의 값이 잘못되었습니다.\");    }    return data[index];}public void clear() {    data = new int[10]; // 배열 재초기화    size = 0;}3. 삭제(delete) 및 삽입(insert) 기능삭제 기능은 특정 인덱스의 데이터를 제거하고, 뒤에 있는 데이터를 앞으로 이동시킵니다. 삽입 기능은 특정 인덱스에 데이터를 삽입하며, 뒤의 데이터를 한 칸씩 이동합니다.public void delete(int index) {    if (index &lt; 0 || index &gt;= size) {        throw new IndexOutOfBoundsException(\"인덱스의 값이 잘못되었습니다.\");    }    for (int i = index; i &lt; size - 1; i++) {        data[i] = data[i + 1]; // 뒤의 요소를 앞으로 이동    }    data[--size] = 0; // 크기 감소 후 마지막 요소 초기화}public void insert(int index, int value) {    if (index &lt; 0 || index &gt; size) {        throw new IndexOutOfBoundsException(\"인덱스의 값이 잘못되었습니다.\");    }    if (size == data.length) {        resize(); // 크기 초과 시 배열 확장    }    for (int i = size; i &gt; index; i--) {        data[i] = data[i - 1]; // 뒤로 밀기    }    data[index] = value; // 값 삽입    size++;}4. 크기 반환(size) 및 출력 기능리스트의 현재 크기를 반환하고, 리스트 내용을 문자열 형태로 출력하는 기능입니다.public int size() {    return size;}@Overridepublic String toString() {    StringBuilder sb = new StringBuilder(\"[\");    for (int i = 0; i &lt; size; i++) {        sb.append(data[i]);        if (i &lt; size - 1) sb.append(\", \");    }    sb.append(\"]\");    return sb.toString();}완성된 클래스 코드public class CustomList {    private int[] data;    private int size;    public CustomList() {        data = new int[10];        size = 0;    }    public void add(int value) {        if (size == data.length) {            resize();        }        data[size++] = value;    }    public int get(int index) {        if (index &lt; 0 || index &gt;= size) {            throw new IndexOutOfBoundsException(\"잘못된 인덱스 입니다.\");        }        return data[index];    }    public void delete(int index) {        if (index &lt; 0 || index &gt;= size) {            throw new IndexOutOfBoundsException(\"잘못된 인덱스 입니다.\");        }        for (int i = index; i &lt; size - 1; i++) {            data[i] = data[i + 1];        }        data[--size] = 0;    }    public void insert(int index, int value) {        if (index &lt; 0 || index &gt; size) {            throw new IndexOutOfBoundsException(\"잘못된 인덱스 입니다.\");        }        if (size == data.length) {            resize();        }        for (int i = size; i &gt; index; i--) {            data[i] = data[i - 1];        }        data[index] = value;        size++;    }    public void clear() {        data = new int[10];        size = 0;    }    public int size() {        return size;    }    private void resize() {        int newCapacity = data.length * 2;        int[] newData = new int[newCapacity];        System.arraycopy(data, 0, newData, 0, data.length);        data = newData;    }    @Override    public String toString() {        StringBuilder sb = new StringBuilder(\"[\");        for (int i = 0; i &lt; size; i++) {            sb.append(data[i]);            if (i &lt; size - 1) sb.append(\", \");        }        sb.append(\"]\");        return sb.toString();    }}사용 예시public class Main {    public static void main(String[] args) {        CustomList list = new CustomList();        list.add(10);        list.add(20);        list.add(30);        System.out.println(\"추가: \" + list); // [10, 20, 30]        list.insert(1, 15);        System.out.println(\"삽입: \" + list); // [10, 15, 20, 30]        list.delete(2);        System.out.println(\"삭제: \" + list); // [10, 15, 30]        System.out.println(\"조회: \" + list.get(1)); // 15        System.out.println(\"크기: \" + list.size()); // 3        list.clear();        System.out.println(\"초기화: \" + list); // []    }}학습한 내용 정리이번 구현 과정을 통해 배열과 리스트의 차이를 깊이 이해하고, Java에서 자료 구조를 직접 설계하는 경험을 쌓을 수 있었습니다. 특히, 동적 크기 조정을 위한 배열 확장과 데이터 삽입/삭제의 원리를 코드를 통해 체득하게 되었습니다. 이 과정을 기반으로 더 복잡한 자료 구조나 기능을 확장해 볼 수 있을 것 같습니다."
+    "snippet": "리스트는 Java에서 자주 사용되는 자료구조로, 보통 ArrayList나 LinkedList와 같은 라이브러리를 활용합니다. 하지만 이번에는 라이브러리를 사용하지 않고, 순수하게 Java로 리스트를 구현하는 방법을 알아보겠습니다.목차  목차  목표 기능  리스트와 배열의 차이  구현 과정          1. 배열 초기화 및 추가 기능 구현      ...",
+    "content": "리스트는 Java에서 자주 사용되는 자료구조로, 보통 ArrayList나 LinkedList와 같은 라이브러리를 활용합니다. 하지만 이번에는 라이브러리를 사용하지 않고, 순수하게 Java로 리스트를 구현하는 방법을 알아보겠습니다.목차  목차  목표 기능  리스트와 배열의 차이  구현 과정          1. 배열 초기화 및 추가 기능 구현      2. 조회(get) 및 초기화(clear) 기능      3. 삭제(delete) 및 삽입(insert) 기능      4. 크기 반환(size) 및 출력 기능        완성된 클래스 코드  사용 예시  학습한 내용 정리목표 기능구현할 리스트는 다음과 같은 기능을 갖추고 있습니다:  추가(add) - 리스트 끝에 데이터를 추가.  삭제(delete) - 특정 위치의 데이터를 삭제.  삽입(insert) - 특정 위치에 데이터를 삽입.  조회(get) - 특정 위치의 데이터를 반환.  크기(size) - 현재 리스트에 포함된 데이터의 개수를 반환.  초기화(clear) - 리스트를 초기 상태로 되돌림.추가적으로, 리스트와 배열의 차이점도 이해하며 구현 과정을 단계별로 살펴보겠습니다.리스트와 배열의 차이리스트와 배열의 가장 큰 차이는 크기의 유동성입니다.  배열 (Array):          크기가 고정되어 있으며, 생성 시 크기를 지정해야 합니다.      메모리 효율적이지만, 크기를 초과하거나 데이터 삽입/삭제 시 불편합니다.        리스트 (List):          크기가 동적이며, 데이터 추가/삭제 시 크기가 자동으로 조정됩니다.      내부적으로 배열을 활용하여 구현되지만, 배열 크기를 초과하면 더 큰 배열로 복사합니다.      구현 과정1. 배열 초기화 및 추가 기능 구현리스트를 구현하려면 먼저 배열의 크기를 고정적으로 정해야 합니다. 예를 들어, 초기 배열의 크기를 10으로 설정하고, 데이터가 추가될 때마다 크기를 확인하여 필요하면 배열을 확장합니다.public class CustomList {    private int[] data;    private int size;    public CustomList() {        data = new int[10];        size = 0;    }    public void add(int value) {        if(size == data.length) {            resize();        }        data[size++] = value;    }    public void resize() {        int newCapacity = data.length * 2;        int[] newData = new int[newCapacity];        System.arraycopy(data, 0, newData, 0, data.length);        data = newData;    }}2. 조회(get) 및 초기화(clear) 기능조회 기능은 배열의 특정 인덱스에 접근하여 데이터를 반환하는 단순한 작업입니다. 초기화 기능은 배열을 새로 생성하여 리스트를 초기 상태로 만듭니다.public int get(int index) {    if (index &lt; 0 || index &gt;= size) {        throw new IndexOutOfBoundsException(\"인덱스의 값이 잘못되었습니다.\");    }    return data[index];}public void clear() {    data = new int[10]; // 배열 재초기화    size = 0;}3. 삭제(delete) 및 삽입(insert) 기능삭제 기능은 특정 인덱스의 데이터를 제거하고, 뒤에 있는 데이터를 앞으로 이동시킵니다. 삽입 기능은 특정 인덱스에 데이터를 삽입하며, 뒤의 데이터를 한 칸씩 이동합니다.public void delete(int index) {    if (index &lt; 0 || index &gt;= size) {        throw new IndexOutOfBoundsException(\"인덱스의 값이 잘못되었습니다.\");    }    for (int i = index; i &lt; size - 1; i++) {        data[i] = data[i + 1]; // 뒤의 요소를 앞으로 이동    }    data[--size] = 0; // 크기 감소 후 마지막 요소 초기화}public void insert(int index, int value) {    if (index &lt; 0 || index &gt; size) {        throw new IndexOutOfBoundsException(\"인덱스의 값이 잘못되었습니다.\");    }    if (size == data.length) {        resize(); // 크기 초과 시 배열 확장    }    for (int i = size; i &gt; index; i--) {        data[i] = data[i - 1]; // 뒤로 밀기    }    data[index] = value; // 값 삽입    size++;}4. 크기 반환(size) 및 출력 기능리스트의 현재 크기를 반환하고, 리스트 내용을 문자열 형태로 출력하는 기능입니다.public int size() {    return size;}@Overridepublic String toString() {    StringBuilder sb = new StringBuilder(\"[\");    for (int i = 0; i &lt; size; i++) {        sb.append(data[i]);        if (i &lt; size - 1) sb.append(\", \");    }    sb.append(\"]\");    return sb.toString();}완성된 클래스 코드public class CustomList {    private int[] data;    private int size;    public CustomList() {        data = new int[10];        size = 0;    }    public void add(int value) {        if (size == data.length) {            resize();        }        data[size++] = value;    }    public int get(int index) {        if (index &lt; 0 || index &gt;= size) {            throw new IndexOutOfBoundsException(\"잘못된 인덱스 입니다.\");        }        return data[index];    }    public void delete(int index) {        if (index &lt; 0 || index &gt;= size) {            throw new IndexOutOfBoundsException(\"잘못된 인덱스 입니다.\");        }        for (int i = index; i &lt; size - 1; i++) {            data[i] = data[i + 1];        }        data[--size] = 0;    }    public void insert(int index, int value) {        if (index &lt; 0 || index &gt; size) {            throw new IndexOutOfBoundsException(\"잘못된 인덱스 입니다.\");        }        if (size == data.length) {            resize();        }        for (int i = size; i &gt; index; i--) {            data[i] = data[i - 1];        }        data[index] = value;        size++;    }    public void clear() {        data = new int[10];        size = 0;    }    public int size() {        return size;    }    private void resize() {        int newCapacity = data.length * 2;        int[] newData = new int[newCapacity];        System.arraycopy(data, 0, newData, 0, data.length);        data = newData;    }    @Override    public String toString() {        StringBuilder sb = new StringBuilder(\"[\");        for (int i = 0; i &lt; size; i++) {            sb.append(data[i]);            if (i &lt; size - 1) sb.append(\", \");        }        sb.append(\"]\");        return sb.toString();    }}사용 예시public class Main {    public static void main(String[] args) {        CustomList list = new CustomList();        list.add(10);        list.add(20);        list.add(30);        System.out.println(\"추가: \" + list); // [10, 20, 30]        list.insert(1, 15);        System.out.println(\"삽입: \" + list); // [10, 15, 20, 30]        list.delete(2);        System.out.println(\"삭제: \" + list); // [10, 15, 30]        System.out.println(\"조회: \" + list.get(1)); // 15        System.out.println(\"크기: \" + list.size()); // 3        list.clear();        System.out.println(\"초기화: \" + list); // []    }}학습한 내용 정리이번 구현 과정을 통해 배열과 리스트의 차이를 깊이 이해하고, Java에서 자료 구조를 직접 설계하는 경험을 쌓을 수 있었습니다. 특히, 동적 크기 조정을 위한 배열 확장과 데이터 삽입/삭제의 원리를 코드를 통해 체득하게 되었습니다. 이 과정을 기반으로 더 복잡한 자료 구조나 기능을 확장해 볼 수 있을 것 같습니다."
   },
   
   {
@@ -103,10 +205,10 @@
   },
   
   {
-    "title": "Unsupported class file major version 66 에러 해결법",
+    "title": "Unsupported class file major version X 의 해결방법",
     "url": "/posts/Unsupported-class-file-major-version-66-%EC%97%90%EB%9F%AC-%ED%95%B4%EA%B2%B0%EB%B2%95/",
-    "categories": "",
-    "tags": "",
+    "categories": "Java",
+    "tags": "Java, JDK, Version, Troubleshooting",
     "date": "2024-08-16 00:00:00 +0900",
     
 
@@ -115,32 +217,15 @@
 
 
     
-    "snippet": "Unsupported class file major version X 의 해결방법노트북을 변경한 이후, Github에서 프로젝트를 새 컴퓨터로 옮겨서 작업하는 도중 한 오류가 나타났습니다.Unsupported class file major version 66이라는 오류가 나타났는데 해당오류는 JRE의 해당버전이 정상적으로 실행되지 않아서 발생한 오류입...",
-    "content": "Unsupported class file major version X 의 해결방법노트북을 변경한 이후, Github에서 프로젝트를 새 컴퓨터로 옮겨서 작업하는 도중 한 오류가 나타났습니다.Unsupported class file major version 66이라는 오류가 나타났는데 해당오류는 JRE의 해당버전이 정상적으로 실행되지 않아서 발생한 오류입니다.Unsupported class file major version X에서 X는 버전의 번호를 이야기합니다.JAVA SE 22 = 66, JAVA SE 21 = 65, JAVA SE 20 = 64 이런식과 동일합니다. (버전의 참조사항은 해당 페이지 아래의 해당 오류 해결 참조를 클릭해서 버전의 번호를 참조해주세요)Intellij 에서 해결하기 위해서는 File &gt; Project Settings에서 Project SDK를 프로젝트에 맞는 SDK로 변경합니다.또한, File &gt; Settings 에서 gradle에서도 SDK의 버전을 변경해야 합니다.해당 오류 해결 참조"
+    "snippet": "노트북을 변경한 이후, Github에서 프로젝트를 새 컴퓨터로 옮겨서 작업하는 도중 한 오류가 나타났습니다.Unsupported class file major version 66이라는 오류가 나타났는데 해당오류는 JRE의 해당버전이 정상적으로 실행되지 않아서 발생한 오류입니다.Unsupported class file major version X에서 X...",
+    "content": "노트북을 변경한 이후, Github에서 프로젝트를 새 컴퓨터로 옮겨서 작업하는 도중 한 오류가 나타났습니다.Unsupported class file major version 66이라는 오류가 나타났는데 해당오류는 JRE의 해당버전이 정상적으로 실행되지 않아서 발생한 오류입니다.Unsupported class file major version X에서 X는 버전의 번호를 이야기합니다.JAVA SE 22 = 66, JAVA SE 21 = 65, JAVA SE 20 = 64 이런식과 동일합니다. (버전의 참조사항은 해당 페이지 아래의 해당 오류 해결 참조를 클릭해서 버전의 번호를 참조해주세요)Intellij 에서 해결하기 위해서는 File &gt; Project Settings에서 Project SDK를 프로젝트에 맞는 SDK로 변경합니다.또한, File &gt; Settings 에서 gradle에서도 SDK의 버전을 변경해야 합니다.해당 오류 해결 참조"
   },
   
   {
-    "title": "Intellij의 환경변수 적용방법",
-    "url": "/posts/Intellij%EC%9D%98-%ED%99%98%EA%B2%BD%EB%B3%80%EC%88%98-%EC%A0%81%EC%9A%A9%EB%B0%A9%EB%B2%95/",
-    "categories": "",
-    "tags": "",
-    "date": "2024-08-06 00:00:00 +0900",
-    
-
-
-
-
-
-    
-    "snippet": "Spring DB 연동용 환경변수 적용하기환경변수란?환경변수란? 환경 변수는 프로세스가 컴퓨터에서 동작하는 방식에 영향을 미치는, 동적인 값들의 모임이다. 환경 변수는 실행 중인 프로세스가 컴퓨터에서 작동하는 방식에 영향을 줄 수 있는 사용자 정의 값이다. 환경 변수는 프로세스가 실행되는 환경의 일부입니다.이것은 환경이나 보안등의 이유를 위해, 동적 ...",
-    "content": "Spring DB 연동용 환경변수 적용하기환경변수란?환경변수란? 환경 변수는 프로세스가 컴퓨터에서 동작하는 방식에 영향을 미치는, 동적인 값들의 모임이다. 환경 변수는 실행 중인 프로세스가 컴퓨터에서 작동하는 방식에 영향을 줄 수 있는 사용자 정의 값이다. 환경 변수는 프로세스가 실행되는 환경의 일부입니다.이것은 환경이나 보안등의 이유를 위해, 동적 변수를 주어서 컴퓨터 내부적으로 관리하기위해 사용됩니다.Spring DB를 연동할때 환경변수를 적용하는 방법Spring에서 데이터 베이스를 연동할 경우, 코드상에서 보안을 위해 데이터 베이스 정보와 아이디, 비밀번호 관련을 코드상에서 말고 내부적으로 처리해야할 경우가 있습니다. 그를 위해 환경변수를 작성해야 합니다.application.yml 파일을 작성하면 되고, 아래와 같이 작성합니다.spring:  datasource:    url: ${LOCAL_DB_URL}    username: ${LOCAL_DB_USERNAME}    password: ${LOCAL_DB_PASSWORD}  thymeleaf3.decoupled-logic: true그럼 해당 ${LOCAL_DB_URL}, ${LOCAL_DB_USERNAME} , ${LOCAL_DB_PASSWORD}으로 환경변수를 선언하면, 어떻게 할수 있을까요?Intellij 기준으로 설명합니다.1. Run Configurations 열기 :  상단 메뉴에서 Run &gt; Run Configurations...를 선택합니다.2. 구성 설정 선택 :  좌측 패널에서 Java Application을 선택하고, Modify options를 클릭합니다.이후, Environement variables 를 클릭합니다.그럼 아래와 같은 화면이 나타납니다.3. 환경 변수 설정 :  Environment variables 의 우측  +(New) 버튼을 클릭하여 새로운 환경 변수를 추가합니다.          Name: LOCAL_DB_URL, LOCAL_DB_USERNAME, LOCAL_DB_PASSWORD와 같은 변수 이름을 입력합니다.      Value: 각 환경 변수의 값을 입력합니다.        입력이 완료되면 OK를 클릭하여 설정을 저장합니다.4. 설정 저장 및 실행 :  Run Configurations 창에서 Apply를 클릭한 후, Run 버튼을 클릭하여 애플리케이션을 실행합니다."
-  },
-  
-  {
-    "title": "Applicaion.yaml의 로깅에 대하여",
+    "title": "applicaion.yaml의 로깅에 대하여",
     "url": "/posts/applicaion.yaml%EC%9D%98-%EB%A1%9C%EA%B9%85%EC%97%90-%EB%8C%80%ED%95%98%EC%97%AC/",
-    "categories": "",
-    "tags": "",
+    "categories": "Spring",
+    "tags": "Spring, Logging, YAML, Configuration",
     "date": "2024-07-30 00:00:00 +0900",
     
 
@@ -149,8 +234,8 @@
 
 
     
-    "snippet": "application.yaml의 로깅(logging)로그(log) : 정보를 제공하는 일련의 기록로깅(logging) : 로그(log)를 생성하도록 하는 시스템을 말한다.로깅를 사용하는 이유는 로그를 바탕으로 데이터를 분석하기 위해 사용합니다.Spring에서 application.yaml을 통해 logging을 하는 방법debug : true이렇게 d...",
-    "content": "application.yaml의 로깅(logging)로그(log) : 정보를 제공하는 일련의 기록로깅(logging) : 로그(log)를 생성하도록 하는 시스템을 말한다.로깅를 사용하는 이유는 로그를 바탕으로 데이터를 분석하기 위해 사용합니다.Spring에서 application.yaml을 통해 logging을 하는 방법debug : true이렇게 debug : false 가 되어있으면 진행하는 모든 데이터에서 로그를 뽑아냅니다.이러면 문제점이, 모든 데이터를 뽑음으로서 쓸모없는 로그를 계속해서 뽑아내어, 성능이 저하되는 문제가 됩니다.따라서 일반적으로는 특정부분을 한정하여 로그를 뽑아내어야 합니다.logging:  com.example.exam: true  org.springframework.web.servlet: true  org.hibernate.type.descriptor.sql.BasicBinder: tracelogging.com.example.exam : truelogging.org.springframework.web.servlet: true  해당 패키지에 작동되는 동작들의 로그를 저장 할 수 있습니다.logging.org.hibernate.type.descriptor.sql.BasicBinder: trace  쿼리문 로그에 출력되어 있는 파라미터에 바인딩 되는 값을 확인할 수 있습니다.  trace로 설정해야 바인딩 파라미터를 확인할 수 있습니다.logging:  file:    path: /Users/jsc/Logs/spring    max-size: 100MB    max-history: 10logging.file.path : 로그 파일의 경로를 설정합니다logging.file.max-size : 로그 파일의 최대 크기를 설정합니다logging.file.max-history : 몇일동안 로그를 저장할 것인지를 지정할 수 있습니다."
+    "snippet": "로그(log) : 정보를 제공하는 일련의 기록로깅(logging) : 로그(log)를 생성하도록 하는 시스템을 말한다.로깅를 사용하는 이유는 로그를 바탕으로 데이터를 분석하기 위해 사용합니다.Spring에서 application.yaml을 통해 logging을 하는 방법debug : true이렇게 debug : false 가 되어있으면 진행하는 모든 ...",
+    "content": "로그(log) : 정보를 제공하는 일련의 기록로깅(logging) : 로그(log)를 생성하도록 하는 시스템을 말한다.로깅를 사용하는 이유는 로그를 바탕으로 데이터를 분석하기 위해 사용합니다.Spring에서 application.yaml을 통해 logging을 하는 방법debug : true이렇게 debug : false 가 되어있으면 진행하는 모든 데이터에서 로그를 뽑아냅니다.이러면 문제점이, 모든 데이터를 뽑음으로서 쓸모없는 로그를 계속해서 뽑아내어, 성능이 저하되는 문제가 됩니다.따라서 일반적으로는 특정부분을 한정하여 로그를 뽑아내어야 합니다.logging:  com.example.exam: true  org.springframework.web.servlet: true  org.hibernate.type.descriptor.sql.BasicBinder: tracelogging.com.example.exam : truelogging.org.springframework.web.servlet: true  해당 패키지에 작동되는 동작들의 로그를 저장 할 수 있습니다.logging.org.hibernate.type.descriptor.sql.BasicBinder: trace  쿼리문 로그에 출력되어 있는 파라미터에 바인딩 되는 값을 확인할 수 있습니다.  trace로 설정해야 바인딩 파라미터를 확인할 수 있습니다.logging:  file:    path: /Users/jsc/Logs/spring    max-size: 100MB    max-history: 10logging.file.path : 로그 파일의 경로를 설정합니다logging.file.max-size : 로그 파일의 최대 크기를 설정합니다logging.file.max-history : 몇일동안 로그를 저장할 것인지를 지정할 수 있습니다."
   },
   
   {
